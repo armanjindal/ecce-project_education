@@ -1,0 +1,144 @@
+version: "2.0"
+nlu:
+    - intent: greet
+      examples: |
+        - Hi
+        - Hey
+        - Hi bot
+        - Hey bot
+        - Hello
+        - Good morning
+        - hi again
+        - hi folks
+        - hi Mister
+        - hi pal!
+        - hi there
+        - greetings
+        - hello everybody
+        - hello is anybody there
+        - hello robot
+        - hallo
+        - heeey
+        - hi hi
+        - hey
+        - hey hey
+        - hello there
+        - hi
+        - hello
+        - yo
+        - hola
+        - hi?
+        - hey bot!
+        - hello friend
+
+    - intent: goodbye
+      examples: |
+        - cu
+        - good by
+        - cee you later
+        - good night
+        - bye
+        - goodbye
+        - have a nice day
+        - see you around
+        - bye bye
+        - see you later
+
+    - intent: affirm
+      examples: |
+        - yes
+        - y
+        - indeed
+        - of course
+        - that sounds good
+        - correct
+        - sure
+        - ok
+        - why not
+        - ok great
+        - yes I did
+        - yeah, great
+        - pretty good
+        - fine
+        - You bet
+        - I sure did
+        - more or less
+
+    - intent: deny
+      examples: |
+        - no
+        - n
+        - never
+        - I don't think so
+        - don't like that
+        - no way
+        - none
+        - absolutely not
+        - no thanks
+        - didn't do any
+        - no I didn't
+        - could have been better
+        - not great
+        - nope
+
+    - intent: inform
+      examples: |
+        - My name is [Arman Jindal](name)
+        - I am called [Mahima](name)
+        - [Dhruv](name)
+        - Name [Ishan](name)
+        - I am [12](age) years old
+        - [11](age) years old
+        - [9](age)
+        - [7](age)
+        - [11](age) y/o
+        - [5](grade) th
+        - Standard [4](grade)
+        - I am in grade [6](grade)
+        - [7](grade)
+        - I go to [MIS](school)
+        - I attend [Shri Rama](school) School, Rajasthan
+        - Go to [Isha Home](school) School
+        - [Vidya Valley](school)
+
+    - intent: out_of_scope
+      examples: |
+        - guess
+        - i want to eat
+        - I already told you that
+        - this is not working
+        - i do not want to do this
+        - stop asking me questions
+        - never mind
+        - I want to do something else
+        - i changed my mind
+        - what is your favorite color
+        - i like cricket
+
+
+    - intent: thankyou
+      examples: |
+        - okay great thanks
+        - thank you
+        - sure thanks
+        - thanks bye
+
+    - intent: bot_challenge
+      examples: |
+        - Who made you?
+        - Were you born?
+        - How did you come to be?
+        - Who brought you into existance?
+
+# - intent: faq/ask_name
+#   examples: |
+#     - what is your name?
+#     - I forgot, what are you called again?
+#     - what should I call you?
+#     - Whare you named?
+
+# - intent: faq/ask_lesson
+#   examples: |
+#     - what can you teach?
+#     - What can I learn from you?
+#     - what lessons can i take?
