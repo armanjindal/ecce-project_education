@@ -1,0 +1,90 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- inform
+- out_of_scope
+- thankyou
+- bot_challenge
+- lesson_fraction
+- q1_correct
+- q1_incorrect
+entities:
+- name
+- age
+- grade
+- school
+slots:
+  age:
+    type: unfeaturized
+  grade:
+    type: unfeaturized
+  name:
+    type: unfeaturized
+  school:
+    type: unfeaturized
+responses:
+  utter_greet:
+  - text: Hello! My name is Ecce, and I am a bot. I am your new, personal tutor. Would
+      you like to start learning?
+  utter_first_time:
+  - text: I do not think we have met before. Nice to meet you! Before we start let
+      me get to know you better.
+  utter_ask_name:
+  - text: What is your name?
+  utter_ask_age:
+  - text: How old are you?
+  utter_ask_grade:
+  - text: What grade are you in right now?
+  utter_ask_school:
+  - text: Which school do you go to?
+  utter_start:
+  - text: Great to meet you, {name}. Is this information correct?
+  utter_slot_values:
+  - text: "\n - name: {name}\n - age: {age}\n - grade: {grade}\n - school: {school}\n"
+  utter_lesson_options:
+  - buttons:
+    - payload: /lesson_fraction
+      title: Fractions
+    - payload: /lesson_fraction
+      title: Multiplication
+    text: What would you like to work on today?
+  utter_fraction_begin:
+  - text: 'Whoop! Fractions it is. We are going to start by talking two of my favorite
+      things: food and friends'
+  utter_halves_1:
+  - text: Imagine you are at {school} and it is lunch time. You only have one aloo
+      paratha left in your tiffin and your friend forgot to bring their food.
+  utter_halves_q1:
+  - buttons:
+    - payload: /q1_incorrect
+      title: A
+    - payload: /q1_incorrect
+      title: B
+    - payload: /q1_correct
+      title: C
+    - payload: /q1_incorrect
+      title: D
+    image: /Users/armanjindal/Desktop/Rasa/rasa_bots/ ecce_v1.0a/media/halves_img_1.1.png
+    text: How would you split the paratha fairly for the two of you.
+  utter_correct:
+  - text: Great job! That is correct.
+  utter_incorrect:
+  - text: That is not quite right!
+  utter_halves_a1:
+  - text: The correct answer is C. That is the 'fair' split. Why is this fair? Because
+      both parts are the SAME size or EQUAL amount.
+  utter_ask_continue:
+  - text: Sorry, I don't quite understand. Do you want to continue?
+  utter_goodbye:
+  - text: Good bye!
+  utter_iamabot:
+  - text: I am a bot. This means I was made by a community of smart and nice educators.They
+      tell me WHAT to say, but I figure out WHEN to say it. As we talk more, the better
+      I become. So lets learn!
+forms:
+- introduction_form
