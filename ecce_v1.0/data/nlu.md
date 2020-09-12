@@ -27,6 +27,7 @@
 - hi?
 - hey bot!
 - hello friend
+- Hello!
 
 ## intent:goodbye
 - cu
@@ -58,6 +59,9 @@
 - You bet
 - I sure did
 - more or less
+- Yes
+- Wow
+- Yes!
 
 ## intent:deny
 - no
@@ -78,7 +82,7 @@
 ## intent:inform
 - My name is [Arman Jindal](name)
 - I am called [Mahima](name)
-- My name is [Raghav](name!
+- My name is [Raghav](name)
 - Name is [Aditya Macheri](name)
 - [Pooja](name)
 - [Dhruv](name)
@@ -103,7 +107,31 @@
 - [MBIS](school)
 - [City Massouri](school)
 - go [Kodai Kanal International](school) School
-- My name is Aditya Agarwal
+- My name is [Aditya Agarwal](name)
+- grade [7](grade)
+- I am [9](age) years old
+- My name is [Adhitya](name)
+- My name is [Raghav](name)!
+- I go to [St. Mary's School](school)
+- Grade [9](grade)
+- [4](age)
+- I am [10](age) years old
+- I go to [Vidya Valley](school) school
+- I am in grade [5](grade)
+- I am [8](age) years old
+- My name is [Arman](name)
+- grad [7](grade)
+- [8](age) years old
+- i am in grade [7](grade)
+- my name is [Arman](name)
+- My name is [Adit](name)
+- I go to [City Massouri](school) School
+- I am in grade [7](grade)
+- my name is [Mahima](name)
+- I go to [St Mary's](school)
+- I am in grade [8](grade)
+- [Raghav](name)
+- [St.Mary's](school) School
 
 ## intent:out_of_scope
 - guess

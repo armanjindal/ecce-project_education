@@ -1,0 +1,21 @@
+stories:
+- story: ask channels
+  steps:
+  - user: |
+     What messaging channels does Rasa support?
+    intent: faq
+  - action: respond_faq
+
+- story: ask languages
+  steps:
+  - user: |
+     Which languages can I build assistants in?
+    intent: faq
+  - action: respond_faq
+
+- story: ask rasa x
+  steps:
+  - user: |
+     What's Rasa X?
+    intent: faq
+  - action: respond_faq

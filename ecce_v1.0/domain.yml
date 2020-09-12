@@ -10,9 +10,9 @@ intents:
 - out_of_scope
 - thankyou
 - bot_challenge
-- lesson_fraction
-- q1_correct
-- q1_incorrect
+- lesson_fractions
+- correct
+- incorrect
 entities:
 - name
 - age
@@ -21,9 +21,23 @@ entities:
 slots:
   age:
     type: unfeaturized
+  friend_1:
+    type: unfeaturized
+    initial_value: Rajat
+  friend_2:
+    type: unfeaturized
+    initial_value: Pooja
   grade:
     type: unfeaturized
   name:
+    type: unfeaturized
+  object_1:
+    type: unfeaturized
+    initial_value: Aloo Paratha
+  object_2:
+    type: unfeaturized
+    initial_value: Badams
+  requested_slot:
     type: unfeaturized
   school:
     type: unfeaturized
@@ -32,8 +46,8 @@ responses:
   - text: Hello! My name is Ecce, and I am a bot. I am your new, personal tutor. Would
       you like to start learning?
   utter_first_time:
-  - text: I do not think we have met before. Nice to meet you! Before we start let
-      me get to know you better.
+  - text: I do not think we have met before. Nice to meet you! Before we start can
+      I get to know you better.
   utter_ask_name:
   - text: What is your name?
   utter_ask_age:
@@ -42,42 +56,99 @@ responses:
   - text: What grade are you in right now?
   utter_ask_school:
   - text: Which school do you go to?
-  utter_start:
-  - text: Great to meet you, {name}. Is this information correct?
-  utter_slot_values:
-  - text: "\n - name: {name}\n - age: {age}\n - grade: {grade}\n - school: {school}\n"
+  utter_information:
+  - text: "Great to meet you, {name}. Is this information correct? \n - name: {name}\n\
+      \ - age: {age}\n - grade: {grade}\n - school: {school}"
   utter_lesson_options:
   - buttons:
-    - payload: /lesson_fraction
+    - payload: /lesson_fractions
       title: Fractions
-    - payload: /lesson_fraction
+    - payload: /lesson_fractions
       title: Multiplication
     text: What would you like to work on today?
   utter_fraction_begin:
   - text: 'Whoop! Fractions it is. We are going to start by talking two of my favorite
       things: food and friends'
   utter_halves_1:
-  - text: Imagine you are at {school} and it is lunch time. You only have one aloo
-      paratha left in your tiffin and your friend forgot to bring their food.
+  - text: Imagine you are at {school} and it is lunch time. You only have one {object_1}
+      left in your tiffin and your friend, {friend_1} forgot to bring their food.
   utter_halves_q1:
   - buttons:
-    - payload: /q1_incorrect
+    - payload: /correct
       title: A
-    - payload: /q1_incorrect
+    - payload: /incorrect
       title: B
-    - payload: /q1_correct
+    - payload: /correct
       title: C
-    - payload: /q1_incorrect
+    - payload: /incorrect
       title: D
-    image: /Users/armanjindal/Desktop/Rasa/rasa_bots/ ecce_v1.0a/media/halves_img_1.1.png
-    text: How would you split the paratha fairly for the two of you.
-  utter_correct:
-  - text: Great job! That is correct.
-  utter_incorrect:
-  - text: That is not quite right!
+    image: http://0.0.0.0:7000/media/halves_img_1.1.png
+    text: Which cuts of {object_1} make a fair split for the two of you.
+  utter_halves_q1-1:
+  - buttons:
+    - payload: /incorrect
+      title: A
+    - payload: /incorrect
+      title: B
+    - payload: /incorrect
+      title: C
+    - payload: /correct
+      title: D
+    image: http://0.0.0.0:7000/media/halves_img_1.2.png?
+    text: Which cuts of {object_1} make a fair split for the two of you.
+  utter_ask_why:
+  - text: Why do you think it is fair?
   utter_halves_a1:
   - text: The correct answer is C. That is the 'fair' split. Why is this fair? Because
       both parts are the SAME size or EQUAL amount.
+  utter_halves_a1-1:
+  - text: The correct answer is D.
+  utter_incorrect:
+  - text: That is not quite right!
+  utter_correct:
+  - text: Great job! That is correct.
+  utter_conclusion_halves:
+  - text: In fractions we would say that you and {friend_1} have each gotten one half
+      (½) of the whole {object_1}!
+  utter_parts_introduction_1:
+  - text: Right after you and {friend_1} finished your yummy (and equal share!) of
+      your last {object_1} another friend, {friend_2} comes says hi, just as you were
+      about to split your 6 {object_2}!
+  utter_parts_q1:
+  - text: Now that there are 3 of you and you have 6 {object_2} that you need to split
+      fairly, how many {object_2} do you each get?
+  utter_parts_q1-1:
+  - buttons:
+    - payload: /correct
+      title: 1/3
+    - payload: /incorrect
+      title: 1/2
+    - payload: /incorrect
+      title: '1'
+    - payload: /incorrect
+      title: 2/3
+    text: Tell us in fractions how much did each of the three friends get?
+  utter_parts_q3:
+  - buttons:
+    - payload: /correct
+      title: More
+    - payload: /incorrect
+      title: Less
+    text: If {friend_2} never came, would you and {friend_1} get more or less than
+      compared to before?
+  utter_parts_story:
+  - text: After you went through the trouble of using fractions, {friend_1} changes
+      his mind and does not want any {object_2}. {friend_1} gives you their part.
+      So, the {object_2} has been divided into 3 equal parts. You now have 2 of these
+      parts and {friend_1} has 1. In fractions, we would say that you have two-out-of-three
+      or two-thirds (⅔) of the whole.
+  utter_parts_animation:
+  - attachment:
+      autoplay: true
+      payload:
+        src: http://0.0.0.0:7000/media/parts_pizzacompare_animation.mp4
+      type: video
+    custom:
   utter_ask_continue:
   - text: Sorry, I don't quite understand. Do you want to continue?
   utter_goodbye:
