@@ -100,6 +100,8 @@
 - [7](grade)
 - [9](grade)
 - Grade [6](grade)
+- I am in the [7](grade)th
+- the [8]th grade
 - I go to [MIS](school)
 - I attend [Shri Rama](school) School, Rajasthan
 - Go to [Isha Home](school) School
