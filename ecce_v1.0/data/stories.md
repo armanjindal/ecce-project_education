@@ -31,36 +31,16 @@
   - utter_parts_story
   - utter_parts_animation
 
-
-## happy path - opening the form
-* greet
-  - utter_greet
-  - utter_first_time
-* inform{"name":"Ananya"}
- - utter_ask_age
-* inform{"age":"12"}
-  - utter_ask_grade
-* inform{"grade":"5"}
-  - utter_ask_school
-* inform{"school":"Hyderabad Public School"}
-  - utter_information
-* affirm
-  - utter_lesson_options
-* lesson_fractions
-  - utter_fraction_begin
-  - utter_halves_1
-  - utter_halves_q1
-
 ## happy path - q1 incorrect
 * incorrect
   - utter_incorrect
   - utter_halves_a1
 
-## say goodbye
+## say goodbye - turn into rule 2.0 
 * goodbye
   - utter_goodbye
 
-## bot challenge
+## bot challenge - turn into rule 2.0
 * bot_challenge
   - utter_iamabot
 
