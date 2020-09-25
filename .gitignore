@@ -1,3 +1,4 @@
 .vscode/
-.media/
 .python-version
+.DS_Store
+__pychace__/
