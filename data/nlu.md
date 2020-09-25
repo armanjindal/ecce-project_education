@@ -97,16 +97,6 @@
 - I am [10](age) years old
 - I am [8](age) years old
 - [8](age) years old
-<!-- - [5](grade)
-- [8](grade)
-- I am in grade [5](grade)
-- Grade [6] (grade)
-- In class [3](grade)
-- Standard [4](grade)
-- My phone number is [9890631155](phonenumber)
-- [9011084765](phonenumber)
-- cell no is [9876566543](phonenumber) -->
-
 
 ## intent:out_of_scope
 - guess
@@ -141,15 +131,11 @@
 - I think it is 2
 - 2
 - 6
-- 3 
+- 3
 - 5
-- 2
 - Seven
 - Two each
 - Me and my friends get 3 each
-- One
-- We get 2 each
- 
 
 ## intent:mcq_incorrect
 - /mcq_incorrect
