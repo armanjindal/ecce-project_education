@@ -5,11 +5,6 @@
 - Hey bot
 - Hello
 - Good morning
-- hi again
-- hi folks
-- hi Mister
-- hi pal!
-- hi there
 - greetings
 - hello everybody
 - hello is anybody there
@@ -19,15 +14,10 @@
 - hi hi
 - hey
 - hey hey
-- hello there
 - hi
-- hello
 - yo
 - hola
-- hi?
 - hey bot!
-- hello friend
-- Hello!
 
 ## intent:goodbye
 - cu
@@ -62,6 +52,9 @@
 - Yes
 - Wow
 - Yes!
+- yay
+- Great
+- Ok
 
 ## intent:deny
 - no
@@ -88,52 +81,32 @@
 - [Dhruv](name)
 - Name [Ishan](name)
 - name [Ishika](name)
+- My name is [Adhitya](name)
+- My name is [Raghav](name)!
+- My name is [Aditya](name) Agarwal
+- [Raghav](name)
+- My is [Jack](name)
 - I am [12](age) years old
 - [11](age) years old
 - I have [13](age) years
 - [9](age)
 - [7](age)
 - [11](age) y/o
-- [5](grade) th
-- Standard [4](grade)
-- I am in grade [6](grade)
-- [7](grade)
-- [9](grade)
-- Grade [6](grade)
-- I am in the [7](grade)th
-- the [8]th grade
-- I go to [MIS](school)
-- I attend [Shri Rama](school) School, Rajasthan
-- Go to [Isha Home](school) School
-- [vidya valley](school)
-- [MBIS](school)
-- [City Massouri](school)
-- go [Kodai Kanal International](school) School
-- My name is [Aditya Agarwal](name)
-- grade [7](grade)
 - I am [9](age) years old
-- My name is [Adhitya](name)
-- My name is [Raghav](name)!
-- I go to [St. Mary's School](school)
-- Grade [9](grade)
 - [4](age)
 - I am [10](age) years old
-- I go to [Vidya Valley](school) school
-- I am in grade [5](grade)
 - I am [8](age) years old
-- My name is [Arman](name)
-- grad [7](grade)
 - [8](age) years old
-- i am in grade [7](grade)
-- my name is [Arman](name)
-- My name is [Adit](name)
-- I go to [City Massouri](school) School
-- I am in grade [7](grade)
-- my name is [Mahima](name)
-- I go to [St Mary's](school)
-- I am in grade [8](grade)
-- [Raghav](name)
-- [St.Mary's](school) School
+<!-- - [5](grade)
+- [8](grade)
+- I am in grade [5](grade)
+- Grade [6] (grade)
+- In class [3](grade)
+- Standard [4](grade)
+- My phone number is [9890631155](phonenumber)
+- [9011084765](phonenumber)
+- cell no is [9876566543](phonenumber) -->
+
 
 ## intent:out_of_scope
 - guess
@@ -162,3 +135,21 @@
 
 ## intent:lesson_fractions
 - /lesson_fractions
+
+## intent:answer_question
+- Each person gets 2 badams
+- I think it is 2
+- 2
+- 6
+- 3 
+- 5
+- 2
+- Seven
+- Two each
+- Me and my friends get 3 each
+- One
+- We get 2 each
+ 
+
+## intent:mcq_incorrect
+- /mcq_incorrect

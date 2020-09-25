@@ -13,6 +13,10 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
   - name: EntitySynonymMapper
+  - name: DucklingHTTPExtractor
+    url: http://localhost:8000
+    dimensions:
+      - number
   - name: ResponseSelector
     epochs: 100
 
@@ -25,9 +29,9 @@ policies:
     epochs: 100
   - name: MappingPolicy
   - name: TwoStageFallbackPolicy
-    nlu_threshold: 0.3
+    nlu_threshold: 0.5
     ambiguity_threshold: 0.1
-    core_threshold: 0.3
+    core_threshold: 0.5
     fallback_core_action_name: "action_default_fallback"
     fallback_nlu_action_name: "action_default_fallback"
     deny_suggestion_intent_name: "out_of_scope"
