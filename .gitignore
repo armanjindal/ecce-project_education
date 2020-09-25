@@ -1,4 +1,4 @@
 .vscode/
 .python-version
 .DS_Store
-__pychace__/
+__pycache__/
