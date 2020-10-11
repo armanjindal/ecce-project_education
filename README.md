@@ -5,9 +5,9 @@ The premise is that conversational AI is a powerful tool for teaching. Particula
 
 The goal is to make this easy for any teacher to create lessons and add it to the regin0spl version of the bot where users can 
 
-Currently the lesson on fraction is based on [this Google Doc.](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing)
+Currently the lesson on fraction is based on [this Google Doc.](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions and syntax for teachers to be able to create simple lesson plans without worrying about the nuances and fail safe behaviors of a conversational AI assistants. 
 
-TODOs 
+TODOs for the MVP:
 - [x] Connect to Rasa X with Integrated Version Control 
 - [ ] Add WhatsApp as a channel 
 - [ ] Lesson plan on fractions until wholes 
@@ -25,4 +25,4 @@ The Team:
 - Dhruv Bhatia
 
 
-In collaboration with Ashwath - Teach For India
+In collaboration with [Ashwath Bharath - Teach For India](https://www.teachforindia.org/people/)
