@@ -3,9 +3,9 @@ This is an early stage MVP for a project to make building lessons using Rasa eas
 
 The premise is that conversational AI is a powerful tool for teaching. Particularly for those in rural India who have limited access to education, but have a smart phone and internet. 
 
-The goal is to make this easy for any teacher to create lessons and add it to the regin0spl version of the bot where users can 
+The goal is to make this easy for any teacher to create lessons and add it to the regional version of the bot where users can speak to it in mixed language. 
 
-Currently the lesson on fraction is based on [this Google Doc.](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions and syntax for teachers to be able to create simple lesson plans without worrying about the nuances and fail safe behaviors of a conversational AI assistants. 
+Currently the lesson on fraction is based on [this Google Doc](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions and syntax for teachers to be able to create simple lesson plans without worrying about the nuances and fail safe behaviors of a conversational AI assistants. 
 
 TODOs for the MVP:
 - [x] Connect to Rasa X with Integrated Version Control 
