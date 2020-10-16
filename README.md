@@ -1,4 +1,5 @@
 # Ecce-project_education
+**IN THE PROCESS OF MIGRATING TO RASA 2.0**
 This is an early stage MVP for a project to make building lessons using Rasa easy for non-technical educators. 
 
 The premise is that conversational AI is a powerful tool for teaching. Particularly for those in rural India who have limited access to education, but have a smart phone and internet. 
