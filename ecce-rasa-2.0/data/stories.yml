@@ -1,0 +1,12 @@
+version: "2.0"
+
+stories:
+- story: Test story
+  steps:
+    - intent: greet
+    - action: utter_greet_first_time
+    - action: first_time_form
+    - active_loop: first_time_form
+    - active_loop: null
+    - action: utter_age_confirm
+  

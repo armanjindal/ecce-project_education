@@ -1,0 +1,48 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - inform
+  - bot_challenge 
+
+entities:
+- number
+
+slots:
+  age:
+    type: text 
+    influence_conversation: false
+
+responses:
+  utter_greet:
+  - text: "Hello! My name is Ecce and I am a bot. I am your new, digital, personal tutor. 
+  We chat together and we learn!"
+
+  utter_greet_first_time:
+  - text: I do not think we have met before. Before we start, lets get to know each
+      other a little bit.
+    
+  utter_ask_age:
+    - text: How old are you?
+
+  utter_age_confirm:
+  - text: "You are {age} years old!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+forms:
+  first_time_form:
+    age:
+    - type: from_entity 
+      entity: number
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

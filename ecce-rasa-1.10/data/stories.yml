@@ -1,0 +1,38 @@
+version: "2.0"
+
+stories:
+- story: happy path - INTRODUCTION - first time user
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_first_time
+  - action: utter_ask_name
+  - intent: inform
+    entities:
+    - name: "Priya"
+  - action: utter_ask_age
+  - intent: inform
+    entities:
+    - age: "9"
+  - action: utter_nice_meet_you
+  - action: utter_lesson_options
+
+- story: HP - Existing User
+  steps:
+   - intent: greet
+   - action: action_check_profile
+   - slot_was_set:
+     - premium_account: true
+   - action: utter_welcome_existing 
+   - action: utter_lesson_options
+
+- story: Welcome message, basic user
+  steps:
+   - intent: greet
+   - action: action_check_profile
+   - slot_was_set:
+     - premium_account: false
+   - action: utter_welcome_basic
+   - action: utter_ask_upgrade
+
+

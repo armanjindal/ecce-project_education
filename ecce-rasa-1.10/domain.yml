@@ -1,0 +1,210 @@
+verision: "2.0"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- inform
+- out_of_scope
+- thankyou
+- bot_challenge
+- lesson_fractions
+- mcq_correct
+- mcq_incorrect
+- answer_question
+entities:
+- name
+- number
+- age
+
+slots:
+  age:
+    type: unfeaturized
+  fractions_parts_nrq_1:
+    type: unfeaturized
+  friend_1:
+    type: unfeaturized
+    initial_value: Rajat
+  friend_2:
+    type: unfeaturized
+    initial_value: Pooja
+  name:
+    type: unfeaturized
+    initial_value: ' '
+  object_1:
+    type: unfeaturized
+    initial_value: aloo paratha
+  object_2:
+    type: unfeaturized
+    initial_value: badams
+  school:
+    type: unfeaturized
+    initial_value: school
+
+responses:
+  utter_greet:
+  - text: "Hello! My name is Ecce and I am a bot. I am your new, digital, personal tutor. 
+  We chat together and we learn!"
+  utter_first_time:
+  - text: I do not think we have met before. Before we start, lets get to know each
+      other a little bit.
+  utter_ask_name:
+  - text: What is your name?
+  utter_ask_age:
+  - text: How old are you?
+  utter_ask_grade:
+  - text: What grade are you in right now?
+  utter_ask_phonenumber:
+  - text: What is your phone number?
+  utter_nice_meet_you:
+  - text: Great to meet you {name}!
+  utter_submit:
+  - text: This is the information you submitted! {name}, {age}, {grade}, {phonenumber}
+  utter_lesson_options:
+  - buttons:
+    - payload: /lesson_fractions
+      title: Fractions
+    - payload: /lesson_fractions
+      title: Multiplication
+    text: What would you like to work on today?
+  utter_fractions_introduction_1:
+  - text: Whoop! Fractions it is. First we are going to talk about sharing food with
+      your friends!
+  utter_fractions_halves_1:
+  - text: Imagine you are at {school} and it is lunch time. You only have one {object_1}
+      left in your tiffin and your friend, {friend_1} forgot to bring their food.
+  utter_fractions_halves_mcq_1:
+  - buttons:
+    - payload: /mcq_incorrect
+      title: A
+    - payload: /mcq_incorrect
+      title: B
+    - payload: /mcq_correct
+      title: C
+    - payload: /mcq_incorrect
+      title: D
+    image: http://0.0.0.0:7000/media/halves_img_1.1.png
+    text: Which of the options split the {object_1} in a way that is that is fair/equal
+      for both of you?
+  utter_fractions_halves_mcq_1-1:
+  - buttons:
+    - payload: /mcq_incorrect
+      title: A
+    - payload: /mcq_incorrect
+      title: B
+    - payload: /mcq_incorrect
+      title: C
+    - payload: /mcq_correct
+      title: D
+    image: http://0.0.0.0:7000/media/halves_img_1.2.png?
+    text: Let’s try this again! Which split of {object_1} do you think is fair to
+      the both of you?
+  utter_fractions_halves_mcq_1_explanation:
+  - text: The correct answer is C. Because when you split {object_1} like that, both
+      you and {friend_1} get the same, or equal, amount. You are splitting the {object_1}
+      in half!
+  utter_fractions_halves_mcq_1-1_explanation:
+  - text: The correct answer is D. The {object_1} has been split into equal halves!
+  utter_fractions_halves_conclusion:
+  - text: In fractions we would say that you and {friend_1} each got one half (½)
+      of {object_1}!
+  utter_fractions_halves_conclusion_animation:
+  - text: Here is a short video showing the idea https://youtu.be/D9q89rcvNIs
+  utter_start_next:
+  - text: Are you ready to start the next mini-lesson?
+  utter_fractions_parts_introduction_1:
+  - text: Right after you and {friend_1} finished your yummy (and equal share!) of
+      your last {object_1} another friend, {friend_2} joins you just as you were about
+      to split your 6 (six) {object_2}!
+  utter_fractions_parts_introduction_2:
+  - text: Now the three of you need to share {object_2} equally.
+  utter_ask_fractions_parts_nrq_1:
+  - text: How many of the 6 (six) {object_2} do you each get if you split them equally?
+  utter_fractions_parts_nrq_1_explanation:
+  - text: You each get 2 because 6 split equally (divided) by 3 is 2.
+  utter_fractions_parts_mcq_1:
+  - buttons:
+    - payload: /correct
+      title: 1/3
+    - payload: /mcq_incorrect
+      title: 1/2
+    - payload: /mcq_incorrect
+      title: '1'
+    - payload: /mcq_incorrect
+      title: 2/3
+    text: Tell us in fractions, what share of the {object_2} did you and your two
+      friends get?
+  utter_fractions_parts_mcq_1_explanation:
+  - text: Since you are breaking down a whole object into three equal parts the fraction
+      is (⅓)
+  utter_fractions_parts_mcq_2:
+  - buttons:
+    - payload: /correct
+      title: More
+    - payload: /mcq_incorrect
+      title: Less
+    text: If {friend_2} never came, and you only had to split the {object_2} with
+      {friend_1} would each person get more or less?
+  utter_fractions_parts_mcq_2_explanation:
+  - text: Because there are fewer people to share with, each person's share goes up.
+  utter_fractions_parts_mcq_3:
+  - buttons:
+    - payload: /mcq_correct
+      title: Yes
+    - payload: /mcq_incorrect
+      title: No
+    text: Remebering the last question, is 1/2 a larger share than 1/3 of the 6 {object_2}?
+  utter_fractions_parts_mcq_3_explanation:
+  - text: ½ is fraction that splits the whole object into two equal parts. ⅓ is a
+      fraction that splits a whole into three equal parts. When you split an object
+      into more equal parts the size of these parts becomes smaller!
+  utter_fractions_parts_conclusion_1:
+  - text: After you went through the trouble of using fractions, {friend_1} changes
+      his mind and decides he does not want any {object_2}. So, {friend_1} gives you
+      his part.
+  utter_fractions_parts_conclusion_2:
+  - text: After you used fractions to split the {object_2} into 3 equal parts, you
+      now have 2 of these parts and {friend_1} has 1.
+  utter_fractions_parts_conclusion_3:
+  - text: In fractions, we would say that you have two-out-of-three or two-thirds
+      (⅔) of the whole. Here is a short animation which shows this!
+  utter_fractions_parts_animation:
+  - text: https://youtu.be/tGAZJiQ0_YU
+  utter_incorrect:
+  - text: Not quite right!
+  - text: Nice try, but that isn't quite it!
+  - text: Almost there, but you didn't get it right!
+  utter_correct:
+  - text: Great job! That is correct.
+  - text: Amazing. Perfectly correct.
+  - text: Right on!
+  utter_ask_rephrase:
+  - text: Could you ask rephrase that please. I didn't pick that up!
+  utter_ask_continue:
+  - text: Sorry, I don't quite understand. Do you want to continue?
+  utter_goodbye:
+  - text: Good bye!
+  utter_iamabot:
+  - text: I am a bot. This means I was made by a team of great teachers. They tell
+      me WHAT to say, but I figure out WHEN to say it. As we talk more, the better
+      I become. So lets learn!
+  utter_response_wrong_format:
+  - text: I am sorry I did not recognize the answer in your response. Can you please
+      rephrase.
+
+forms:
+  fractions_parts_nrq_1_form:
+    fractions_parts_nrq_1:
+    - type: from_entity
+      entity: number
+      intent: answer_numerical
+
+actions:
+  - validate_fractions_parts_nrq1_form 
+  
+
