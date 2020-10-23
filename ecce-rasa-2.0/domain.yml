@@ -1,48 +1,86 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - inform
-  - bot_challenge 
-
-entities:
-- number
-
-slots:
-  age:
-    type: text 
-    influence_conversation: false
-
-responses:
-  utter_greet:
-  - text: "Hello! My name is Ecce and I am a bot. I am your new, digital, personal tutor. 
-  We chat together and we learn!"
-
-  utter_greet_first_time:
-  - text: I do not think we have met before. Before we start, lets get to know each
-      other a little bit.
-    
-  utter_ask_age:
-    - text: How old are you?
-
-  utter_age_confirm:
-  - text: "You are {age} years old!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
-forms:
-  first_time_form:
-    age:
-    - type: from_entity 
-      entity: number
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- affirm
+- greet
+- lesson_fractions
+- inform
+- goodbye
+- deny
+- bot_challenge
+entities:
+- name
+- number
+slots:
+  age:
+    type: text
+    influence_conversation: false
+  friend_1:
+    type: text
+    initial_value: Pooja
+    influence_conversation: false
+  object_1:
+    type: text
+    initial_value: Aloo Paratha
+    influence_conversation: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+  school:
+    type: text
+    initial_value: school
+    influence_conversation: false
+  user_name:
+    type: text
+    influence_conversation: false
+responses:
+  utter_greet_first_time:
+  - text: Hello :) My name is Ecce and I am a bot. I am your new, digital, personal tutor. I exist to help you learn, and all we do is chat.
+  utter_greet_first_time_1:
+  - text: I do not think we have met before. Before we start, lets get to know each other a little bit.
+  utter_wrong_format:
+  - text: There is something wrong about the value. {err}
+  utter_ask_user_name:
+  - text: What is your name?
+  utter_ask_age:
+  - text: How old are you?
+  utter_first_time_confirm:
+  - text: "Is this information correct? \n Name: {user_name} \n Age {age}"
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_lesson_options:
+  - text: What lesson would you like to work on today?
+    buttons:
+    - title: Fractions
+      payload: /lesson_fractions
+    - title: Multiplication
+      payload: /lesson_fractions
+  utter_fractions_introduction:
+  - text: Whoop! Fractions it is. First we are going to talk about sharing food with your friends.
+  utter_fractions_introduction_1:
+  - text: Imagine it is lunchtime at {school}. Which friend do you like to eat with?
+  utter_fractions_introduction_2:
+  - text: Your friend, {friend_1} forgot to bring their tiffin and you are about to eat your last {object_1}. You being a good friend, decide to split the {object_1} equally.
+actions:
+- utter_first_time_confirm
+- utter_fractions_introduction
+- utter_fractions_introduction_1
+- utter_fractions_introduction_2
+- utter_greet_first_time
+- utter_greet_first_time_1
+- utter_lesson_options
+- validate_first_time_form
+forms:
+  first_time_form:
+    user_name:
+    - type: from_entity
+      entity: name
+      intent: inform
+    age:
+    - type: from_entity
+      entity: number
+      intent: inform
+version: '2.0'

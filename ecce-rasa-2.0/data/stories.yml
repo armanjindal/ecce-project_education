@@ -1,12 +1,89 @@
 version: "2.0"
 
 stories:
-- story: Test story
+- story: Introduction story - happy path 
   steps:
     - intent: greet
     - action: utter_greet_first_time
+    - action: utter_greet_first_time_1
     - action: first_time_form
     - active_loop: first_time_form
     - active_loop: null
-    - action: utter_age_confirm
+    - action: utter_first_time_confirm
+    - intent: affirm 
+    - action: utter_lesson_options
+
+- story: Lesson fraction begin 
+  steps:
+    - intent: lesson_fractions 
+    - action: utter_fractions_introduction
+    - action: utter_fractions_introduction_1
+    - intent: inform
+      entities:
+      - name: "Diya"
+    - slot_was_set:
+      - friend_1: "Diya"
+    - action: utter_fractions_introduction_2
+
   
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_1
+  - action: first_time_form
+  - active_loop: first_time_form
+  - slot_was_set:
+    - requested_slot: user_name
+  - slot_was_set:
+    - user_name: mahima
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: 8
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: lesson_fractions
+  - action: utter_fractions_introduction
+  - action: utter_fractions_introduction_1
+  - intent: inform
+    entities:
+    - name: "Raunak"
+  - slot_was_set:
+    - friend_1: "Raunak"  
+  - action: utter_fractions_introduction_2
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_1
+  - action: first_time_form
+  - active_loop: first_time_form
+  - slot_was_set:
+    - requested_slot: user_name
+  - slot_was_set:
+    - user_name: dhruv
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: 9
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: lesson_fractions
+  - action: utter_fractions_introduction
+  - action: utter_fractions_introduction_1
+  - intent: inform
+    entities:
+    - name: Mahima
+  - slot_was_set:
+    friend_1: "Mahima"
+  - action: utter_fractions_introduction_2
