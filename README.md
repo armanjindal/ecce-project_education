@@ -22,9 +22,9 @@ TODOs for the MVP:
 	- [ ] Multiple Choice Questions (MCQs)
 
 The Team:
-- Arman Jindal
-- Mahima Gupta 
-- Dhruv Bhatia
+- Arman Jindal - arman.jindal@columbia.edu 
+- Mahima Gupta - mahima_gupta@brown.edu
+- Dhruv Bhatia - dhruv_bhatia@brown.edu 
 
 
 In collaboration with [Ashwath Bharath - Teach For India](https://www.teachforindia.org/people/)
