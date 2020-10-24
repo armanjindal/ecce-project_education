@@ -1,6 +1,7 @@
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
 - affirm
 - greet
@@ -9,9 +10,11 @@ intents:
 - goodbye
 - deny
 - bot_challenge
+
 entities:
 - name
 - number
+
 slots:
   age:
     type: text
@@ -34,6 +37,7 @@ slots:
   user_name:
     type: text
     influence_conversation: false
+
 responses:
   utter_greet_first_time:
   - text: Hello :) My name is Ecce and I am a bot. I am your new, digital, personal tutor. I exist to help you learn, and all we do is chat.
@@ -58,21 +62,20 @@ responses:
       payload: /lesson_fractions
     - title: Multiplication
       payload: /lesson_fractions
-  utter_fractions_introduction:
+  
+  utter_fractions_halves_introduction:
   - text: Whoop! Fractions it is. First we are going to talk about sharing food with your friends.
-  utter_fractions_introduction_1:
+  
+  utter_fractions_halves_introduction_1:
   - text: Imagine it is lunchtime at {school}. Which friend do you like to eat with?
-  utter_fractions_introduction_2:
+  
+  utter_fractions_halves_introduction_2:
   - text: Your friend, {friend_1} forgot to bring their tiffin and you are about to eat your last {object_1}. You being a good friend, decide to split the {object_1} equally.
+
 actions:
-- utter_first_time_confirm
-- utter_fractions_introduction
-- utter_fractions_introduction_1
-- utter_fractions_introduction_2
-- utter_greet_first_time
-- utter_greet_first_time_1
-- utter_lesson_options
 - validate_first_time_form
+- action_fractions_halves_introduction_2
+
 forms:
   first_time_form:
     user_name:
@@ -83,4 +86,8 @@ forms:
     - type: from_entity
       entity: number
       intent: inform
+  halves_fractions_form:
+    frq_halves_fractions:
+      - type: from_text
+  
 version: '2.0'
