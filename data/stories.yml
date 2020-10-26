@@ -48,13 +48,14 @@ stories:
   - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
   - active_loop: null
+  - action: utter_check_in
+  - intent: affirm 
+  - action: utter_fractions_halves_conclusion
+  - action: utter_fractions_halves_conclusion_animation
 
 
 - story: interactive_story_2
   steps:
-  - intent: greet
-  - action: utter_greet_first_time
-  - action: utter_greet_first_time_1
   - action: first_time_form
   - active_loop: first_time_form
   - slot_was_set:
@@ -83,3 +84,7 @@ stories:
   - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
   - active_loop: null
+  - action: utter_check_in
+  - intent: affirm 
+  - action: utter_fractions_halves_conclusion
+  - action: utter_fractions_halves_conclusion_animation

@@ -78,19 +78,39 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         # TODO: Turn this coroutine for all MCQs where values loaded dynamically
         # Check if provided in correct format
-        print(slot_value, type(slot_value))
         if slot_value.lower() in ['a','b','c', 'd']: 
             if slot_value.lower() == "c":
                 dispatcher.utter_message(template="utter_correct")
+                return {"fractions_halves_mcq_1": slot_value}
             else:
                 dispatcher.utter_message(template="utter_incorrect")
-            return {"fractions_halves_mcq_1": slot_value}
+                dispatcher.utter_message(text= "Let try it again!")
+                return {"fractions_halves_mcq_1": None}
         else:
             dispatcher.utter_message(template="utter_wrong_format", err="Try and give me a one letter answer (like 'A', or 'D')")
             return {"fractions_halves_mcq_1": None}
 
+    def validate_fractions_halves_frq_1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        answer_keywords = ["equal", "halves", "half", "same"]
+        response = slot_value.lower()
+        if response:
+            if any(word in answer_keywords for word in response.split()):
+                dispatcher.utter_message(template="utter_correct")
+            else:
+                dispatcher.utter_message(template="utter_incorrect")
+            dispatcher.utter_message(template="utter_fractions_halves_frq_1_explanation")
+            return{"fractions_halves_frq_1": response}
+        else:
+            dispatcher.utter_message(template= "utter_wrong_format", err= "I need a longer answer than that!")
+            return{"fractions_halves_frq_1": None}
 
-
+    
 """ Temporay helper methods that will be defined correctly 
 once basic functionality is established """
 

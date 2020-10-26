@@ -42,7 +42,7 @@ slots:
   fractions_halves_mcq_1:
     type: text
     influence_conversation: false
-  halves_frq_1:
+  fractions_halves_frq_1:
     type: text
     influence_conversation: false 
   
@@ -67,6 +67,12 @@ responses:
   - text: Almost there but not yet 
   - text: So close! I am sure you will get it next time
   
+  utter_check_in:
+  - text: Does that make sense?
+  - text: Do you understand? 
+  - text: Is that clear? 
+  - text: Got it? 
+
   utter_ask_user_name:
   - text: What is your name?
   
@@ -103,6 +109,20 @@ responses:
   utter_ask_fractions_halves_mcq_1:
   - text: Which way of splitting do you think is fair to the both of you?
     image: "https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png"
+  
+  utter_ask_fractions_halves_frq_1:
+  - text: Why do you think this split is "fair"? 
+
+  utter_fractions_halves_frq_1_explanation:
+  - text: "Because when you split {object_1} like that, both you and {friend_1} get the same, or an equal, amount.
+  You are splitting the {object_1} into two halves!"
+
+  utter_fractions_halves_conclusion:
+  - text: In fractions we would say that you and {friend_1} each got *one half (½)* of the *whole*
+    
+  utter_fractions_halves_conclusion_animation:
+  - text: This might help! 
+    image: "https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4"
 
 actions:
 - validate_first_time_form
@@ -124,6 +144,8 @@ forms:
       - type: from_entity
         entity: mcq_answer
         intent: answer_question
+    fractions_halves_frq_1:
+    - type: from_text
 
   
 version: '2.0'
