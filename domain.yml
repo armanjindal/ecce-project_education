@@ -10,12 +10,17 @@ intents:
 - goodbye
 - deny
 - bot_challenge
+- answer_question
 
 entities:
 - name
 - number
+- mcq_answer
 
 slots:
+  user_name:
+    type: text
+    influence_conversation: false  
   age:
     type: text
     influence_conversation: false
@@ -23,7 +28,7 @@ slots:
     type: text
     initial_value: Pooja
     influence_conversation: false
-  object_1:
+  object_1: # Circular object like Pizza/Paratha
     type: text
     initial_value: Aloo Paratha
     influence_conversation: false
@@ -34,27 +39,49 @@ slots:
     type: text
     initial_value: school
     influence_conversation: false
-  user_name:
+  fractions_halves_mcq_1:
     type: text
     influence_conversation: false
+  halves_frq_1:
+    type: text
+    influence_conversation: false 
+  
 
 responses:
   utter_greet_first_time:
   - text: Hello :) My name is Ecce and I am a bot. I am your new, digital, personal tutor. I exist to help you learn, and all we do is chat.
+  
   utter_greet_first_time_1:
   - text: I do not think we have met before. Before we start, lets get to know each other a little bit.
+  
   utter_wrong_format:
   - text: There is something wrong about the value. {err}
+
+  utter_correct:
+  - text: That was right!
+  - text: Right on {user_name} :)
+  - text: Yes that's so right! 
+
+  utter_incorrect:
+  - text: Not quite right
+  - text: Almost there but not yet 
+  - text: So close! I am sure you will get it next time
+  
   utter_ask_user_name:
   - text: What is your name?
+  
   utter_ask_age:
   - text: How old are you?
+  
   utter_first_time_confirm:
   - text: "Is this information correct? \n Name: {user_name} \n Age {age}"
+  
   utter_goodbye:
   - text: Bye
+  
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  
   utter_lesson_options:
   - text: What lesson would you like to work on today?
     buttons:
@@ -64,17 +91,23 @@ responses:
       payload: /lesson_fractions
   
   utter_fractions_halves_introduction:
-  - text: Whoop! Fractions it is. First we are going to talk about sharing food with your friends.
+  - text: Whoop! Fractions it is. To start we are going to talk about sharing food.
   
   utter_fractions_halves_introduction_1:
-  - text: Imagine it is lunchtime at {school}. Which friend do you like to eat with?
+  - text: Which of your friends do you like to eat with the most?
   
   utter_fractions_halves_introduction_2:
-  - text: Your friend, {friend_1} forgot to bring their tiffin and you are about to eat your last {object_1}. You being a good friend, decide to split the {object_1} equally.
+  - text: "Imagine it is lunch time at {school} and {friend_1} forgot to bring their tiffin.
+  You being such a good friend, decide to split your last {object_1}."
+
+  utter_ask_fractions_halves_mcq_1:
+  - text: Which way of splitting do you think is fair to the both of you?
+    image: "https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png"
 
 actions:
 - validate_first_time_form
 - action_fractions_halves_introduction_2
+- validate_fractions_halves_story_form
 
 forms:
   first_time_form:
@@ -86,8 +119,11 @@ forms:
     - type: from_entity
       entity: number
       intent: inform
-  halves_fractions_form:
-    frq_halves_fractions:
-      - type: from_text
+  fractions_halves_story_form:
+    fractions_halves_mcq_1:
+      - type: from_entity
+        entity: mcq_answer
+        intent: answer_question
+
   
 version: '2.0'

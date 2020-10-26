@@ -4,11 +4,9 @@ rules:
 
 - rule: Say goodbye anytime the user says goodbye
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
-
-
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - action: action_fractions_halves_introduction_2
+  - slot_was_set:
+    - friend_1: "Raunak"
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - active_loop: null

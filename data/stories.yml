@@ -1,11 +1,13 @@
 version: "2.0"
 
 stories:
+
+# TODO: Turn this into rule once SSO/action session start has been done
 - story: Introduction story - happy path 
   steps:
     - intent: greet
     - action: utter_greet_first_time
-    - action: utter_greet_first_time_1
+    - action: utter_greet_first_time_1 
     - action: first_time_form
     - active_loop: first_time_form
     - active_loop: null
@@ -13,19 +15,6 @@ stories:
     - intent: affirm 
     - action: utter_lesson_options
 
-- story: Lesson fraction begin 
-  steps:
-    - intent: lesson_fractions 
-    - action: utter_fractions_halves_introduction
-    - action: utter_fractions_halves_introduction_1
-    - intent: inform
-      entities:
-      - name: "Diya"
-    - action: action_fractions_halves_introduction_2
-    - slot_was_set:
-      - friend_1: "Diya"
-
-  
 - story: interactive_story_1
   steps:
   - intent: greet
@@ -56,4 +45,41 @@ stories:
   - action: action_fractions_halves_introduction_2
   - slot_was_set:
     - friend_1: "Raunak"
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - active_loop: null
 
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_1
+  - action: first_time_form
+  - active_loop: first_time_form
+  - slot_was_set:
+    - requested_slot: user_name
+  - slot_was_set:
+    - user_name: Naveen
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: 9
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: lesson_fractions
+  - action: utter_fractions_halves_introduction
+  - action: utter_fractions_halves_introduction_1
+  - intent: inform
+    entities:
+    - name: mahima
+  - action: action_fractions_halves_introduction_2
+  - slot_was_set:
+    - friend_1: mahima
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - active_loop: null

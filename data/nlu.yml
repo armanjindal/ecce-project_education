@@ -16,7 +16,6 @@ nlu:
     - goodevening
     - good afternoon
     - Hello
-
 - intent: goodbye
   examples: |
     - good afternoon
@@ -30,7 +29,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -40,7 +38,6 @@ nlu:
     - that sounds good
     - correct
     - Yes it is
-
 - intent: deny
   examples: |
     - no
@@ -70,11 +67,23 @@ nlu:
     - I am 9
     - I like to eat with [Mahima](name)
     - [Nitin](name)
-    - My best friend named [Akash](name)
-  
+    - My best friend is named [Akash](name)
+
+- intent: answer_question
+  examples: |  
+    - [A](mcq_answer)
+    - I think it is [b](mcq_answer)
+    - [c](mcq_answer)...
+    - Option [d](mcq_answer)
+    - [C](mcq_answer)!
+    - [d](mcq_answer)
+
+
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+
