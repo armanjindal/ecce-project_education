@@ -28,9 +28,16 @@ slots:
     type: text
     initial_value: Pooja
     influence_conversation: false
+  friend_2:
+    type: text
+    initial_value: Rajat
+    influence_conversation: false
   object_1: # Circular object like Pizza/Paratha
     type: text
     initial_value: Aloo Paratha
+    influence_conversation: false
+  object_2: # Discrete object
+    type: text
     influence_conversation: false
   requested_slot:
     type: text
@@ -45,7 +52,15 @@ slots:
   fractions_halves_frq_1:
     type: text
     influence_conversation: false 
-  
+  fractions_parts_nrq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_2:
+    type: text
+    influence_conversation: false 
 
 responses:
   utter_greet_first_time:
@@ -56,6 +71,15 @@ responses:
   
   utter_wrong_format:
   - text: There is something wrong about the value. {err}
+  
+  utter_ask_start_next:
+  - text: Would you like to go to the next lesson?
+  - text: You are doing great. Want to start the next lesson?
+
+  utter_encouragment: 
+  - text: That's awesome
+  - text: Yes! Lets do it
+  - text: You are doing amazing
 
   utter_correct:
   - text: That was right!
@@ -124,10 +148,40 @@ responses:
   - text: This might help! 
     image: "https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4"
 
+  utter_ask_fractions_parts_story_form_object_2:
+  - text: "Right after you and {friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table. 
+  {friend_2} says they will share 1 of the 4 snacks.\nYou can choose badams, biscuits, grapes, and chocolates.\nWhich one do you want?"
+
+  utter_ask_fractions_parts_nrq_1:
+  - text: "{friend_2} has 6 {object_2}. How many do you each get if you split them equally between the three of you?"
+  
+  utter_fractions_parts_nrq_1_explanation:
+  - text: "6 split equally between 3 people is 2. You can check that this is right by adding together all three equal parts:
+  2 {object_2} + 2 {object_2} + 2 {object_2} is 6 {object_2}!"
+
+  utter_ask_fractions_parts_mcq_1:
+  - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
+  
+  utter_fractions_parts_mcq_1_options: 
+  - text: "Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1"
+  
+  utter_fractions_parts_mcq_1_explanation: 
+  - text: "You are splitting the whole 6 {objects} among 3 people, which means there will be 3 equal parts!
+  Since you get 1 out of the 3 equal parts, your share, in fractions, is ⅓ (one-third) of the whole."
+
+  utter_ask_fractions_parts_mcq_2: 
+  - text: "{friend_1} decides they do not want {object_2}, so they give you their share.
+  Now you have 2 out of 3 equal parts. In fractions we would say you have ⅔ (two-thirds) of the whole.
+  \nMeanwhile, {friend_2} has 1 out of 3 of the whole - ⅓ of the whole. Do you get more or less than {friend_2}?"
+  
+  utter_fractions_parts_mcq_2_explanation:
+  - text: ANIMATION WHOOOOO 
+
 actions:
 - validate_first_time_form
 - action_fractions_halves_introduction_2
 - validate_fractions_halves_story_form
+- validate_fractions_parts_story_form
 
 forms:
   first_time_form:
@@ -146,6 +200,17 @@ forms:
         intent: answer_question
     fractions_halves_frq_1:
     - type: from_text
+  fractions_parts_story_form: 
+    object_2:
+    - type: from_text
+    fractions_parts_nrq_1:
+    - type: from_entity
+      entity: number
+    fractions_parts_mcq_1:
+    - type: from_entity
+      entity: number
+    fractions_parts_mcq_2:
+    - type: from_text
 
-  
+
 version: '2.0'

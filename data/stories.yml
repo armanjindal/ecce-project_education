@@ -52,7 +52,12 @@ stories:
   - intent: affirm 
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
-
+  - action: utter_ask_start_next
+  - intent: affirm
+  - action: utter_encouragment
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - active_loop: null
 
 - story: interactive_story_2
   steps:
@@ -88,3 +93,12 @@ stories:
   - intent: affirm 
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
+  - action: utter_ask_start_next
+  - intent: affirm
+  - action: utter_encouragment
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - active_loop: null
+
+
+ 

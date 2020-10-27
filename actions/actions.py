@@ -1,7 +1,7 @@
 import string 
 from typing import Text, List, Any, Dict
 
-
+from fuzzywuzzy import process
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
@@ -37,7 +37,6 @@ class ValidateFirstTimeForm(FormValidationAction):
     ) -> Dict[Text, Any]:
 
         if int(slot_value) > 0:
-            # validation succeeded, set the value of the "cuisine" slot to value
             return {"age": slot_value}
         else:
             dispatcher.utter_message(template="utter_wrong_format", err="You can't be less than 0 :) !")
@@ -78,7 +77,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         # TODO: Turn this coroutine for all MCQs where values loaded dynamically
         # Check if provided in correct format
-        if slot_value.lower() in ['a','b','c', 'd']: 
+        if slot_value.lower() in mcq_options_db(): 
             if slot_value.lower() == "c":
                 dispatcher.utter_message(template="utter_correct")
                 return {"fractions_halves_mcq_1": slot_value}
@@ -111,17 +110,101 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
             return{"fractions_halves_frq_1": None}
 
     
+
+class ValidateFractionPartsStoryForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_fractions_parts_story_form"
+
+    def validate_object_2(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        # TODO: Turn this coroutine for all MCQs where values loaded dynamically
+        # Check if provided in correct format
+        answer_keywords = ["badams", "biscuits", "grapes", "chocolates"]
+        response = slot_value.lower()
+        result = process.extractOne(response, answer_keywords, score_cutoff=80)
+        print(result)
+        if result:
+            return{"object_2": result[0]}
+        else:
+            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option! Choose again")
+            return{"object_2": None}
+
+    def validate_fractions_parts_nrq_1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:        
+        if slot_value and int(slot_value) > 0:
+            if int(slot_value) == 2:
+                dispatcher.utter_message(template="utter_correct")
+            else:
+                dispatcher.utter_message(template="utter_incorrect")
+            
+            dispatcher.utter_message(template="utter_fractions_parts_nrq_1_explanation")
+            return {"fractions_parts_nrq_1": slot_value}
+        else:
+            dispatcher.utter_message(template="utter_wrong_format", err="Give me a number!")
+            return {"fractions_parts_nrq_1": None}
+    
+    def validate_fractions_parts_mcq_1(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        if slot_value > 0 and slot_value <= 1:
+            text_fraction = tracker.latest_message.get('entities')[0].get('text').lower()
+            if text_fraction == '1/3':
+                dispatcher.utter_message(template="utter_correct")
+                dispatcher.utter_message(template="utter_fractions_parts_mcq_1_explanation")
+                return {"fractions_parts_mcq_1": text_fraction}
+            else:
+                dispatcher.utter_message(template="utter_fractions_parts_mcq_1_options")
+                return {"fractions_parts_mcq_1": None}
+        else:
+            dispatcher.utter_message(template="utter_wrong_format", err="Give me a fraction! For example 1/2 which is a half")
+            return {"fractions_parts_mcq_1": None}          
+
+    def validate_fractions_parts_mcq_2(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        # need to come up with better validation 
+        answer_keywords = ["more", "I get more", "greater"] 
+        response = slot_value.lower()
+        result = process.extractOne(response, answer_keywords, score_cutoff=80)
+        print(result)
+        if result and "lower" not in response:
+            dispatcher.utter_message(template="utter_correct")
+        else:
+            dispatcher.utter_message(template= "utter_incorrect")
+            response = None
+        dispatcher.utter_message(template="utter_fractions_parts_mcq_2_explanation")
+        return{"fractions_parts_mcq_2": response}
+
+
 """ Temporay helper methods that will be defined correctly 
 once basic functionality is established """
 
-# def mcq_options_db(alpha = True, num_options = 4):
-#     if alpha:
-#         # Create a list of all English lowercase letters
-#         alphabet_list = list(string.ascii_lowercase)
-#         return alphabet_list[:num_options]
-#     else:
-#         #MCQ indexed by Numbers starting from 1
-#         return list(range(1, num_options + 1))
+def mcq_options_db(alpha = True, num_options = 4):
+    if alpha:
+        # Create a list of all English lowercase letters
+        alphabet_list = list(string.ascii_lowercase)
+        return alphabet_list[:num_options]
+    else:
+        #MCQ indexed by Numbers starting from 1
+        return list(range(1, num_options + 1))
 
 # # TODO: Create a database where answers and questions can be changed
 # answer_dict = {
