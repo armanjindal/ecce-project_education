@@ -202,6 +202,7 @@ def mcq_options_db(alpha = True, num_options = 4):
     if alpha:
         # Create a list of all English lowercase letters
         alphabet_list = list(string.ascii_lowercase)
+        print(alphabet_list)
         return alphabet_list[:num_options]
     else:
         #MCQ indexed by Numbers starting from 1
