@@ -191,6 +191,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
             dispatcher.utter_message(template= "utter_incorrect")
             response = None
         dispatcher.utter_message(template="utter_fractions_parts_mcq_2_explanation")
+        
         return{"fractions_parts_mcq_2": response}
 
 
