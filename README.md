@@ -6,7 +6,7 @@ The premise is that conversational AI is a powerful tool for teaching. Particula
 
 The goal is to make this easy for any teacher to create lessons and add it to the regional version of the bot where users can speak to it in mixed language. 
 
-Currently the lesson on fraction is based on the team is developing -  [this Google Doc](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions and syntax for teachers to be able to create simple lesson plans without worrying about the nuances and fail safe behaviors of conversational AI assistants - so they can focus on what they do best: creativley and effectivley teaching the next generation (remotley for now!). 
+Currently the lesson on fraction is based on the doc the teams is working on in [this Google Doc](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions and syntax for teachers to be able to create simple lesson plans without worrying about the nuances and fail safe behaviors of conversational AI assistants - so they can focus on what they do best: creativley and effectivley teaching the next generation (remotley for now!). 
 
 TODOs for the MVP:
 - [ ] Completley migrate to Rasa 2.0 the fractions lessons
