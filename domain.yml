@@ -185,32 +185,31 @@ actions:
 
 forms:
   first_time_form:
-    user_name:
-    - type: from_entity
-      entity: name
-      intent: inform
     age:
     - type: from_entity
       entity: number
       intent: inform
+    user_name:
+    - type: from_entity
+      entity: name
+      intent: inform
   fractions_halves_story_form:
+    fractions_halves_frq_1:
+    - type: from_text
     fractions_halves_mcq_1:
       - type: from_entity
         entity: mcq_answer
         intent: answer_question
-    fractions_halves_frq_1:
-    - type: from_text
   fractions_parts_story_form: 
-    object_2:
+    fractions_parts_mcq_2:
     - type: from_text
-    fractions_parts_nrq_1:
-    - type: from_entity
-      entity: number
     fractions_parts_mcq_1:
     - type: from_entity
       entity: number
-    fractions_parts_mcq_2:
+    fractions_parts_nrq_1:
+    - type: from_entity
+      entity: number
+    object_2:
     - type: from_text
-
 
 version: '2.0'
