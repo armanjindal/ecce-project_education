@@ -1,1 +1,2 @@
 fuzzywuzzy
+typing_extensions
