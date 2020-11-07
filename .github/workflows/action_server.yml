@@ -30,6 +30,6 @@ jobs:
     - name: Upgrade Rasa X deployment
       uses: WyriHaximus/github-action-helm3@v2
       with:
-        exec: helm repo add rasa-x https://rasahq.github.io/rasa-x-helm ; helm upgrade --install --reuse-values --set app.name=${{ steps.action_server.outputs.docker_image_name }} --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
+        exec: helm test-1 repo add rasa-x https://rasahq.github.io/rasa-x-helm ; helm test-1 upgrade rasa-x-1604487544 --install --reuse-values --set app.name=${{ steps.action_server.outputs.docker_image_name }} --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
         kubeconfig: '${{ secrets.KUBECONFIG }}'
         # Upgrade the helm release using output parameters from the `action_server` step
