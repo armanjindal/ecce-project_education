@@ -86,7 +86,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
                 dispatcher.utter_message(text= "Let try it again!")
                 return {"fractions_halves_mcq_1": None}
         else:
-            dispatcher.utter_message(template="utter_wrong_format", err="Try and give me a one letter answer like 'A', or 'D'")
+            dispatcher.utter_message(template="utter_wrong_format", err="Try and give me a one letter answer like 'A' or 'D'")
             return {"fractions_halves_mcq_1": None}
 
     def validate_fractions_halves_frq_1(
