@@ -39,7 +39,7 @@ class ValidateFirstTimeForm(FormValidationAction):
         if int(slot_value) > 0:
             return {"age": slot_value}
         else:
-            dispatcher.utter_message(template="utter_wrong_format", err="You can't be less than 0 :)) !!")
+            dispatcher.utter_message(template="utter_wrong_format", err="You can't be less than 0  :)) !!")
             return {"age": None}
     
 
