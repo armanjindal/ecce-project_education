@@ -1,7 +1,7 @@
 # Ecce-project_education
 
 Can chat with MVB (Minimum Viable Bot) [here](http://35.232.27.88:8000/guest/conversations/production/78a995e30bd74272a9c393738d2af68b) as a guest tester. 
-MVP: 
+
 
 This is an early stageproject to make building and deploying lessons using Rasa easy for non-technical educators. 
 
