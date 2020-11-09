@@ -26,16 +26,16 @@ jobs:
         #
         # github.sha - The commit SHA that triggered the workflow run
         docker_image_tag: ${{ github.sha }}
-        requirements_file: 'action/requirements-actions.txt'
+        requirements_file: 'actions/requirements-actions.txt'
 
-    - name: deploy postgres to cluster
+    - name: Deploy built action server to GKE
       uses: wahyd4/kubectl-helm-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
         args: |
           helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
-          helm upgrade --install rasa-x-1604487544 rasa-x/rasa-x \
-          --namespace test-1 \
+          helm upgrade rasa-x-1604487544 rasa-x/rasa-x \
+          --namespace "test-1" \
           --reuse-values --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
           --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} 
