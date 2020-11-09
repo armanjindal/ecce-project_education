@@ -8,7 +8,7 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    name: Build Action Server image and upgrade Rasa X deployment
+    name: Build Action Server Image
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -27,7 +27,8 @@ jobs:
         # github.sha - The commit SHA that triggered the workflow run
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
-
+    
+    
     - name: Deploy built action server to GKE
       uses: wahyd4/kubectl-helm-action@master
       env:
@@ -37,5 +38,4 @@ jobs:
           helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
           helm upgrade rasa-x-1604487544 rasa-x/rasa-x \
           --namespace "test-1" \
-          --reuse-values --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
-          --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} 
+          --reuse-values --set app.name="eccebot" --set app.tag=${{ github.sha }}

@@ -106,7 +106,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
             dispatcher.utter_message(template="utter_fractions_halves_frq_1_explanation")
             return{"fractions_halves_frq_1": response}
         else:
-            dispatcher.utter_message(template= "utter_wrong_format", err= "I need a longer answer than that!")
+            dispatcher.utter_message(template= "utter_wrong_format", err= "I need a longer answer than that !")
             return{"fractions_halves_frq_1": None}
 
     
@@ -131,7 +131,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         if result:
             return{"object_2": result[0]}
         else:
-            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option! Choose again")
+            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option. Choose again!")
             return{"object_2": None}
 
     def validate_fractions_parts_nrq_1(
