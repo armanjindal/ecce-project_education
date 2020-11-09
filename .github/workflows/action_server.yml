@@ -6,7 +6,7 @@ on:
     - 'actions/**'
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
     name: Build Action Server Image
     steps:
@@ -27,9 +27,19 @@ jobs:
         # github.sha - The commit SHA that triggered the workflow run
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
-    
-    
-    - name: Deploy built action server to GKE
+  
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy built image to GKE
+    needs: build
+    steps:
+    - name: Authenticate GCP
+      if: env.ACTIONS_CHANGED == 'true'
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '275.0.0'
+        service_account_key: ${{ secrets.GCLOUD_AUTH }}
+    - name: Update Helm 
       uses: wahyd4/kubectl-helm-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}

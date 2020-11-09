@@ -131,7 +131,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         if result:
             return{"object_2": result[0]}
         else:
-            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option - choose again!!")
+            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option. Please choose again!!")
             return{"object_2": None}
 
     def validate_fractions_parts_nrq_1(
