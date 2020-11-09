@@ -180,7 +180,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        # need to come up with better validation 
+        # need to come up with better validation  - TODO: MCQ Validation
         answer_keywords = ["more", "I get more", "greater"] 
         response = slot_value.lower()
         result = process.extractOne(response, answer_keywords, score_cutoff=80)
