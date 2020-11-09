@@ -86,7 +86,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
                 dispatcher.utter_message(text= "Let try it again!")
                 return {"fractions_halves_mcq_1": None}
         else:
-            dispatcher.utter_message(template="utter_wrong_format", err="I need a one letter answer like 'A' or 'D'")
+            dispatcher.utter_message(template="utter_wrong_format", err="I need a one letter answer like 'A' or 'D' ")
             return {"fractions_halves_mcq_1": None}
 
     def validate_fractions_halves_frq_1(
@@ -96,7 +96,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        answer_keywords = ["equal", "halves", "half", "same"]
+        answer_keywords = ["equal", "halves", "half", "same", "identical"]
         response = slot_value.lower()
         if response:
             if any(word in answer_keywords for word in response.split()):
