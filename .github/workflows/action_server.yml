@@ -37,7 +37,8 @@ jobs:
       env:
         GCLOUD_SERVICE_ACCOUNT_KEYFILE: ${{ secrets.GCLOUD_AUTH }}
       run: |
-        gcloud auth activate-service-account --key-file=GCLOUD_SERVICE_ACCOUNT_KEYFILE
+        echo "${GCLOUD_SERVICE_ACCOUNT_KEYFILE}" > gcloud_sa_key.json
+        gcloud auth activate-service-account --key-file=gcloud_sa_key.json
         gcloud container clusters get-credentials rasa-x-cluster --zone us-central1-c --project rasa-287805
     - name: Helm Upgrade
       run: |
