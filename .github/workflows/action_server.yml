@@ -44,7 +44,7 @@ jobs:
       run: |
         # Install helm v3
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-        helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
+        helm repo add rasa-x https://armanjindal.github.io/rasa-x-helm/
         helm upgrade rasa-x-1604487544 rasa-x/rasa-x \
         --namespace test-1 \
         --reuse-values --set app.name="eccebot" --set app.tag="${{ github.sha }}"
