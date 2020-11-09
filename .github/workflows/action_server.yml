@@ -33,19 +33,18 @@ jobs:
     name: Deploy built image to GKE
     needs: build
     steps:
-    - name: Authenticate GCP
-      if: env.ACTIONS_CHANGED == 'true'
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '275.0.0'
-        service_account_key: ${{ secrets.GCLOUD_AUTH }}
-    - name: Update Helm 
-      uses: wahyd4/kubectl-helm-action@master
+    - name: GCP Auth
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      with:
-        args: |
-          helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
-          helm upgrade rasa-x-1604487544 rasa-x/rasa-x \
-          --namespace test-1 \
-          --reuse-values --set app.name="eccebot" --set app.tag="${{ github.sha }}"
+        GCLOUD_SERVICE_ACCOUNT_KEYFILE: ${{ secrets.GCLOUD_AUTH }}
+      run: |
+        echo "${GCLOUD_SERVICE_ACCOUNT_KEYFILE}" | base64 -d  > gcloud_sa_key.json
+        gcloud auth activate-service-account --key-file=gcloud_sa_key.json
+        gcloud container clusters get-credentials rasa-x-cluster --zone us-central1-c --project rasa-287805
+    - name: Helm Upgrade
+      run: |
+        # Install helm v3
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
+        helm upgrade rasa-x-1604487544 rasa-x/rasa-x \
+        --namespace test-1 \
+        --reuse-values --set app.name="eccebot" --set app.tag="${{ github.sha }}"
