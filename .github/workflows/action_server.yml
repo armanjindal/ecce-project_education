@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build Action Server Image
+    name: Build Action Server Image and Deploy
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -41,5 +41,6 @@ jobs:
         helm repo add rasa-x https://armanjindal.github.io/rasa-x-helm/ --namespace "test-1"
         helm get values rasa-x-1604487544 -o yaml > values-generated.yaml --namespace "test-1"        
         helm upgrade rasa-x-1604487544 rasa-x/rasa-x -n "test-1" -f values-generated.yaml \
-         --set app.name=eccebot --set app.tag=${{ github.sha }} --namespace test-1 
+        --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
+        --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} --namespace test-1 
 
