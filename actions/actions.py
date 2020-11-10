@@ -209,6 +209,3 @@ def mcq_options_db(alpha = True, num_options = 4):
         return list(range(1, num_options + 1))
 
 # # TODO: Create a database where answers and questions can be changed
-answer_dict = {
-    "fractions_halves_mcq_1" : "c",
-}
