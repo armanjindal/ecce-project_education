@@ -170,7 +170,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
                 dispatcher.utter_message(template="utter_fractions_parts_mcq_1_options")
                 return {"fractions_parts_mcq_1": None}
         else:
-            dispatcher.utter_message(template="utter_wrong_format", err="Give me a fraction! Like 1/2 or 1/4")
+            dispatcher.utter_message(template="utter_wrong_format", err="Give me a fraction! For example 1/2 or 1/4")
             return {"fractions_parts_mcq_1": None}          
 
     def validate_fractions_parts_mcq_2(

@@ -27,12 +27,6 @@ jobs:
         # github.sha - The commit SHA that triggered the workflow run
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
-  
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy built image to GKE
-    needs: build
-    steps:
     - name: GCP Auth
       env:
         GCLOUD_SERVICE_ACCOUNT_KEYFILE: ${{ secrets.GCLOUD_AUTH }}
@@ -40,7 +34,7 @@ jobs:
         echo "${GCLOUD_SERVICE_ACCOUNT_KEYFILE}" > gcloud_sa_key.json
         gcloud auth activate-service-account --key-file=gcloud_sa_key.json
         gcloud container clusters get-credentials rasa-x-cluster --zone us-central1-c --project rasa-287805
-    - name: Helm Upgrade
+    - name: Helm Upgrade and Deploy
       run: |
         # Install helm v3
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
