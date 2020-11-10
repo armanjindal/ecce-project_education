@@ -59,7 +59,7 @@ class FractionsHalvesIntroduction2(Action):
             dispatcher.utter_message(template="utter_fractions_halves_introduction_2", friend_1=friend_name)
             return [SlotSet(key="friend_1", value=friend_name)]
         else:
-            dispatcher.utter_message(text=f"I did not quite get the name. Lets call your friend {prev_name} for now!")
+            dispatcher.utter_message(text=f"I did not quite get the name. Lets call just call your friend {prev_name} for now!")
             dispatcher.utter_message(template="utter_fractions_halves_introduction_2")
 
         return []
