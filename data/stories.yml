@@ -14,6 +14,7 @@ stories:
     - action: utter_first_time_confirm
     - intent: affirm 
     - action: utter_lesson_options
+    - intent: inform 
 
 - story: interactive_story_1
   steps:

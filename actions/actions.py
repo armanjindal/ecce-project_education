@@ -1,13 +1,30 @@
 import string 
 from typing import Text, List, Any, Dict
 
-from fuzzywuzzy import process
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
+#import helpers
+from fuzzywuzzy import process
 
+
+
+def mcq_match(user_input, question, key , method="FuzzyWuzzy", cutoff=60):
+    # Method used to match a single word 
+    mcq_options_dict = {
+    "action_lesson_options": ["fractions", "multiplication"],
+    "validate_fractions_parts_story_form": {
+        "object_2": ["badams", "biscuits", "grapes", "chocolates"]
+        }
+    }
+    if method=="FuzzyWuzzy":
+        resp = user_input.lower()
+        options = mcq_options_dict[f"{question}"]
+        if key:
+            options = options[f"{key}"]
+        return process.extractOne(resp, options, score_cutoff=cutoff)[0]
 
 class ValidateFirstTimeForm(FormValidationAction):
     def name(self) -> Text:
@@ -20,7 +37,6 @@ class ValidateFirstTimeForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-
         if slot_value:
             name = str(slot_value)
             return {"user_name": name.capitalize()}
@@ -35,7 +51,6 @@ class ValidateFirstTimeForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-
         if int(slot_value) > 0:
             return {"age": slot_value}
         else:
@@ -43,9 +58,7 @@ class ValidateFirstTimeForm(FormValidationAction):
             return {"age": None}
     
 
-
 class FractionsHalvesIntroduction2(Action):
-
     def name(self) -> Text:
         return "action_fractions_halves_introduction_2"
 
@@ -61,7 +74,6 @@ class FractionsHalvesIntroduction2(Action):
         else:
             dispatcher.utter_message(text=f"I did not quite get the name. Lets call just call your friend {prev_name} for now!")
             dispatcher.utter_message(template="utter_fractions_halves_introduction_2")
-
         return []
 
 class ValidateFractionHalvesStoryForm(FormValidationAction):
@@ -76,8 +88,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         # TODO: Turn this coroutine for all MCQs where values loaded dynamically
-        # Check if provided in correct format
-        if slot_value.lower() in mcq_options_db(): 
+        if slot_value.lower() in ["a","b","c","d"]: 
             if slot_value.lower() == "c":
                 dispatcher.utter_message(template="utter_correct")
                 return {"fractions_halves_mcq_1": slot_value}
@@ -122,14 +133,10 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        # TODO: Turn this coroutine for all MCQs where values loaded dynamically
-        # Check if provided in correct format
-        answer_keywords = ["badams", "biscuits", "grapes", "chocolates"]
-        response = slot_value.lower()
-        result = process.extractOne(response, answer_keywords, score_cutoff=80)
-        print(result)
-        if result:
-            return{"object_2": result[0]}
+        
+        match = mcq_match(slot_value, self.name(), "object_2")
+        if match:
+            return{"object_2": match}
         else:
             dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option, choose again!!")
             return{"object_2": None}
@@ -198,14 +205,6 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
 """ Temporay helper methods that will be defined correctly 
 once basic functionality is established """
 
-def mcq_options_db(alpha = True, num_options = 4):
-    if alpha:
-        # Create a list of all English lowercase letters
-        alphabet_list = list(string.ascii_lowercase)
-        print(alphabet_list)
-        return alphabet_list[:num_options]
-    else:
-        #MCQ indexed by Numbers starting from 1
-        return list(range(1, num_options + 1))
+
 
 # # TODO: Create Q/A database 

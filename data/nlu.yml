@@ -1,4 +1,5 @@
 version: "2.0"
+
 nlu:
 - intent: greet
   examples: |
@@ -79,6 +80,13 @@ nlu:
     - Option [d](mcq_answer)
     - [C](mcq_answer)!
     - [d](mcq_answer)
+
+- intent: lesson_fractions
+  examples: |
+    - I want to study frations!
+    - fractions 
+    - lets do fractions
+    - Fractions!
 
 - intent: bot_challenge
   examples: |
