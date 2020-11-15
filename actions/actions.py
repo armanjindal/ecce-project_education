@@ -9,22 +9,46 @@ from rasa_sdk.types import DomainDict
 #import helpers
 from fuzzywuzzy import process
 
+def extractFraction(tracker):
+    # Error handle exceptions 
+    return tracker.latest_message.get('entities')[0].get('text').lower()
 
-
-def mcq_match(user_input, question, key , method="FuzzyWuzzy", cutoff=60):
+def mcq_match(user_input, question, key , method="FuzzyMatch", cutoff=60):
     # Method used to match a single word 
     mcq_options_dict = {
     "action_lesson_options": ["fractions", "multiplication"],
+    "validate_fractions_halves_story_form": {
+        "fractions_halves_mcq_1": [['a','c','d','e'], 'c']
+        },
     "validate_fractions_parts_story_form": {
-        "object_2": ["badams", "biscuits", "grapes", "chocolates"]
+        "object_2": ["badams", "biscuits", "grapes", "chocolates"],
+        "fractions_parts_mcq_2" : ["more", "I get more", "greater"] 
         }
     }
-    if method=="FuzzyWuzzy":
+    # Fuzzy match strings and returns closest match result
+    if method=="FuzzyMatch":
         resp = user_input.lower()
         options = mcq_options_dict[f"{question}"]
         if key:
             options = options[f"{key}"]
-        return process.extractOne(resp, options, score_cutoff=cutoff)[0]
+        result = process.extractOne(resp, options, score_cutoff=cutoff)
+        if result:
+            return result[0]
+        else:
+            return None 
+    
+    # Returns exact match to options i.e 'A, B, C, D' 
+    if method=="DirectMatch":
+        resp = user_input.lower()
+        answer_list = mcq_options_dict[f"{question}"][f"{key}"]
+        if resp in answer_list[0]:
+            if resp == answer_list[1]:
+                return ["CORRECT", resp]
+            else:
+                return ["INCORRECT", resp]
+        else:
+            return None
+
 
 class ValidateFirstTimeForm(FormValidationAction):
     def name(self) -> Text:
@@ -57,7 +81,6 @@ class ValidateFirstTimeForm(FormValidationAction):
             dispatcher.utter_message(template="utter_wrong_format", err="You can't be less than 0  :) !")
             return {"age": None}
     
-
 class FractionsHalvesIntroduction2(Action):
     def name(self) -> Text:
         return "action_fractions_halves_introduction_2"
@@ -70,7 +93,7 @@ class FractionsHalvesIntroduction2(Action):
         prev_name = tracker.get_slot(key="friend_1")
         if friend_name:
             dispatcher.utter_message(template="utter_fractions_halves_introduction_2", friend_1=friend_name)
-            return [SlotSet(key="friend_1", value=friend_name)]
+            return [SlotSet(key="friend_1", value=friend_name.capitalize())]
         else:
             dispatcher.utter_message(text=f"I did not quite get the name. Lets call just call your friend {prev_name}!s")
             dispatcher.utter_message(template="utter_fractions_halves_introduction_2")
@@ -87,11 +110,12 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        # TODO: Turn this coroutine for all MCQs where values loaded dynamically
-        if slot_value.lower() in ["a","b","c","d"]: 
-            if slot_value.lower() == "c":
+        slot_name = "fractions_halves_mcq_1"
+        answer = mcq_match(slot_value, self.name(), slot_name, "DirectMatch") 
+        if answer:
+            if answer[0] == "CORRECT":
                 dispatcher.utter_message(template="utter_correct")
-                return {"fractions_halves_mcq_1": slot_value}
+                return {"fractions_halves_mcq_1": answer[1]}
             else:
                 dispatcher.utter_message(template="utter_incorrect")
                 dispatcher.utter_message(text= "Let try it again!")
@@ -119,8 +143,6 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         else:
             dispatcher.utter_message(template= "utter_wrong_format", err= "I need a longer answer than that !")
             return{"fractions_halves_frq_1": None}
-
-    
 
 class ValidateFractionPartsStoryForm(FormValidationAction):
     def name(self) -> Text:
@@ -168,7 +190,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         if slot_value > 0 and slot_value <= 1:
-            text_fraction = tracker.latest_message.get('entities')[0].get('text').lower()
+            text_fraction = extractFraction(tracker)
             if text_fraction == '1/3':
                 dispatcher.utter_message(template="utter_correct")
                 dispatcher.utter_message(template="utter_fractions_parts_mcq_1_explanation")
@@ -187,19 +209,15 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        # need to come up with better validation  - TODO: MCQ Validation
-        answer_keywords = ["more", "I get more", "greater"] 
-        response = slot_value.lower()
-        result = process.extractOne(response, answer_keywords, score_cutoff=80)
-        print(result)
-        if result and "lower" not in response:
+        slot_name = "fractions_parts_mcq_2"
+        result = mcq_match(slot_value, self.name(), slot_name)
+        if result and slot_value.lower() not in ["lower", "less"]:
             dispatcher.utter_message(template="utter_correct")
         else:
             dispatcher.utter_message(template= "utter_incorrect")
-            response = None
         dispatcher.utter_message(template="utter_fractions_parts_mcq_2_explanation")
         
-        return{"fractions_parts_mcq_2": response}
+        return{"fractions_parts_mcq_2": result}
 
 
 """ Temporay helper methods that will be defined correctly 
