@@ -1,4 +1,15 @@
 version: "2.0"
 
 rules:
+- rule: Implementation of the Two-Stage-Fallback
+  condition:
+  - active_loop: null 
+  steps:
+  - intent: nlu_fallback
+  - action: action_two_stage_fallback
+  - active_loop: action_two_stage_fallback
 
+- rule: respond to FAQs
+  steps:
+  - intent: faq
+  - action: utter_faq

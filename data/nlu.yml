@@ -17,10 +17,11 @@ nlu:
     - goodevening
     - good afternoon
     - Hello
+    - morning
 
 - intent: goodbye
   examples: |
-    - good afternoon
+    - good bye
     - cu
     - good by
     - cee you later
@@ -41,6 +42,10 @@ nlu:
     - that sounds good
     - correct
     - Yes it is
+    - sure
+    - yep
+    - defintley 
+    - fine by me
 
 - intent: deny
   examples: |
@@ -51,6 +56,7 @@ nlu:
     - don't like that
     - no way
     - not really
+    - nope
 
 - intent: inform
   examples: |
@@ -62,7 +68,7 @@ nlu:
     - I am 10 years old
     - 9 years old
     - My name is [Arman](name)
-    - [Mahima](name)
+    - [Dhruv](name)
     - I am [Aditya](name)
     - Called [Maya](name)
     - [mahima](name)
@@ -71,6 +77,7 @@ nlu:
     - I like to eat with [Mahima](name)
     - [Nitin](name)
     - My best friend is named [Akash](name)
+    - Eat with [Sandeep](name)
 
 - intent: answer_question
   examples: |  
@@ -88,11 +95,30 @@ nlu:
     - lets do fractions
     - Fractions!
 
-- intent: bot_challenge
+- intent: faq/ask_name
+  examples: |
+    - What is your name?
+    - May I know your name?
+    - What do people call you?
+    - Do you have a name for yourself?
+
+- intent: faq/bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
 
+- intent: faq/ask_creator
+  examples: |
+    - Who made you?
+    - How did you come to exist?
+    - are you created by my teacher?
+    - how were u made?
+    - what programming language was used to make you
 
+- intent: faq/ask_language
+  examples: |
+    - What languages do you speak
+    - Do you understand hindi?
+    - what are
