@@ -1,91 +1,246 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
-
+version: "2.0"
 stories:
 - story: happy path 1
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hello there!
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: mood_great
+    user: |-
       amazing
-    intent: mood_great
   - action: utter_happy
-
 - story: happy path 2
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hello there!
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: mood_great
+    user: |-
       amazing
-    intent: mood_great
   - action: utter_happy
-  - user: |
+  - intent: goodbye
+    user: |-
       bye-bye!
-    intent: goodbye
   - action: utter_goodbye
-
 - story: sad path 1
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hello
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: mood_unhappy
+    user: |-
       not good
-    intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
-  - user: |
+  - intent: affirm
+    user: |-
       yes
-    intent: affirm
   - action: utter_happy
-
 - story: sad path 2
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hello
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: mood_unhappy
+    user: |-
       not good
-    intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
-  - user: |
+  - intent: deny
+    user: |-
       not really
-    intent: deny
   - action: utter_goodbye
-
 - story: sad path 3
   steps:
-  - user: |
+  - intent: greet
+    user: |-
       hi
-    intent: greet
   - action: utter_greet
-  - user: |
+  - intent: mood_unhappy
+    user: |-
       very terrible
-    intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
-  - user: |
+  - intent: deny
+    user: |-
       no
-    intent: deny
   - action: utter_goodbye
-
 - story: say goodbye
   steps:
-  - user: |
+  - intent: goodbye
+    user: |-
       bye-bye!
-    intent: goodbye
   - action: utter_goodbye
-
 - story: bot challenge
   steps:
-  - user: |
+  - intent: bot_challenge
+    user: |-
       are you a bot?
-    intent: bot_challenge
   - action: utter_iamabot
+- story: Story from Conversation ID 192c98cb31c6417bb5965dba4deafd50
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_1
+  - action: first_time_form
+  - active_loop: first_time_form
+  - slot_was_set:
+    - requested_slot: user_name
+  - intent: inform
+    entities:
+    - name: Arman
+  - action: first_time_form
+  - slot_was_set:
+    - user_name: Arman
+  - slot_was_set:
+    - requested_slot: age
+  - intent: inform
+    entities:
+    - number: 9
+  - action: first_time_form
+  - slot_was_set:
+    - age: 9
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: lesson_fractions
+  - action: utter_fractions_halves_introduction
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - slot_was_set:
+    - requested_slot: friend_1
+  - intent: inform
+    entities:
+    - name: Mahima
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - friend_1: Mahima
+  - slot_was_set:
+    - requested_slot: fractions_halves_mcq_1
+  - intent: answer_question
+    entities:
+    - mcq_answer: C
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - fractions_halves_mcq_1: C
+  - slot_was_set:
+    - requested_slot: fractions_halves_frq_1
+  - intent: nlu_fallback
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - fractions_halves_frq_1: Because they are of equal sizes
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_halves_conclusion
+  - action: utter_fractions_halves_conclusion_animation
+  - action: utter_ask_start_next
+  - intent: affirm
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - slot_was_set:
+    - requested_slot: object_2
+  - intent: deny
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - object_2: chocolates
+  - slot_was_set:
+    - requested_slot: fractions_parts_nrq_1
+  - intent: inform
+    entities:
+    - number: 2
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - fractions_parts_nrq_1: 2
+  - slot_was_set:
+    - requested_slot: fractions_parts_mcq_1
+  - intent: inform
+    entities:
+    - number: 0.3333333333333333
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - fractions_parts_mcq_1: 0.3333333333333333
+  - slot_was_set:
+    - requested_slot: fractions_parts_mcq_2
+  - intent: nlu_fallback
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - fractions_parts_mcq_2: I get more than Rajat
+  - slot_was_set:
+    - requested_slot: fractions_parts_mcq_3
+  - intent: greet
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - fractions_parts_mcq_3: more
+  - slot_was_set:
+    - requested_slot: fractions_parts_mcq_4
+  - intent: greet
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - fractions_parts_mcq_4: more
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_parts_conclusion
+  - action: utter_ask_start_next
+  - intent: affirm
+  - action: utter_fractions_wholes_introduction
+  - action: utter_fractions_wholes_introduction_hint
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_1
+  - intent: inform
+    entities:
+    - number: 4
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_nrq_1: 4
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_2
+  - intent: inform
+    entities:
+    - number: 0.3333333333333333
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_nrq_2: 0.3333333333333333
+  - slot_was_set:
+    - requested_slot: fractions_wholes_frq_1
+  - intent: greet
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_frq_1: The box
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_3
+  - intent: inform
+    entities:
+    - number: 1
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_nrq_3: 1
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_4
+  - intent: inform
+    entities:
+    - number: 0.25
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_nrq_4: 0.25
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_5
+  - intent: inform
+    entities:
+    - number: 0.16666666666666666
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - fractions_wholes_nrq_5: 0.16666666666666666
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
