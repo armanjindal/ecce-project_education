@@ -1,9 +1,8 @@
 version: "2.0"
 
 stories:
-
 # TODO: Turn this into rule once SSO/action session start has been done
-- story: First Time Meeting - Happy Path
+- story: General - First Time Meeting - Happy Path
   steps:
   - intent: greet
   - action: utter_greet_first_time
@@ -26,18 +25,11 @@ stories:
   - intent: affirm
   - action: utter_lesson_options
 
-- story: Fraction Lesson Halves and Parts
+- story: Fraction - Halves -> Parts
   steps:
   - action: utter_lesson_options
   - intent: lesson_fractions
   - action: utter_fractions_halves_introduction
-  - action: utter_fractions_halves_introduction_1
-  - intent: inform
-    entities:
-    - name: "Raunak"
-  - action: action_fractions_halves_introduction_2
-  - slot_was_set:
-    - friend_1: "Raunak"
   - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
   - active_loop: null
@@ -48,14 +40,37 @@ stories:
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
-
-- story: Fractions Parts -> Wholes
-  steps:
-  - action: utter_fractions_halves_conclusion_animation
+  - action: utter_fractions_parts_conclusion
   - action: utter_ask_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
-  - intent: affirm
+  - action: utter_fractions_wholes_introduction_hint
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
   - active_loop: null
+
+- story: Fractions - Parts -> Wholes 
+  steps:
+  - action: utter_fractions_parts_conclusion
+  - action: utter_ask_start_next
+  - intent: affirm
+  - action: utter_fractions_wholes_introduction
+  - action: utter_fractions_wholes_introduction_hint
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - active_loop: null
+  - action: utter_fractions_wholes_conclusion
+  - action: utter_fractions_wholes_conclusion_1
+  - action: utter_fractions_wholes_conclusion_2
+  - action: utter_fractions_wholes_conclusion_3
+
+- story: General - Exit at End of Lesson 
+  steps:
+  - action: utter_ask_start_next
+  - or:
+    - intent: deny 
+    - intent: stop
+  - action: utter_ask_confirm
+  - intent: affirm
+  - action: action_listen
+   

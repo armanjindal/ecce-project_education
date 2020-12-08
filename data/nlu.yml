@@ -19,6 +19,14 @@ nlu:
     - Hello
     - morning
 
+- intent: thankyou
+  examples: |
+    - thanks!
+    - thank you 
+    - u are great!
+    - thanks so much
+    - thanks
+
 - intent: goodbye
   examples: |
     - good bye
@@ -68,7 +76,6 @@ nlu:
     - I am 10 years old
     - 9 years old
     - My name is [Arman](name)
-    - [Dhruv](name)
     - I am [Aditya](name)
     - Called [Maya](name)
     - [mahima](name)
@@ -78,6 +85,7 @@ nlu:
     - [Nitin](name)
     - My best friend is named [Akash](name)
     - Eat with [Sandeep](name)
+    - [dhruv](name)
 
 - intent: answer_question
   examples: |  
@@ -94,6 +102,14 @@ nlu:
     - fractions 
     - lets do fractions
     - Fractions!
+
+- intent: stop
+  examples: |
+    - I would like to stop this lesson!
+    - lets stop 
+    - no more 
+    - lets do this later 
+  
 
 - intent: faq/ask_name
   examples: |
