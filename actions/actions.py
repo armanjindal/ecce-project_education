@@ -10,6 +10,25 @@ from rasa_sdk.types import DomainDict
 from fuzzywuzzy import process
 # TODO: Figure out why I cannot import local .py files
 
+def question_db():
+    # TODO: Turn this into a external database. Turn dict into DB query
+    questions_dict = {
+    "fractions_halves_mcq_1": ["mcq_match", ['a','c','d','e'], 'c'],
+    "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
+    "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
+    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_parts_nrq_1": ["nrq_numeral", [2]],
+    "fractions_parts_mcq_3": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
+    "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
+    "fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
+    "fractions_wholes_nrq_3": ["nrq_numeral", [1]],
+    "fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
+    "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
+    }
+    return questions_dict
+
 def extractFraction(tracker):
     # Error handle exceptions 
     print(tracker)
@@ -40,23 +59,7 @@ def matchOption(user_input, slot_name, cutoff=60):
 def checkQuestion(user_input, question, tracker=None):
     """ Takes in the expected user input, queries DB, 
     and validates the user input against the question type"""
-
-    # TODO: Turn this into a external database. Turn dict into DB query
-    questions_dict = {
-    "fractions_halves_mcq_1": ["mcq_match", ['a','c','d','e'], 'c'],
-    "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
-    "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_parts_nrq_1": ["nrq_numeral", [2]],
-    "fractions_parts_mcq_3": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
-    "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
-    "fractions_wholes_nrq_3": ["nrq_numeral", [1]],
-    "fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
-    "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
-    }
+    questions_dict = question_db()
     q_list = questions_dict[question]
     question_type = q_list[0]
     
@@ -134,8 +137,10 @@ class ValidateFirstTimeForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         if slot_value:
-            name = str(slot_value)
-            return {"user_name": name.capitalize()}
+            if isinstance(slot_value, str):
+                return {"user_name": slot_value.capitalize()}
+            if isinstance(slot_value, list):
+                return {"user_name": slot_value[0].capitalize()}
         else:
             dispatcher.utter_message(text="I can't seem to recognize your name, friend!")
             return {"user_name": "friend"}
@@ -166,9 +171,13 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         defualt_name = "Puja"
-        if slot_value and len(slot_value) > 0:
-            dispatcher.utter_message(template=f"utter_friend_1_explanation", friend_1=slot_value)
-            return {"friend_1": slot_value}
+        if slot_value:
+            if isinstance(slot_value, str):
+                name = slot_value
+            if isinstance(slot_value, list):
+                name = slot_value[0]
+            dispatcher.utter_message(template=f"utter_friend_1_explanation", friend_1=name)
+            return {"friend_1": name}
         else:
             dispatcher.utter_message(f"I can't find the name! Lets call your friend {default_name} for now!")
             dispatcher.utter_message(template=f"utter_friend_1_explanation", friend_1=default_name)           

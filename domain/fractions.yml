@@ -1,0 +1,198 @@
+slots:
+  friend_1: # Favorite friend to EAT with 
+    type: text
+    influence_conversation: false
+  friend_2:
+    type: text
+    initial_value: Rajat
+    influence_conversation: false
+  object_1: # Circular object like Pizza/Paratha
+    type: text
+    initial_value: Aloo Paratha
+    influence_conversation: false
+  object_2: # Discrete object
+    type: text
+    influence_conversation: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+  fractions_halves_mcq_1:
+    type: text
+    influence_conversation: false
+  fractions_halves_frq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_nrq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_2:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_3:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_4:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_1:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_2:
+    type: text
+    influence_conversation: false
+  fractions_wholes_frq_1:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_3:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_4:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_5:
+    type: text
+    influence_conversation: false
+
+responses:  
+  utter_fractions_halves_introduction:
+  - text: Whoop! Fractions it is. To start we are going to talk about sharing food.
+  utter_ask_friend_1:
+  - text: Which of your friends do you like to eat with the most?
+  utter_ask_fractions_halves_mcq_1:
+  - text: "Imagine it is lunch time at {school} and {friend_1} forgot to bring their tiffin.
+  You being such a good friend, decide to split your last {object_1}.\n
+  Which way of splitting do you think is fair to the both of you?"
+    image: "https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png"
+  utter_ask_fractions_halves_frq_1:
+  - text: Why do you think this split is "fair"?
+  utter_fractions_halves_frq_1_explanation:
+  - text: "Because when you split {object_1} like that, both you and {friend_1} get the same, or an equal, amount.
+  You are splitting the {object_1} into two halves!"
+  utter_fractions_halves_conclusion:
+  - text: In fractions we would say that you and {friend_1} each got *one half (½)* of the *whole*
+  utter_fractions_halves_conclusion_animation:
+  - text: This might help!
+    image: "https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4"
+  utter_ask_fractions_parts_story_form_object_2:
+  - text: "Right after you and {friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table.
+   {friend_2} says they will share 1 of the 4 snacks.They have biscuits, grapes, and chocolates. Which is your favorite?"
+  utter_ask_fractions_parts_nrq_1:
+  - text: "{object_2} it is!\n{friend_2} has 6 {object_2}. How many do you each get if you split them equally between the three of you?"
+  utter_fractions_parts_nrq_1_explanation:
+  - text: "6 split equally between 3 people is 2. You can check that this is right by adding together all three equal parts:
+  2 {object_2} + 2 {object_2} + 2 {object_2} is 6 {object_2}!"
+  utter_ask_fractions_parts_mcq_1:
+  - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
+  utter_fractions_parts_mcq_1_options:
+  - text: "Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1"
+  utter_fractions_parts_mcq_1_explanation:
+  - text: "You are splitting the whole 6 {object_2} among 3 people, which means there will be 3 equal parts!
+  Since you get 1 out of the 3 equal parts, your share, in fractions, is ⅓ (one-third) of the whole."
+  utter_ask_fractions_parts_mcq_2:
+  - text: "{friend_1} decides they do not want {object_2}, so they give you their share.
+  Now you have 2 out of 3 equal parts together. In fractions we would say you have ⅔ (two-thirds) of the whole.
+  \nMeanwhile, {friend_2} has 1 out of 3 of the whole - ⅓ of the whole. Do you get more or less than {friend_2}?"
+  utter_fractions_parts_mcq_2_explanation:
+  - text: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
+  utter_ask_fractions_parts_mcq_3:
+  - text: After showing off your fraction skills to {friend_2}, they are upset you get more than they do! So now  {friend_2} wants you to split them equally between the two of you now. Now does {friend_2} get more or less than before?
+  utter_fractions_parts_mcq_3_explanation:
+  - text: You are splitting the {object_2} into two equal parts instead of three! Because there are fewer people to share with, now each person gets more.
+  utter_ask_fractions_parts_mcq_4:
+  - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
+  utter_fractions_parts_mcq_4_explanation:
+  - text: ½ is a fraction that splits the whole object into two equal parts. ⅓ is a fraction that splits a whole into three equal parts. When you split an object into more equal parts the size of these parts becomes smaller!
+  utter_fractions_parts_conclusion:
+  - text: And that is PARTS!
+  utter_fractions_wholes_introduction:
+  - text: A farmer has a total of 12 mangoes. He needs to split them into 3 boxes, equally. You can help him with FRACTIONS!
+  utter_fractions_wholes_introduction_hint:
+  - text: Whenever we are dealing with fractions it’s always a good idea to figure out what the *whole* is and what the *part* is.
+  utter_ask_fractions_wholes_nrq_1:
+  - text: The farmer is splitting the 12 mangoes, which is the whole, into 3 boxes, so into 3 equal parts. How many mangoes are in each box?
+  utter_fractions_wholes_nrq_1_explanation:
+  - text: 12 split equally into 3 parts is 4. You can check that this is right by adding together all 3 equal parts - 4 mangoes + 4 mangoes + 4 mangoes is 12 mangoes!
+  utter_ask_fractions_wholes_nrq_2:
+  - text: In fractions, how much of the *whole* is in each box?
+  utter_fractions_wholes_nrq_2_explanation:
+  - text:  Each box is 1 part out of 3 boxes.  or ⅓ of the whole.
+  utter_ask_fractions_wholes_frq_1:
+  - text: Now that you are splitting a box of 4 mangoes, what would you consider as the whole?
+  utter_fractions_wholes_frq_1_explanation:
+  - text: "The **whole** is the 4 mangoes in the box.\nThe farmer was so grateful for your help that he gifted you a box! At dinner, you need to split this box of 4 mangoes evenly between your family of 4 people."
+  utter_ask_fractions_wholes_nrq_3:
+  - text: After splitting the mangoes evenly among your family of 4, how many mangoes does each person get?
+  utter_fractions_wholes_nrq_3_explanation:
+  - text: 1 mango each since 4 mangoes split among 4 people (equally) is 1!
+  utter_ask_fractions_wholes_nrq_4:
+  - text: In fractions what share did each member of your family get?
+  utter_fractions_wholes_nrq_4_explanation:
+  - text: Each got 1 out of 4 parts, and so the fraction is ¼
+  utter_ask_fractions_wholes_nrq_5:
+  - text: Now that you’ve got one mango all to yourself, you want to cut your mango into 6 equal pieces. What fraction of the whole mango is each piece?
+  utter_fractions_wholes_nrq_5_explanation:
+  - text: You are cutting the mango into 6 equal parts so the fraction is 1/6
+  utter_fractions_wholes_conclusion:
+  - text: Did you realise that the whole changed depending on what you're splitting?!
+  utter_fractions_wholes_conclusion_1:
+  - text: When the farmer was splitting 12 mangoes into 3 equal boxes, you identified 12 mangoes as the whole!
+  utter_fractions_wholes_conclusion_2:
+  - text: Later, when you had to share the box of 4 mangoes with your family, you identified 4 mangoes as the new whole!
+  utter_fractions_wholes_conclusion_3:
+  - text: Finally, when you were ready to eat one mango - you cut it into 6 slices. 1 mango was now the whole you are splitting into 6 parts!In fact, Fractions are how you divide/split *any whole*
+
+actions:
+- validate_first_time_form
+- validate_fractions_halves_story_form
+- validate_fractions_parts_story_form
+- validate_fractions_wholes_story_form
+
+forms:
+  fractions_halves_story_form:
+    friend_1:
+    - type: from_entity
+      entity: name
+    fractions_halves_mcq_1:
+    - type: from_entity
+      entity: mcq_answer
+      intent: answer_question
+    fractions_halves_frq_1:
+    - type: from_text
+  fractions_parts_story_form:
+    object_2:
+    - type: from_text
+    fractions_parts_nrq_1:
+    - type: from_entity
+      entity: number
+    fractions_parts_mcq_1:
+    - type: from_entity
+      entity: number
+    fractions_parts_mcq_2:
+    - type: from_text
+    fractions_parts_mcq_3:
+    - type: from_text
+    fractions_parts_mcq_4:
+    - type: from_text
+  fractions_wholes_story_form:
+    fractions_wholes_nrq_1:
+    - type: from_entity
+      entity: number
+    fractions_wholes_nrq_2:
+    - type: from_entity
+      entity: number
+    fractions_wholes_frq_1:
+    - type: from_text
+    fractions_wholes_nrq_3:
+    - type: from_entity
+      entity: number
+    fractions_wholes_nrq_4:
+    - type: from_entity
+      entity: number
+    fractions_wholes_nrq_5:
+    - type: from_entity
+      entity: number
+
+version: '2.0'

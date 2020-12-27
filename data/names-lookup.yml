@@ -1,28 +1,11 @@
 version: "2.0"
-
 nlu:
 - lookup: name
   examples: |
-    - Rahul
-    - Mahesh
-    - Arjun 
-    - Rao 
-    - Pooja
-    - Puja 
-    - Naveen
-    - Dhruv 
-    - Diya
-    - Raunak
-    - Sambhav
-    - Kanishk 
-    - Vikram 
-    - Anjali 
-    - Tiara 
-    - Kiran 
-    - Sanjay
-    - Maya 
-    - Riya
-    - Elena
+    - tiara 
+    - elena
+    - patrycja
+    
     
 
     

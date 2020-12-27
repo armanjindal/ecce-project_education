@@ -68,33 +68,26 @@ nlu:
 
 - intent: inform
   examples: |
-    - My age is 11
-    - I have 13 years
-    - 7 years old
-    - 11 y/o
-    - 4
-    - I am 10 years old
-    - 9 years old
     - My name is [Arman](name)
     - I am [Aditya](name)
     - Called [Maya](name)
     - [mahima](name)
-    - I am 8
-    - I am 9
     - I like to eat with [Mahima](name)
     - [Nitin](name)
-    - My best friend is named [Akash](name)
     - Eat with [Sandeep](name)
-    - [dhruv](name)
+    - [rajan](name)
+    - [puja](name)
+    - [sambhav](name)
 
 - intent: answer_question
   examples: |  
     - [A](mcq_answer)
-    - I think it is [b](mcq_answer)
+    - [b](mcq_answer)
     - [c](mcq_answer)...
-    - Option [d](mcq_answer)
+    - [d](mcq_answer)
     - [C](mcq_answer)!
     - [d](mcq_answer)
+    - [e](mcq_answer)
 
 - intent: lesson_fractions
   examples: |
@@ -109,7 +102,7 @@ nlu:
     - lets stop 
     - no more 
     - lets do this later 
-  
+    - im done
 
 - intent: faq/ask_name
   examples: |
@@ -117,6 +110,7 @@ nlu:
     - May I know your name?
     - What do people call you?
     - Do you have a name for yourself?
+    - I forgot your name
 
 - intent: faq/bot_challenge
   examples: |
@@ -137,4 +131,5 @@ nlu:
   examples: |
     - What languages do you speak
     - Do you understand hindi?
-    - what are
+    - can you speak [hindi](language)
+    - do you speak [marathi](language)

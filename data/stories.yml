@@ -1,12 +1,12 @@
 version: "2.0"
 
 stories:
-# TODO: Turn this into rule once SSO/action session start has been done
+# TODO: Turn this into rule once SSO Action session start has been done
 - story: General - First Time Meeting - Happy Path
   steps:
   - intent: greet
   - action: utter_greet_first_time
-  - action: utter_greet_first_time_1
+  - action: utter_greet_first_time_followup
   - action: first_time_form
   - active_loop: first_time_form
   - active_loop: null
@@ -25,7 +25,7 @@ stories:
   - intent: affirm
   - action: utter_lesson_options
 
-- story: Fraction - Halves -> Parts
+- story: Fraction - Halves
   steps:
   - action: utter_lesson_options
   - intent: lesson_fractions
@@ -35,24 +35,22 @@ stories:
   - active_loop: null
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
-  - action: utter_ask_start_next
+  - action: utter_start_next
+
+- story: Fractions - Halves -> Parts
+  steps:
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - active_loop: null
+  - action: utter_fractions_halves_conclusion
+  - action: utter_fractions_halves_conclusion_animation
+  - action: utter_start_next
   - intent: affirm
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
   - action: utter_fractions_parts_conclusion
-  - action: utter_ask_start_next
-  - intent: affirm
-  - action: utter_fractions_wholes_introduction
-  - action: utter_fractions_wholes_introduction_hint
-  - action: fractions_wholes_story_form
-  - active_loop: fractions_wholes_story_form
-  - active_loop: null
-
-- story: Fractions - Parts -> Wholes 
-  steps:
-  - action: utter_fractions_parts_conclusion
-  - action: utter_ask_start_next
+  - action: utter_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
   - action: utter_fractions_wholes_introduction_hint
@@ -64,13 +62,57 @@ stories:
   - action: utter_fractions_wholes_conclusion_2
   - action: utter_fractions_wholes_conclusion_3
 
-- story: General - Exit at End of Lesson 
+- story: Fractions - Parts -> Wholes 
   steps:
-  - action: utter_ask_start_next
+  - action: utter_fractions_parts_conclusion
+  - action: utter_start_next
+  - intent: affirm
+  - action: utter_fractions_wholes_introduction
+  - action: utter_fractions_wholes_introduction_hint
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - active_loop: null
+  - action: utter_fractions_wholes_conclusion
+  - action: utter_fractions_wholes_conclusion_1
+  - action: utter_fractions_wholes_conclusion_2
+  - action: utter_fractions_wholes_conclusion_3
+
+# General conversation functionality
+- story: Exit at End of Lesson 
+  steps:
+  - action: utter_start_next
   - or:
     - intent: deny 
     - intent: stop
-  - action: utter_ask_confirm
+  - action: utter_confirm
   - intent: affirm
+  - action: utter_end_chat_session
   - action: action_listen
+
+- story: False exit at End of Lesson 
+  steps:
+  - action: utter_start_next
+  - or:
+    - intent: deny 
+    - intent: stop
+  - action: utter_confirm
+  - intent: deny
+  - action: action_back
+  - action: action_back
+
+- story: Exit mid lesson 
+  steps:
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm 
+  - action: utter_end_chat_session
+  - action: action_listen
+  
+- story: False exit mid lesson 
+  steps:
+  - intent: stop
+  - action: utter_confirm
+  - intent: deny 
+  - action: action_back
+  - action: action_back
    
