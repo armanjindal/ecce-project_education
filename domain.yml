@@ -1,3 +1,122 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+- affirm
+- greet
+- lesson_fractions
+- inform
+- goodbye
+- deny
+- answer_question
+- faq
+- thankyou
+- stop
+
+entities:
+- name
+- number
+- mcq_answer
+- language
+
+slots:
+  user_name:
+    type: text
+    influence_conversation: false
+  age:
+    type: text
+    influence_conversation: false
+  school:
+    type: text
+    initial_value: school
+    influence_conversation: false
+
+forms:
+  first_time_form:
+    user_name:
+    - type: from_entity
+      entity: name
+    age:
+    - type: from_entity
+      entity: number
+
+responses:
+  # General conversation utterances
+  utter_greet:
+  - text: Hello!
+  - text: Hey {user_name}
+  utter_goodbye:
+  - text: Bye!
+  - text: Bye bye. Chat with you soon :)
+  utter_wrong_format:
+  - text: There is something wrong about the value. {err}
+  utter_ask_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+  utter_encouragment:
+  - text: That's awesome
+  - text: Yes! Lets do it
+  - text: You are doing amazing
+  utter_correct:
+  - text: That was right!
+  - text: Right on {user_name} :)
+  - text: Yes that's so right!
+  - text: Nice one
+  utter_incorrect:
+  - text: Not quite right {user_name}
+  - text: Almost there but not yet
+  - text: So close! I am sure you will get it next time
+  - text: Nope. Nice try though! 
+  utter_you_are_welcome:
+  - text: You are welcome {user_name}!
+  - text: The pleasure is all mine!
+  - text: You are very welcome!! :) 
+
+  # First time form
+  utter_greet_first_time:
+  - text: Hello :) My name is Ecce and I am a bot. I am a digital, personal tutor.
+  utter_greet_first_time_followup:
+  - text: I do not think we have met before. Before we start, lets get to know each other a little bit.
+  utter_ask_user_name:
+  - text: What is your name?
+  utter_ask_age:
+  - text: How old are you?
+  utter_first_time_confirm:
+  - text: "Is this information correct?\nName: {user_name}\nAge: {age}"
+  
+  # OTI - FAQs 
+  utter_faq/ask_name:
+  - text: My name is Ecce :)
+  - text: You can call me Ecce!
+  utter_faq/bot_challenge:
+  - text: I am a bot, but I prefer to think of myself as a conversational teaching assistant
+  utter_faq/ask_creator:
+  - text: I was made by a team of cool educators still in college! You can find out more at eccetech.com
+  utter_faq/ask_language:
+  - text: I only text in English for now but I am going to be able to speak Hindi and Marathi soon!
+  
+  # OTI - ChitChat - TODO: ADD chitchat functionality
+
+  # Conversation flow utterances
+  utter_start_next:
+  - text: Would you like to go to the next lesson?
+  - text: You are doing great. Want to start the next lesson?
+  - text: Should we keep going?
+  utter_confirm:
+  - text: Are you sure you want to stop?
+  - text: Do you want to take a break?
+  - text: So are you done for now? 
+  utter_check_in:
+  - text: Does that make sense?
+  - text: Do you understand?
+  - text: Is that clear?
+  - text: Got it?
+  utter_lesson_options:
+  - text: "What lesson would you like to work on today?\n- Fractions \n- Multiplicatin \n- Division"
+  utter_end_chat_session:
+  - text: You've done an awesome job! Lets chat again soon.
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
 slots:
   friend_1: # Favorite friend to EAT with 
     type: text
