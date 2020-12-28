@@ -20,26 +20,9 @@ entities:
 - mcq_answer
 - language
 
-slots:
-  user_name:
-    type: text
-    influence_conversation: false
-  age:
-    type: text
-    influence_conversation: false
-  school:
-    type: text
-    initial_value: school
-    influence_conversation: false
 
-forms:
-  first_time_form:
-    user_name:
-    - type: from_entity
-      entity: name
-    age:
-    - type: from_entity
-      entity: number
+
+
 
 responses:
   # General conversation utterances
@@ -117,65 +100,6 @@ responses:
   - text: You've done an awesome job! Lets chat again soon.
   utter_please_rephrase:
   - text: I'm sorry, I didn't quite understand that. Could you rephrase?
-slots:
-  friend_1: # Favorite friend to EAT with 
-    type: text
-    influence_conversation: false
-  friend_2:
-    type: text
-    initial_value: Rajat
-    influence_conversation: false
-  object_1: # Circular object like Pizza/Paratha
-    type: text
-    initial_value: Aloo Paratha
-    influence_conversation: false
-  object_2: # Discrete object
-    type: text
-    influence_conversation: false
-  requested_slot:
-    type: text
-    influence_conversation: false
-  fractions_halves_mcq_1:
-    type: text
-    influence_conversation: false
-  fractions_halves_frq_1:
-    type: text
-    influence_conversation: false
-  fractions_parts_nrq_1:
-    type: text
-    influence_conversation: false
-  fractions_parts_mcq_1:
-    type: text
-    influence_conversation: false
-  fractions_parts_mcq_2:
-    type: text
-    influence_conversation: false
-  fractions_parts_mcq_3:
-    type: text
-    influence_conversation: false
-  fractions_parts_mcq_4:
-    type: text
-    influence_conversation: false
-  fractions_wholes_nrq_1:
-    type: text
-    influence_conversation: false
-  fractions_wholes_nrq_2:
-    type: text
-    influence_conversation: false
-  fractions_wholes_frq_1:
-    type: text
-    influence_conversation: false
-  fractions_wholes_nrq_3:
-    type: text
-    influence_conversation: false
-  fractions_wholes_nrq_4:
-    type: text
-    influence_conversation: false
-  fractions_wholes_nrq_5:
-    type: text
-    influence_conversation: false
-
-responses:  
   utter_fractions_halves_introduction:
   - text: Whoop! Fractions it is. To start we are going to talk about sharing food.
   utter_ask_friend_1:
@@ -263,6 +187,73 @@ responses:
   utter_fractions_wholes_conclusion_3:
   - text: Finally, when you were ready to eat one mango - you cut it into 6 slices. 1 mango was now the whole you are splitting into 6 parts!In fact, Fractions are how you divide/split *any whole*
 
+slots:
+  user_name:
+    type: text
+    influence_conversation: false
+  age:
+    type: text
+    influence_conversation: false
+  school:
+    type: text
+    initial_value: school
+    influence_conversation: false
+  friend_1: # Favorite friend to EAT with 
+    type: text
+    influence_conversation: false
+  friend_2:
+    type: text
+    initial_value: Rajat
+    influence_conversation: false
+  object_1: # Circular object like Pizza/Paratha
+    type: text
+    initial_value: Aloo Paratha
+    influence_conversation: false
+  object_2: # Discrete object
+    type: text
+    influence_conversation: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+  fractions_halves_mcq_1:
+    type: text
+    influence_conversation: false
+  fractions_halves_frq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_nrq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_1:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_2:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_3:
+    type: text
+    influence_conversation: false
+  fractions_parts_mcq_4:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_1:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_2:
+    type: text
+    influence_conversation: false
+  fractions_wholes_frq_1:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_3:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_4:
+    type: text
+    influence_conversation: false
+  fractions_wholes_nrq_5:
+    type: text
+    influence_conversation: false
 actions:
 - validate_first_time_form
 - validate_fractions_halves_story_form
@@ -270,6 +261,13 @@ actions:
 - validate_fractions_wholes_story_form
 
 forms:
+  first_time_form:
+    user_name:
+    - type: from_entity
+      entity: name
+    age:
+    - type: from_entity
+      entity: number
   fractions_halves_story_form:
     friend_1:
     - type: from_entity
