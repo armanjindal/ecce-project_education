@@ -133,3 +133,18 @@ nlu:
     - Do you understand hindi?
     - can you speak [hindi](language)
     - do you speak [marathi](language)
+
+- intent: chitchat/exclaim_positive
+  examples: |
+    - Thats so awesome
+    - Whooooaaa
+    - Nice! 
+    - this is so cool 
+    - amazing 
+
+- intent: chitchat/exclaim_negative
+  examples: |
+    - This is so hard 
+    - Oh no I keep getting this wrong
+    - Can't do this any more :(
+    - oooofff this is sucks
