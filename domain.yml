@@ -200,13 +200,13 @@ responses:
   utter_fractions_parts_mcq_1_options:
   - text: Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1
   utter_fractions_parts_mcq_1_explanation:
-  - text: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
+  - text: Listen to this!
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
   utter_ask_fractions_parts_mcq_2:
   - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
       In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
       or less than {friend_2}?'
   utter_fractions_parts_mcq_2_explanation:
-  - text: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
   utter_ask_fractions_parts_mcq_3:
   - text: After showing off your fraction skills to {friend_2}, they are upset you
       get more than they do :( Now, {friend_2} wants to RE SPLIT the {object_2} EQUALLY
@@ -217,7 +217,8 @@ responses:
   utter_ask_fractions_parts_mcq_4:
   - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
   utter_fractions_parts_mcq_4_explanation:
-  - text: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
+  - text: Check this out 
+    image: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
   utter_fractions_parts_conclusion:
   - text: And that is PARTS!
   utter_fractions_wholes_introduction:
@@ -269,8 +270,21 @@ responses:
       1 mango was now the whole you are splitting into 6 parts!In fact, Fractions
       are how you divide/split *any whole*
   utter_fractions_halves_conclusion_animation:
-  - image: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
-    text: Check out this animation
+  - text: Check out this animation
+    image: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
+  utter_fractions_parts_mcq_2_explanation:
+  - image: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
+    text: This animation might help!
+  utter_fractions_parts_mcq_4_explanation:
+  - image: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
+    text: Listen to this
+  utter_fractions_parts_nrq_1_explanation:
+  - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
+    text: Tap here!
+  utter_fractions_wholes_frq_1_explanation:
+  - text: Listen :)
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
+    
 actions:
 - validate_first_form
 - validate_fractions_halves_story_form
