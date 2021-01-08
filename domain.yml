@@ -1,3 +1,4 @@
+version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -208,6 +209,9 @@ responses:
   - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
       In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
       or less than {friend_2}?'
+  utter_fractions_parts_mcq_2_explanation:
+  - text: This animation might help!
+    image: https://ecceapi.herokuapp.com/media/fractions_parts_mcq_2_explanation.mp4
   utter_ask_fractions_parts_mcq_3:
   - text: After showing off your fraction skills to {friend_2}, they are upset you
       get more than they do :( Now, {friend_2} wants to RE SPLIT the {object_2} EQUALLY
@@ -270,9 +274,7 @@ responses:
   - text: Finally, when you were ready to eat one mango - you cut it into 6 slices.
       1 mango was now the whole you are splitting into 6 parts!In fact, Fractions
       are how you divide/split *any whole*
-  utter_fractions_parts_mcq_2_explanation:
-  - text: This animation might help!
-    image: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
+
   
     
 actions:
