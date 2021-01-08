@@ -116,8 +116,8 @@ responses:
   - text: The pleasure is all mine!
   - text: You are very welcome!! :)
   utter_greet_first_time:
-  - text: Hello  My name is Ecce. I am your new digital, personal tutor 🙋🏽‍♀️ Lets
-      get chatting!!"
+  - text: Hello! 👋🏾 My name is Ecce. I am your new digital, personal tutor 🙋🏽‍♀️ Lets
+      get chatting!
   utter_greet_first_time_followup:
   - text: I do not think we have met before. Before we start, lets get to know each
       other a little bit.
@@ -183,19 +183,18 @@ responses:
   - text: Because when you split {object_1} like that, both you and {friend_1} get
       the same, or an equal, amount. You are splitting the {object_1} into two halves!
   utter_fractions_halves_conclusion:
-  - text: In fractions we would say that you and {friend_1} each got *one half (½)* of the *whole*
-  utter_fractions_halves_conclusion_animation:
-  - text: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
+  - text: In fractions we would say that you and {friend_1} each got *one half (½)*
+      of the *whole*
   utter_ask_fractions_parts_story_form_object_2:
   - text: Right after you and {friend_1} finished your yummy (and equal!) {object_1},
       {friend_2} sits at your table. {friend_2} says they will share 1 of the 4 snacks.They
       have biscuits, grapes, and chocolates. Which is your favorite?
   utter_ask_fractions_parts_nrq_1:
-  - text: "I love {object_2} too 😋!\n{friend_2} has 6 {object_2}. How many do you each get if you split them equally between the three of you?"
+  - text: "I love {object_2} too \U0001F60B!\n{friend_2} has 6 {object_2}. How many\
+      \ do you each get if you split them equally between the three of you?"
   utter_fractions_parts_nrq_1_explanation:
-  # TODO: TURN THIS INTO A VOICE NOTE - Voice Note 1
-  - text: Listen to this!
-    image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
+  - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
+    text: Listen to this!
   utter_ask_fractions_parts_mcq_1:
   - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
   utter_fractions_parts_mcq_1_options:
@@ -204,7 +203,9 @@ responses:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
   utter_ask_fractions_parts_mcq_2:
-  - text: "{friend_1} gives you their share. Now you have 2 out of the 3 equal parts. In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more or less than {friend_2}?"
+  - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
+      In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
+      or less than {friend_2}?'
   utter_fractions_parts_mcq_2_explanation:
   utter_ask_fractions_parts_mcq_3:
   - text: After showing off your fraction skills to {friend_2}, they are upset you
@@ -216,7 +217,8 @@ responses:
   utter_ask_fractions_parts_mcq_4:
   - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
   utter_fractions_parts_mcq_4_explanation:
-  # Audio Message 3
+  - text: Check this out 
+    image: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
   utter_fractions_parts_conclusion:
   - text: And that is PARTS!
   utter_fractions_wholes_introduction:
@@ -237,10 +239,10 @@ responses:
   utter_fractions_wholes_nrq_2_explanation:
   - text: Each box is 1 part out of 3 boxes.  or ⅓ of the whole.
   utter_ask_fractions_wholes_frq_1:
-  - text: Now that you are splitting a box of 4 mangoes, what would you consider as the whole?
+  - text: Now that you are splitting a box of 4 mangoes, what would you consider as
+      the whole?
   utter_fractions_wholes_frq_1_explanation:
-  # Voice note 4
-  - text: "https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg"
+  - text: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
   utter_ask_fractions_wholes_nrq_3:
   - text: After splitting the mangoes evenly among your family of 4, how many mangoes
       does each person get?
@@ -267,6 +269,9 @@ responses:
   - text: Finally, when you were ready to eat one mango - you cut it into 6 slices.
       1 mango was now the whole you are splitting into 6 parts!In fact, Fractions
       are how you divide/split *any whole*
+  utter_fractions_halves_conclusion_animation:
+  - text: Check out this animation
+    image: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
   utter_fractions_parts_mcq_2_explanation:
   - image: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
     text: This animation might help!
@@ -277,8 +282,9 @@ responses:
   - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
     text: Tap here!
   utter_fractions_wholes_frq_1_explanation:
-  - image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
-    text: Listen :)
+  - text: Listen :)
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
+    
 actions:
 - validate_first_form
 - validate_fractions_halves_story_form
