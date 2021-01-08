@@ -139,7 +139,6 @@ def extractName(slot_value, tracker):
     name_entity = next(tracker.get_latest_entity_values("name"), None)
     PERSON_entity = next(tracker.get_latest_entity_values("PERSON"), None)
     resp_words = slot_value.split()
-    print(f"Value are - name_entity: {name_entity}, PERSON_entity = {PERSON_entity}, resp = {resp_words}")
     if name_entity:
         return name_entity.capitalize()    
     if PERSON_entity:

@@ -175,7 +175,7 @@ responses:
   utter_ask_friend_1:
   - text: Which of your friends do you like to eat with the most?
   utter_ask_fractions_halves_mcq_1:
-  - text: "Imagine it is lunch time at {school} and {friend_1} forgot to bring their tiffin. You decide to split your last {object_1} with your friend. \n Which way of splitting do you think is fair to the both of you?"
+  - text: "Imagine it is lunch time at {school} and {friend_1} forgot to bring their tiffin. You decide to split your last {object_1} with your friend.\nWhich way of splitting do you think is fair to the both of you?"
     image: https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png
   utter_ask_fractions_halves_frq_1:
   - text: "**WHY** do you think this split is 'fair'?"
