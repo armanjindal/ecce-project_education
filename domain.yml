@@ -184,25 +184,26 @@ responses:
   utter_fractions_halves_conclusion:
   - text: In fractions we would say that you and {friend_1} each got *one half (½)* of the *whole*
   utter_fractions_halves_conclusion_animation:
-  - image: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
+  - text: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
   utter_ask_fractions_parts_story_form_object_2:
   - text: Right after you and {friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table. {friend_2} says they will share 1 of the 4 snacks.They have biscuits, grapes, and chocolates. Which is your favorite?
   utter_ask_fractions_parts_nrq_1:
   - text: "I love {object_2} too 😋!\n{friend_2} has 6 {object_2}. How many do you each get if you split them equally between the three of you?"
   utter_fractions_parts_nrq_1_explanation:
   # TODO: TURN THIS INTO A VOICE NOTE - Voice Note 1
-  - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
+  - text: Listen to this!
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
   utter_ask_fractions_parts_mcq_1:
   - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
   utter_fractions_parts_mcq_1_options:
   - text: Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1
   utter_fractions_parts_mcq_1_explanation:
   # Voice note 2
-  - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
+  - text: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
   utter_ask_fractions_parts_mcq_2:
   - text: "{friend_1} gives you their share. Now you have 2 out of the 3 equal parts. In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more or less than {friend_2}?"
   utter_fractions_parts_mcq_2_explanation:
-  - image: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
+  - text: https://ecceapi.herokuapp.com/media/fractions_parts_conclusion_animation.mp4
   utter_ask_fractions_parts_mcq_3:
   # ACTION - break up
   - text: After showing off your fraction skills to {friend_2}, they are upset you get more than they do :( Now, {friend_2} wants to RE SPLIT the {object_2} EQUALLY (into halves). Do you get more or less than before?
@@ -212,7 +213,7 @@ responses:
   - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
   utter_fractions_parts_mcq_4_explanation:
   # Audio Message 3
-  - image: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
+  - text: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
   utter_fractions_parts_conclusion:
   - text: And that is PARTS!
   utter_fractions_wholes_introduction:
@@ -231,7 +232,7 @@ responses:
   - text: Now that you are splitting a box of 4 mangoes, what would you consider as the whole?
   utter_fractions_wholes_frq_1_explanation:
   # Voice note 4
-  - image: "https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg"
+  - text: "https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg"
   utter_ask_fractions_wholes_nrq_3:
   - text: After splitting the mangoes evenly among your family of 4, how many mangoes does each person get?
   utter_fractions_wholes_nrq_3_explanation:
