@@ -7,23 +7,13 @@ stories:
   - intent: greet
   - action: utter_greet_first_time
   - action: utter_greet_first_time_followup
-  - action: first_time_form
-  - active_loop: first_time_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: user_name
-  - slot_was_set:
-    - user_name: mahima
-  - slot_was_set:
-    - requested_slot: age
-  - slot_was_set:
-    - age: 8
-  - slot_was_set:
-    - requested_slot: null
+  - action: first_form
+  - active_loop: first_form
   - active_loop: null
   - action: utter_first_time_confirm
   - intent: affirm
   - action: utter_lesson_options
+
 
 - story: Fraction - Halves
   steps:

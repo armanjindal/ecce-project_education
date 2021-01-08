@@ -1,5 +1,5 @@
 import string 
-from typing import Text, List, Any, Dict
+from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.events import SlotSet
@@ -13,12 +13,12 @@ from fuzzywuzzy import process
 def question_db():
     # TODO: Turn this into a external database. Turn dict into DB query
     questions_dict = {
-    "fractions_halves_mcq_1": ["mcq_match", ['a','c','d','e'], 'c'],
+    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d','e'], 'c'],
     "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
     "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
     "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
     "fractions_parts_nrq_1": ["nrq_numeral", [2]],
-    "fractions_parts_mcq_3": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater"]],
     "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
     "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
     "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
@@ -124,26 +124,58 @@ def respondQuestion(answer, question, slot_value, dispatcher):
     if slot_dict_input:
         dispatcher.utter_message(template=f"utter_{question}_explanation")
     return slot_dict_input
-    
-class ValidateFirstTimeForm(FormValidationAction):
+
+def extractFirstElementfromSlot(slot_value):
+    if slot_value:
+        if isinstance(slot_value, list):
+            return slot_value[0]
+        else:
+            return slot_value
+    return None
+
+def extractName(slot_value, tracker):
+    """ Take in the slot value extracted using slot mapping 'from_text' 
+    extracts name, and if cannot find returns None"""
+    name_entity = next(tracker.get_latest_entity_values("name"), None)
+    PERSON_entity = next(tracker.get_latest_entity_values("PERSON"), None)
+    resp_words = slot_value.split()
+    print(f"Value are - name_entity: {name_entity}, PERSON_entity = {PERSON_entity}, resp = {resp_words}")
+    if name_entity:
+        return name_entity.capitalize()    
+    if PERSON_entity:
+        return PERSON_entity.capitalize()
+    if len(resp_words) == 1:
+        return resp_words[0].capitalize()
+    return None
+
+class ActionFailedFirstTimeForm(Action):
+
     def name(self) -> Text:
-        return "validate_first_time_form"
+        return "action_failed_first_time_form"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message("Sorry lets try this again!")
+        return [SlotSet(key = "userName", value = None), SlotSet(key = "age", value = None) ]
+
+class ValidateFirstForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_first_form"
     
-    def validate_user_name(
+    def validate_userName(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        if slot_value:
-            if isinstance(slot_value, str):
-                return {"user_name": slot_value.capitalize()}
-            if isinstance(slot_value, list):
-                return {"user_name": slot_value[0].capitalize()}
+        name = extractName(slot_value, tracker)
+        if name:
+            return {"userName":name}
         else:
-            dispatcher.utter_message(text="I can't seem to recognize your name, friend!")
-            return {"user_name": "friend"}
+            dispatcher.utter_message(text="Sorry I missed your name. Can you just type only your name for me?")
+            return {"userName": None}
     
     def validate_age(
         self,
@@ -171,16 +203,11 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         defualt_name = "Puja"
-        if slot_value:
-            if isinstance(slot_value, str):
-                name = slot_value
-            if isinstance(slot_value, list):
-                name = slot_value[0]
-            dispatcher.utter_message(template=f"utter_friend_1_explanation", friend_1=name)
-            return {"friend_1": name}
+        name = extractName(slot_value, tracker)
+        if name:
+            return {"friend_1":name}
         else:
             dispatcher.utter_message(f"I can't find the name! Lets call your friend {default_name} for now!")
-            dispatcher.utter_message(template=f"utter_friend_1_explanation", friend_1=default_name)           
             return {"friend_1": defualt_name}
 
     def validate_fractions_halves_mcq_1(

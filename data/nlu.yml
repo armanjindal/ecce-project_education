@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -18,15 +17,13 @@ nlu:
     - good afternoon
     - Hello
     - morning
-
 - intent: thankyou
   examples: |
     - thanks!
-    - thank you 
+    - thank you
     - u are great!
     - thanks so much
     - thanks
-
 - intent: goodbye
   examples: |
     - good bye
@@ -40,7 +37,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -52,9 +48,8 @@ nlu:
     - Yes it is
     - sure
     - yep
-    - defintley 
+    - defintley
     - fine by me
-
 - intent: deny
   examples: |
     - no
@@ -65,7 +60,6 @@ nlu:
     - no way
     - not really
     - nope
-
 - intent: inform
   examples: |
     - My name is [Arman](name)
@@ -78,32 +72,28 @@ nlu:
     - [rajan](name)
     - [puja](name)
     - [sambhav](name)
-
 - intent: answer_question
-  examples: |  
+  examples: |
     - [A](mcq_answer)
     - [b](mcq_answer)
     - [c](mcq_answer)...
     - [d](mcq_answer)
     - [C](mcq_answer)!
-    - [d](mcq_answer)
     - [e](mcq_answer)
-
+    - [dee](name)
 - intent: lesson_fractions
   examples: |
     - I want to study frations!
-    - fractions 
+    - fractions
     - lets do fractions
     - Fractions!
-
 - intent: stop
   examples: |
     - I would like to stop this lesson!
-    - lets stop 
-    - no more 
-    - lets do this later 
+    - lets stop
+    - no more
+    - lets do this later
     - im done
-
 - intent: faq/ask_name
   examples: |
     - What is your name?
@@ -111,14 +101,12 @@ nlu:
     - What do people call you?
     - Do you have a name for yourself?
     - I forgot your name
-
 - intent: faq/bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
 - intent: faq/ask_creator
   examples: |
     - Who made you?
@@ -126,25 +114,25 @@ nlu:
     - are you created by my teacher?
     - how were u made?
     - what programming language was used to make you
-
 - intent: faq/ask_language
   examples: |
     - What languages do you speak
     - Do you understand hindi?
     - can you speak [hindi](language)
     - do you speak [marathi](language)
-
 - intent: chitchat/exclaim_positive
   examples: |
     - Thats so awesome
     - Whooooaaa
-    - Nice! 
-    - this is so cool 
-    - amazing 
-
+    - Nice!
+    - this is so cool
+    - amazing
 - intent: chitchat/exclaim_negative
   examples: |
-    - This is so hard 
+    - This is so hard
     - Oh no I keep getting this wrong
     - Can't do this any more :(
-    - oooofff this is sucks
+    - oooofff this sucks
+    - im bored
+    - im so tired 
+
