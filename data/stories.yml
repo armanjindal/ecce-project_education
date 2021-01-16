@@ -25,14 +25,25 @@ stories:
   - active_loop: null
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
+  - action: action_pause
   - action: utter_start_next
 
 - story: Fractions - Halves -> Parts
   steps:
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
+  - action: action_pause
   - action: utter_start_next
   - intent: affirm
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - active_loop: null
+  - action: utter_fractions_parts_conclusion
+  - action: utter_start_next
+  - intent: affirm
+
+- story: Fractions - Parts -> Wholes
+  steps:
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
@@ -85,7 +96,6 @@ stories:
   - action: utter_confirm
   - intent: deny
   - action: action_back
-  - action: action_back
 
 - story: Exit mid lesson 
   steps:
@@ -101,5 +111,4 @@ stories:
   - action: utter_confirm
   - intent: deny 
   - action: action_back
-  - action: action_back
-   
+

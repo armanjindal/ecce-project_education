@@ -27,6 +27,11 @@ pipeline:
     url: "http://localhost:8000"
     dimensions: ["number"]
     timeout : 3
+  - name: SpacyNLP
+    model: "en_core_web_md"
+  - name: "SpacyEntityExtractor"
+  # dimensions to extract
+    dimensions: ["PERSON", "TIME"] # (more options at https://spacy.io/api/annotation#section-named-entities)
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
 policies:

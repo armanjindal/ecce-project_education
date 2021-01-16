@@ -1,4 +1,5 @@
-import string 
+import string
+import time
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
@@ -13,7 +14,7 @@ from fuzzywuzzy import process
 def question_db():
     # TODO: Turn this into a external database. Turn dict into DB query
     questions_dict = {
-    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d','e'], 'c'],
+    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
     "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
     "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
     "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
@@ -37,8 +38,8 @@ def extractFraction(tracker):
         fraction = tracker.latest_message.get('entities')[0].get('text').lower()
     except:
         print("AN ERROR in EXTRACT FRACTION OCCURED")
-        return None
-    return fraction
+    finally:
+        return fraction
 
 def matchOption(user_input, slot_name, cutoff=60):
     # TODO: Turn this into an external database
@@ -58,29 +59,33 @@ def matchOption(user_input, slot_name, cutoff=60):
 
 def checkQuestion(user_input, question, tracker=None):
     """ Takes in the expected user input, queries DB, 
-    and validates the user input against the question type"""
+    and validates the user input against the question type
+    Returns -> 'CORRECT', 'INCORRECT' and None """
+
     questions_dict = question_db()
     q_list = questions_dict[question]
     question_type = q_list[0]
+    
+    # Exit if not extracted
+
+    if not user_input:
+        return None
     
     if question_type == "nrq_fractions":
         if user_input > 0 and user_input <= 1:
             text_fraction = extractFraction(tracker)
             if text_fraction:
                 if text_fraction in q_list[1]:
-                    return "CORRECT"
+                    return "CORRECT"                
                 else:
                     return "INCORRECT"
-        return "WRONG_FORMAT"
-    
+        
     if question_type == "nrq_numeral":
-        if user_input:
-            for ans_option in q_list[1]:
-                if user_input == ans_option:
-                    return "CORRECT"
+        for ans_option in q_list[1]:
+            if user_input == ans_option:
+                return "CORRECT"
             return "INCORRECT"
-        else:
-            return "WRONG_FORMAT"
+
     # Returns exact match to options i.e 'A, B, C, D' 
     if question_type=="mcq_match":
         resp = user_input.lower()
@@ -90,10 +95,9 @@ def checkQuestion(user_input, question, tracker=None):
                 return "CORRECT"
             else:
                 return "INCORRECT"
-        else:
-            return None
     # Checks free text input if it contains list 1 and does not contain words for list 2
     if question_type == "frq_keyword_match":
+        # Turn this into a seperate method for FRQs
         resp = user_input.lower()
         resp_words = resp.split()
         keywords = q_list[1] 
@@ -101,7 +105,7 @@ def checkQuestion(user_input, question, tracker=None):
             not_words = q_list[2]
             if not_words:
                 if any(word in not_words for word in resp_words):
-                    return "AMBIG" # Included words in both lists
+                    return None # Included words in both lists
             return "CORRECT"
         else:
             return "INCORRECT"
@@ -113,14 +117,11 @@ def respondQuestion(answer, question, slot_value, dispatcher):
         slot_dict_input = slot_value
     if answer == "INCORRECT":
         dispatcher.utter_message(template="utter_incorrect")
-        # TODO: Add hint counter / progression HERE
         slot_dict_input = slot_value
-    if answer == "WRONG_FORMAT":
-        dispatcher.utter_message(template="utter_wrong_format", err="Give me a number!")
+    if not answer:
+        print(f"Failed to extract slot for {question} - Extracted: {slot_value}")
         slot_dict_input = None
-    if answer == "AMBIG":
-        dispatcher.utter_message(template="utter_wrong_format", err="That is a confusing answer!")
-        slot_dict_input = None
+    # Respond with explanation (check what happens in error case)
     if slot_dict_input:
         dispatcher.utter_message(template=f"utter_{question}_explanation")
     return slot_dict_input
@@ -146,6 +147,17 @@ def extractName(slot_value, tracker):
     if len(resp_words) == 1:
         return resp_words[0].capitalize()
     return None
+
+class ActionPause(Action):
+
+    def name(self) -> Text:
+        return "action_pause"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        time.sleep(7) # Add a 7 second delay 
+        return [ ]
 
 class ActionFailedFirstTimeForm(Action):
 
@@ -173,7 +185,7 @@ class ValidateFirstForm(FormValidationAction):
         if name:
             return {"userName":name}
         else:
-            dispatcher.utter_message(text="Sorry I missed your name. Can you just type only your name for me?")
+            dispatcher.utter_message(text="Sorry I missed your name. Can you just type only your first name for me?")
             return {"userName": None}
     
     def validate_age(
@@ -206,7 +218,7 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         if name:
             return {"friend_1":name}
         else:
-            dispatcher.utter_message(f"I can't find the name! Lets call your friend {default_name} for now!")
+            dispatcher.utter_message(f"I can't find the name! Lets call your friend {defualt_name} for now!")
             return {"friend_1": defualt_name}
 
     def validate_fractions_halves_mcq_1(

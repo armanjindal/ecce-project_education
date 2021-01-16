@@ -20,6 +20,7 @@ entities:
 - mcq_answer
 - name
 - number
+- PERSON
 slots:
   age:
     type: text
@@ -283,6 +284,7 @@ actions:
 - validate_fractions_parts_story_form
 - validate_fractions_wholes_story_form
 - action_failed_first_time_form
+- action_pause
 
 forms:
   first_form:
