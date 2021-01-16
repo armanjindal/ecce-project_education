@@ -279,6 +279,7 @@ responses:
   
     
 actions:
+- action_session_start
 - validate_first_form
 - validate_fractions_halves_story_form
 - validate_fractions_parts_story_form
