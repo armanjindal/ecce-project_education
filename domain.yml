@@ -9,12 +9,14 @@ intents:
 - affirm
 - faq
 - chitchat
-- lesson_fractions
+- lesson_fractions_halves
+- lesson_fractions_wholes
 - inform
 - goodbye
 - deny
 - thankyou
 - stop
+- hint
 entities:
 - language
 - mcq_answer
@@ -164,14 +166,13 @@ responses:
   - text: Is that clear?
   - text: Got it?
   utter_lesson_options:
-  - text: "What lesson would you like to work on today?\n- Fractions \n- Multiplication\
-      \ \n- Division"
+  - text: In our lesson on fractions, you can start from the beginning from HALVES or jump to our later lesson on WHOLES if fractions are not new :) So which will it be?
   utter_end_chat_session:
   - text: You've done an awesome job! Lets chat again soon.
   utter_please_rephrase:
   - text: I'm sorry, I didn't quite understand that. Could you rephrase?
   utter_fractions_halves_introduction:
-  - text: Yay! Fractions it is. To start we are going to talk about sharing food.
+  - text: Yay! Fractions from the start it is. To start we are going to talk about sharing food.
   utter_ask_friend_1:
   - text: Which of your friends do you like to eat with the most?
   utter_ask_fractions_halves_mcq_1:
@@ -199,14 +200,14 @@ responses:
   utter_fractions_parts_nrq_1_explanation:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
-  utter_ask_fractions_parts_mcq_1:
+  utter_question_fractions_parts_mcq_1:
   - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
   utter_fractions_parts_mcq_1_options:
   - text: Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1
   utter_fractions_parts_mcq_1_explanation:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
-  utter_ask_fractions_parts_mcq_2:
+  utter_question_fractions_parts_mcq_2:
   - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
       In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
       or less than {friend_2}?'
@@ -228,7 +229,7 @@ responses:
   utter_fractions_parts_conclusion:
   - text: And that is PARTS!
   utter_fractions_wholes_introduction:
-  - text: A farmer has a total of 12 mangoes. He needs to split them into 3 boxes,
+  - text: A farmer has a total of 12 MANGOES 🥭🥭🥭 He needs to split them into 3 boxes,
       equally. You can help him with FRACTIONS!
   utter_fractions_wholes_introduction_hint:
   - text: Whenever we are dealing with fractions it’s always a good idea to figure
@@ -248,8 +249,9 @@ responses:
   - text: Now that you are splitting a box of 4 mangoes, what would you consider as
       the whole?
   utter_fractions_wholes_frq_1_explanation:
-  - text: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
-  utter_ask_fractions_wholes_nrq_3:
+  - text: Hear why!
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
+  utter_question_fractions_wholes_nrq_3:
   - text: After splitting the mangoes evenly among your family of 4, how many mangoes
       does each person get?
   utter_fractions_wholes_nrq_3_explanation:
@@ -275,8 +277,8 @@ responses:
   - text: Finally, when you were ready to eat one mango - you cut it into 6 slices.
       1 mango was now the whole you are splitting into 6 parts!In fact, Fractions
       are how you divide/split *any whole*
-
-  
+  utter_fractions_demo_conclusion:
+  - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code. 
     
 actions:
 - action_session_start
@@ -286,6 +288,9 @@ actions:
 - validate_fractions_wholes_story_form
 - action_failed_first_time_form
 - action_pause
+- action_ask_fractions_parts_mcq_1
+- action_ask_fractions_parts_mcq_2
+- action_ask_fractions_wholes_nrq_3
 
 forms:
   first_form:

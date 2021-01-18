@@ -155,10 +155,10 @@ def respondQuestion(answer, question, slot_value, dispatcher, domain):
     # Respond with explanation (check what happens in error case)
     if slot_dict_input:
         explanation_response = f"utter_{question}_explanation"
-        dispatcher.utter_message(template=explanation_response)
-        if explanation_response in domain["responses"].keys() and 'image' in domain["responses"][explanation_response][0].keys():
-            time.sleep(5) #Add a delay after the dispatcher utters
-            print("Sleep Ran!")
+        if explanation_response in domain["responses"].keys():
+            dispatcher.utter_message(template=explanation_response)
+    else:
+        print(f"SLOT Not Filled {question}")
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
@@ -204,6 +204,45 @@ class ActionFailedFirstTimeForm(Action):
     ) -> List[Dict[Text, Any]]:
         dispatcher.utter_message("Sorry lets try this again!")
         return [SlotSet(key = "userName", value = None), SlotSet(key = "age", value = None) ]
+
+class ActionAskFractionPartsMCQ1(Action):
+
+    def name(self) -> Text:
+        return "action_ask_fractions_parts_mcq_1"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        time.sleep(5)
+        dispatcher.utter_message(template = "utter_question_fractions_parts_mcq_1")
+        return []
+
+class ActionAskFractionPartsMCQ2(Action):
+
+    def name(self) -> Text:
+        return "action_ask_fractions_parts_mcq_2"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        time.sleep(5)
+        print(f"Ran {self.name}")
+        dispatcher.utter_message(template = "utter_question_fractions_parts_mcq_2")
+        return []
+
+class ActionAskFractionWholesNRQ3(Action):
+
+    def name(self) -> Text:
+        return "action_ask_fractions_wholes_nrq_3"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        print(f"Ran {self.name}")
+        time.sleep(5)
+        print(f"5 seconds later {self.name}")
+        dispatcher.utter_message(template = "utter_question_fractions_wholes_nrq_3")
+        return []
 
 class ValidateFirstForm(FormValidationAction):
     def name(self) -> Text:
@@ -399,7 +438,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
         question_name = "fractions_wholes_frq_1"
         answer = checkQuestion(slot_value, question_name)
         print(answer)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}    
     
     def validate_fractions_wholes_nrq_3(

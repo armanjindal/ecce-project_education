@@ -18,7 +18,7 @@ stories:
 - story: Fraction - Halves
   steps:
   - action: utter_lesson_options
-  - intent: lesson_fractions
+  - intent: lesson_fractions_halves
   - action: utter_fractions_halves_introduction
   - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
@@ -27,6 +27,21 @@ stories:
   - action: utter_fractions_halves_conclusion_animation
   - action: action_pause
   - action: utter_start_next
+
+- story: Fraction - Wholes
+  steps:
+  - action: utter_lesson_options
+  - intent: lesson_fractions_wholes
+  - action: utter_fractions_wholes_introduction
+  - action: utter_fractions_wholes_introduction_hint
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - active_loop: null
+  - action: utter_fractions_wholes_conclusion
+  - action: utter_fractions_wholes_conclusion_1
+  - action: utter_fractions_wholes_conclusion_2
+  - action: utter_fractions_wholes_conclusion_3
+  - action: utter_fractions_demo_conclusion
 
 - story: Fractions - Halves -> Parts
   steps:
@@ -38,6 +53,7 @@ stories:
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
+  - action: action_pause
   - action: utter_fractions_parts_conclusion
   - action: utter_start_next
   - intent: affirm
@@ -47,6 +63,7 @@ stories:
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
+  - action: action_pause
   - action: utter_fractions_parts_conclusion
   - action: utter_start_next
   - intent: affirm
@@ -59,6 +76,7 @@ stories:
   - action: utter_fractions_wholes_conclusion_1
   - action: utter_fractions_wholes_conclusion_2
   - action: utter_fractions_wholes_conclusion_3
+  - action: utter_fractions_demo_conclusion
 
 - story: Fractions - Parts -> Wholes 
   steps:
@@ -74,6 +92,7 @@ stories:
   - action: utter_fractions_wholes_conclusion_1
   - action: utter_fractions_wholes_conclusion_2
   - action: utter_fractions_wholes_conclusion_3
+  - action: utter_fractions_demo_conclusion
 
 # General conversation functionality
 - story: Exit at End of Lesson 

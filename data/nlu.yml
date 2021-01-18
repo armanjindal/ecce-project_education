@@ -72,6 +72,7 @@ nlu:
     - [rajan](name)
     - [puja](name)
     - [sambhav](name)
+
 - intent: answer_question
   examples: |
     - [A](mcq_answer)
@@ -80,13 +81,27 @@ nlu:
     - [d](mcq_answer)
     - [C](mcq_answer)!
     - [e](mcq_answer)
-    - [dee](name)
-- intent: lesson_fractions
+
+- intent: lesson_fractions_halves
   examples: |
-    - I want to study frations!
-    - fractions
-    - lets do fractions
-    - Fractions!
+    - halves options 
+    - the one with the halves
+    - i want to do the halves
+    - halves
+    - half 
+- intent: lesson_fractions_wholes
+  examples: |
+    - wholes options 
+    - the one with the wholes
+    - i want to do the whole
+    - wholes
+    - lets do the whole 
+- intent: hint
+  examples: |
+    - I need some help
+    - i am stuck 
+    - please give me a hint
+    - i need a hint
 - intent: stop
   examples: |
     - I would like to stop this lesson!
