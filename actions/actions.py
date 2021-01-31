@@ -158,7 +158,7 @@ def respondQuestion(answer, question, slot_value, dispatcher, domain):
         if explanation_response in domain["responses"].keys():
             dispatcher.utter_message(template=explanation_response)
         else:
-            print(f"No explantion for {question}")
+            print(f"No explantion for the {question}")
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
