@@ -150,4 +150,31 @@ nlu:
     - oooofff this sucks
     - im bored
     - im so tired 
+- intent: chitchat/exclaim_difficult
+  examples: |
+    - This is so hard
+    - im not getting this 
+    - ugh too difficult
+    - so challenging
 
+responses:
+  utter_faq/ask_name:
+  - text: My name is Ecce :)
+  - text: You can call me Ecce!
+  utter_faq/bot_challenge:
+  - text: I am a bot, but I prefer to think of myself as a conversational teaching
+      assistant
+  utter_faq/ask_creator:
+  - text: I was made by a team of cool educators still in college! You can find out
+      more at eccetech.com
+  utter_faq/ask_language:
+  - text: I only text in English for now but I am going to be able to speak Hindi
+      and Marathi soon!
+  utter_chitchat/exclaim_positive:
+  - text: I know right!
+  - text: This is so cool!
+  utter_chitchat/exclaim_negative:
+  - text: You've got it. You are doing so well!
+  - text: I know it isn't easy, but you can do it :)
+  utter_chitchat/exclaim_difficult:
+  - text: You are doing such a good job. I believe in you! You can always ask questions or for hints!

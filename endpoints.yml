@@ -7,6 +7,8 @@
 #  url: http://my-server.com/models/default_core@latest
 #  wait_time_between_pulls:  10   # [optional](default: 100)
 
+nlg:
+  url: https://rasa-response-server.herokuapp.com/nlg/
 # Server which runs your custom actions.
 # https://rasa.com/docs/rasa/custom-actions
 

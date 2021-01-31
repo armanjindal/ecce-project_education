@@ -33,7 +33,6 @@ stories:
   - action: utter_lesson_options
   - intent: lesson_fractions_wholes
   - action: utter_fractions_wholes_introduction
-  - action: utter_fractions_wholes_introduction_hint
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
   - active_loop: null
@@ -55,6 +54,7 @@ stories:
   - active_loop: null
   - action: action_pause
   - action: utter_fractions_parts_conclusion
+  - action: action_pause
   - action: utter_start_next
   - intent: affirm
 
@@ -65,10 +65,10 @@ stories:
   - active_loop: null
   - action: action_pause
   - action: utter_fractions_parts_conclusion
+  - action: action_pause
   - action: utter_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
-  - action: utter_fractions_wholes_introduction_hint
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
   - active_loop: null
@@ -81,10 +81,10 @@ stories:
 - story: Fractions - Parts -> Wholes 
   steps:
   - action: utter_fractions_parts_conclusion
+  - action: action_pause
   - action: utter_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
-  - action: utter_fractions_wholes_introduction_hint
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
   - active_loop: null

@@ -21,7 +21,7 @@ jobs:
         docker_image_name: 'eccezarathustra/eccebot'
         docker_registry_login: ${{ secrets.DOCKER_HUB_LOGIN }}
         docker_registry_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        rasa_sdk_version: '2.1.2'
+        rasa_sdk_version: '2.2.0'
         # More details about github context:
         # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
         #

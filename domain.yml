@@ -131,27 +131,6 @@ responses:
   - text: How old are you?
   utter_first_time_confirm:
   - text: "Is this information correct?\nName: {userName}\nAge: {age}"
-  utter_faq/ask_name:
-  - text: My name is Ecce :)
-  - text: You can call me Ecce!
-  utter_faq/bot_challenge:
-  - text: I am a bot, but I prefer to think of myself as a conversational teaching
-      assistant
-  utter_faq/ask_creator:
-  - text: I was made by a team of cool educators still in college! You can find out
-      more at eccetech.com
-  utter_faq/ask_language:
-  - text: I only text in English for now but I am going to be able to speak Hindi
-      and Marathi soon!
-  utter_chitchat/exclaim_positive:
-  - text: I know right!
-  - text: This is so cool!
-  utter_chitchat/exclaim_negative:
-  - text: You've got it. You are doing so well!
-  - text: I know it isn't easy, but you can do it :)
-  utter_chitchat/exclaim_difficult:
-  - text: You are doing such a good job. I believe in you!
-  - text: Almost there! Keep going :)
   utter_start_next:
   - text: Would you like to go to the next lesson?
   - text: You are doing great. Want to start the next lesson?
@@ -200,14 +179,14 @@ responses:
   utter_fractions_parts_nrq_1_explanation:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
-  utter_question_fractions_parts_mcq_1:
+  utter_ask_fractions_parts_mcq_1:
   - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
   utter_fractions_parts_mcq_1_options:
   - text: Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1
   utter_fractions_parts_mcq_1_explanation:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
-  utter_question_fractions_parts_mcq_2:
+  utter_ask_fractions_parts_mcq_2:
   - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
       In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
       or less than {friend_2}?'
@@ -225,7 +204,7 @@ responses:
   - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
   utter_fractions_parts_mcq_4_explanation:
   - text: Check this out 
-    image: https://ecceapi.herokuapp.com/media/audio/utter_fractions_parts_mcq_4_explanation.mp3
+    image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_4_explanation.mp3
   utter_fractions_parts_conclusion:
   - text: And that is PARTS!
   utter_fractions_wholes_introduction:
@@ -251,7 +230,7 @@ responses:
   utter_fractions_wholes_frq_1_explanation:
   - text: Hear why!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
-  utter_question_fractions_wholes_nrq_3:
+  utter_ask_fractions_wholes_nrq_3:
   - text: After splitting the mangoes evenly among your family of 4, how many mangoes
       does each person get?
   utter_fractions_wholes_nrq_3_explanation:
@@ -288,10 +267,8 @@ actions:
 - validate_fractions_wholes_story_form
 - action_failed_first_time_form
 - action_pause
-- action_ask_fractions_parts_mcq_1
-- action_ask_fractions_parts_mcq_2
-- action_ask_fractions_wholes_nrq_3
-
+- utter_faq
+- utter_chitchat
 forms:
   first_form:
     userName:

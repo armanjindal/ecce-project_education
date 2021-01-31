@@ -3,14 +3,31 @@ import time
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
 #import helpers
 from fuzzywuzzy import process
 # TODO: Figure out why I cannot import local .py files
-
+def question_db():
+    # TODO: Turn this into a external database. Turn dict into DB query
+    questions_dict = {
+    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
+    "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
+    "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
+    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_parts_nrq_1": ["nrq_numeral", [2]],
+    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater"]],
+    "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
+    "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
+    "fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
+    "fractions_wholes_nrq_3": ["nrq_numeral", [1]],
+    "fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
+    "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
+    }
+    return questions_dict
 #Custom action - runs at the start of every chat
 class ActionSessionStart(Action):
     def name(self) -> Text:
@@ -41,25 +58,6 @@ class ActionSessionStart(Action):
         events.append(ActionExecuted("action_listen"))
 
         return events
-
-def question_db():
-    # TODO: Turn this into a external database. Turn dict into DB query
-    questions_dict = {
-    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
-    "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
-    "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_parts_nrq_1": ["nrq_numeral", [2]],
-    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater"]],
-    "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
-    "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
-    "fractions_wholes_nrq_3": ["nrq_numeral", [1]],
-    "fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
-    "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
-    }
-    return questions_dict
 
 def extractFraction(tracker):
     # Error handle exceptions 
@@ -152,13 +150,15 @@ def respondQuestion(answer, question, slot_value, dispatcher, domain):
     if not answer:
         print(f"Failed to extract slot for {question} - Extracted: {slot_value}")
         slot_dict_input = None
-    # Respond with explanation (check what happens in error case)
+    
+    # Automatically search for explanation
+
     if slot_dict_input:
         explanation_response = f"utter_{question}_explanation"
         if explanation_response in domain["responses"].keys():
             dispatcher.utter_message(template=explanation_response)
-    else:
-        print(f"SLOT Not Filled {question}")
+        else:
+            print(f"No explantion for {question}")
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
@@ -204,45 +204,6 @@ class ActionFailedFirstTimeForm(Action):
     ) -> List[Dict[Text, Any]]:
         dispatcher.utter_message("Sorry lets try this again!")
         return [SlotSet(key = "userName", value = None), SlotSet(key = "age", value = None) ]
-
-class ActionAskFractionPartsMCQ1(Action):
-
-    def name(self) -> Text:
-        return "action_ask_fractions_parts_mcq_1"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        time.sleep(5)
-        dispatcher.utter_message(template = "utter_question_fractions_parts_mcq_1")
-        return []
-
-class ActionAskFractionPartsMCQ2(Action):
-
-    def name(self) -> Text:
-        return "action_ask_fractions_parts_mcq_2"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        time.sleep(5)
-        print(f"Ran {self.name}")
-        dispatcher.utter_message(template = "utter_question_fractions_parts_mcq_2")
-        return []
-
-class ActionAskFractionWholesNRQ3(Action):
-
-    def name(self) -> Text:
-        return "action_ask_fractions_wholes_nrq_3"
-
-    async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
-    ) -> List[Dict[Text, Any]]:
-        print(f"Ran {self.name}")
-        time.sleep(5)
-        print(f"5 seconds later {self.name}")
-        dispatcher.utter_message(template = "utter_question_fractions_wholes_nrq_3")
-        return []
 
 class ValidateFirstForm(FormValidationAction):
     def name(self) -> Text:
@@ -411,7 +372,6 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "fractions_wholes_nrq_1"
         answer = checkQuestion(slot_value, question_name)
-        print(answer)    
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
     
