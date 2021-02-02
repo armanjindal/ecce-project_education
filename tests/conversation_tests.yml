@@ -1,0 +1,62 @@
+version: "2.0"
+stories:
+- story: Story from Conversation ID 65c9e5a12ed341f883f65bc95843e5ee
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_followup
+  - action: first_form
+  - active_loop: first_form
+  - slot_was_set:
+    - requested_slot: userName
+  - intent: nlu_fallback
+  - action: first_form
+  - slot_was_set:
+    - userName: Hiya
+  - slot_was_set:
+    - requested_slot: age
+  - intent: chitchat
+  - action: first_form
+  - slot_was_set:
+    - age: 9
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: lesson_fractions_halves
+  - action: utter_fractions_halves_introduction
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - slot_was_set:
+    - requested_slot: friend_1
+  - intent: inform
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - friend_1: Amaya
+  - slot_was_set:
+    - requested_slot: fractions_halves_mcq_1
+  - intent: answer_question
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - fractions_halves_mcq_1: B
+  - slot_was_set:
+    - requested_slot: fractions_halves_frq_1
+  - intent: greet
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - fractions_halves_frq_1: Because they are equal
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_halves_conclusion
+  - action: utter_fractions_halves_conclusion_animation
+  - action: action_pause
+  - action: utter_start_next
+  - intent: deny
+  - action: utter_confirm
+  - intent: affirm
+  - action: utter_end_chat_session
+  - intent: goodbye
+  - action: utter_goodbye

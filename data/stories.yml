@@ -1,7 +1,5 @@
 version: "2.0"
-
 stories:
-# TODO: Turn this into rule once SSO Action session start has been done
 - story: General - First Time Meeting - Happy Path
   steps:
   - intent: greet
@@ -13,16 +11,6 @@ stories:
   - action: utter_first_time_confirm
   - intent: affirm
   - action: utter_lesson_options
-
-- story: Example of an unhappy path exit 
-  steps:
-  # This unhappy path handles the case of an intent `chitchat`.
-  - intent: stop
-  - action: utter_confirm
-  - intent: deny
-  # Return to form after handling the `chitchat` intent
-  - action: first_form
-  - active_loop: first_form
 
 - story: Fraction - Halves
   steps:
@@ -66,7 +54,6 @@ stories:
   - action: action_pause
   - action: utter_start_next
   - intent: affirm
-
 - story: Fractions - Parts -> Wholes
   steps:
   - action: fractions_parts_story_form
@@ -87,7 +74,7 @@ stories:
   - action: utter_fractions_wholes_conclusion_3
   - action: utter_fractions_demo_conclusion
 
-- story: Fractions - Parts -> Wholes 
+- story: Fractions - Parts -> Wholes
   steps:
   - action: utter_fractions_parts_conclusion
   - action: action_pause
@@ -103,40 +90,88 @@ stories:
   - action: utter_fractions_wholes_conclusion_3
   - action: utter_fractions_demo_conclusion
 
-# General conversation functionality
-- story: Exit at End of Lesson 
+- story: Exit at End of Lesson
   steps:
   - action: utter_start_next
   - or:
-    - intent: deny 
+    - intent: deny
     - intent: stop
   - action: utter_confirm
   - intent: affirm
   - action: utter_end_chat_session
-  - action: action_listen
-
-- story: False exit at End of Lesson 
+- story: False exit at End of Lesson
   steps:
   - action: utter_start_next
   - or:
-    - intent: deny 
+    - intent: deny
     - intent: stop
   - action: utter_confirm
   - intent: deny
   - action: action_back
-
-- story: Exit mid lesson 
+- story: Exit mid lesson
   steps:
   - intent: stop
   - action: utter_confirm
-  - intent: affirm 
+  - intent: affirm
   - action: utter_end_chat_session
-  - action: action_listen
-  
-- story: False exit mid lesson 
+- story: False exit mid lesson
   steps:
   - intent: stop
   - action: utter_confirm
-  - intent: deny 
+  - intent: deny
   - action: action_back
 
+- story: Exit from First Form
+  steps:
+  - intent: greet
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_followup
+  - action: first_form
+  - active_loop: first_form
+  - slot_was_set:
+    - requested_slot: userName
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_goodbye
+
+- story: Exit from Halves form
+  steps:
+  - action: utter_lesson_options
+  - intent: lesson_fractions_halves
+  - action: utter_fractions_halves_introduction
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - slot_was_set:
+    - requested_slot: friend_1
+  - slot_was_set:
+    - friend_1: Sudhir
+  - slot_was_set:
+    - requested_slot: fractions_halves_mcq_1
+  - slot_was_set:
+    - fractions_halves_mcq_1: B
+  - slot_was_set:
+    - requested_slot: fractions_halves_frq_1
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: utter_end_chat_session
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Exit from Wholes Form
+  steps:
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - slot_was_set:
+    - requested_slot: fractions_wholes_nrq_1
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: utter_end_chat_session
+  - intent: goodbye
+  - action: utter_goodbye
