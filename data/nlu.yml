@@ -109,6 +109,12 @@ nlu:
     - no more
     - lets do this later
     - im done
+
+- intent: restart
+  examples: |
+    - restart
+    - RESTART
+
 - intent: faq/ask_name
   examples: |
     - What is your name?

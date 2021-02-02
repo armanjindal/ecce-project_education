@@ -155,10 +155,8 @@ def respondQuestion(answer, question, slot_value, dispatcher, domain):
 
     if slot_dict_input:
         explanation_response = f"utter_{question}_explanation"
-        if explanation_response in domain["responses"].keys():
-            dispatcher.utter_message(template=explanation_response)
-        else:
-            print(f"No explantion for the {question}")
+        dispatcher.utter_message(template=explanation_response)
+
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
@@ -182,7 +180,6 @@ def extractName(slot_value, tracker):
     if len(resp_words) == 1:
         return resp_words[0].capitalize()
     return None
-
 class ActionPause(Action):
 
     def name(self) -> Text:

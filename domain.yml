@@ -17,6 +17,8 @@ intents:
 - thankyou
 - stop
 - hint
+- restart
+
 entities:
 - language
 - mcq_answer

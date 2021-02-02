@@ -14,6 +14,15 @@ stories:
   - intent: affirm
   - action: utter_lesson_options
 
+- story: Example of an unhappy path exit 
+  steps:
+  # This unhappy path handles the case of an intent `chitchat`.
+  - intent: stop
+  - action: utter_confirm
+  - intent: deny
+  # Return to form after handling the `chitchat` intent
+  - action: first_form
+  - active_loop: first_form
 
 - story: Fraction - Halves
   steps:

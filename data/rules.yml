@@ -31,6 +31,11 @@ rules:
   - intent: chitchat
   - action: utter_chitchat
 
+- rule: restart
+  steps:
+  - intent: restart
+  - action: action_restart
+
 - rule: Provide hint in whole fractions story
   condition:
   - active_loop: fractions_wholes_story_form
@@ -38,3 +43,4 @@ rules:
   - intent: hint
   - action: utter_fractions_wholes_introduction_hint
   wait_for_user_input: false
+
