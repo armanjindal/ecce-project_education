@@ -17,6 +17,9 @@ nlu:
     - good afternoon
     - Hello
     - morning
+    - helloo
+    - Hey
+    - What’s up
 - intent: thankyou
   examples: |
     - thanks!
@@ -37,6 +40,7 @@ nlu:
     - see you around
     - bye bye
     - see you later
+    - Goodbye bitch
 - intent: affirm
   examples: |
     - yes
@@ -50,6 +54,10 @@ nlu:
     - yep
     - defintley
     - fine by me
+    - Yes
+    - piy
+    - Y
+    - Very much so
 - intent: deny
   examples: |
     - no
@@ -72,7 +80,18 @@ nlu:
     - [rajan](name)
     - [puja](name)
     - [sambhav](name)
-
+    - [Mahima](name)
+    - [Arman](name)[Arman](name)
+    - [Mehboob](name)
+    - i am 8
+    - Johnny
+    - [poonam](name)
+    - my name is [arman](name)[arman](name)
+    - I am 9
+    - Arshaan
+    - James
+    - James Bond
+    - [Maya](name)[Maya](name)
 - intent: answer_question
   examples: |
     - [A](mcq_answer)
@@ -81,25 +100,39 @@ nlu:
     - [d](mcq_answer)
     - [C](mcq_answer)!
     - [e](mcq_answer)
-
+    - Because they are equal
+    - [B](mcq_answer)
+    - 12 mangoes
+    - One out of three
+    - 5
+    - 29
+    - chcolate
+    - equal size pieces
+    - [C](mcq_answer)
+    - Equal sized parts
+    - 21
+    - equal
+    - [c](mcq_answer)
 - intent: lesson_fractions_halves
   examples: |
-    - halves options 
+    - halves options
     - the one with the halves
     - i want to do the halves
     - halves
-    - half 
+    - half
+    - Halves
 - intent: lesson_fractions_wholes
   examples: |
-    - wholes options 
+    - wholes options
     - the one with the wholes
     - i want to do the whole
     - wholes
-    - lets do the whole 
+    - lets do the whole
+    - Whole
 - intent: hint
   examples: |
     - I need some help
-    - i am stuck 
+    - i am stuck
     - please give me a hint
     - i need a hint
 - intent: stop
@@ -109,6 +142,8 @@ nlu:
     - no more
     - lets do this later
     - im done
+    - Id like to stop
+    - im dione
 - intent: faq/ask_name
   examples: |
     - What is your name?
@@ -149,32 +184,17 @@ nlu:
     - Can't do this any more :(
     - oooofff this sucks
     - im bored
-    - im so tired 
+    - im so tired
 - intent: chitchat/exclaim_difficult
   examples: |
     - This is so hard
-    - im not getting this 
+    - im not getting this
     - ugh too difficult
     - so challenging
-
-responses:
-  utter_faq/ask_name:
-  - text: My name is Ecce :)
-  - text: You can call me Ecce!
-  utter_faq/bot_challenge:
-  - text: I am a bot, but I prefer to think of myself as a conversational teaching
-      assistant
-  utter_faq/ask_creator:
-  - text: I was made by a team of cool educators still in college! You can find out
-      more at eccetech.com
-  utter_faq/ask_language:
-  - text: I only text in English for now but I am going to be able to speak Hindi
-      and Marathi soon!
-  utter_chitchat/exclaim_positive:
-  - text: I know right!
-  - text: This is so cool!
-  utter_chitchat/exclaim_negative:
-  - text: You've got it. You are doing so well!
-  - text: I know it isn't easy, but you can do it :)
-  utter_chitchat/exclaim_difficult:
-  - text: You are doing such a good job. I believe in you! You can always ask questions or for hints!
+- intent: nlu_fallback
+  examples: |
+    - One three
+    - blach clashcj af
+- intent: chitchat
+  examples: |
+    - this is so hard
