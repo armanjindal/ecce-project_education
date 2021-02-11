@@ -13,6 +13,4 @@ The Team:
 - Dhruv Bhatia - dhruv_bhatia@brown.edu 
 
 
-## Demo
-
-![Ecce Demo](https://user-images.githubusercontent.com/58370547/107607356-036b7900-6c5f-11eb-85b6-994eb50e4d6d.mp4)
+## [Demo[(https://www.ecceeducation.org/)
