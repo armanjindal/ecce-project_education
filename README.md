@@ -1,6 +1,6 @@
 # Ecce Education - MVP
 
-This is an early stage MVP. The goal is to make this for any teacher to create lessons and add it to the regional version of the Ecce, our Conversational AI, so  users can speak to it in vernacular langages and mixed dialects. 
+This is an early stage MVP. The goal is to make this for any teacher to create lessons and add it to the regional version of the Ecce, our Conversational AI, so  users can speak to it in vernacular langages and mixed dialects. Check out our [website](www.ecceeducation.org) for more information www.ecceeducation.org.
 
 Currently the MVP is centeted on a lesson on fraction. The lesson plan is based on "script" doc the teams is working on in [this Google Doc](https://docs.google.com/document/d/1LgeUIaqbyBnGFTDRHN3YF5hKgZFWIs5CE3sVX9yHKT0/edit?usp=sharing). Using this single lesson as a test case we are developing the right abstractions for teachers to easily create lesson without worrying about the nuances and fail safe behaviors of conversational AI assistants - so they can focus on what they do best: creativley and effectivley teaching the next generation (remotley for now!). Eventually we will turn this into an easy-to-use, drag-drop, graphical interface (sort of like Wix). Right now it is GoogleDocs :)
 
@@ -13,3 +13,6 @@ The Team:
 - Dhruv Bhatia - dhruv_bhatia@brown.edu 
 
 
+## Demo
+
+![Ecce Demo](https://user-images.githubusercontent.com/58370547/107607356-036b7900-6c5f-11eb-85b6-994eb50e4d6d.mp4)
