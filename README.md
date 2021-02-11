@@ -13,4 +13,4 @@ The Team:
 - Dhruv Bhatia - dhruv_bhatia@brown.edu 
 
 
-## [Demo[(https://www.ecceeducation.org/)
+[Demo](https://www.ecceeducation.org/)
