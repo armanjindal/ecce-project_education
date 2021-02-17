@@ -81,17 +81,13 @@ nlu:
     - [puja](name)
     - [sambhav](name)
     - [Mahima](name)
-    - [Arman](name)[Arman](name)
     - [Mehboob](name)
-    - i am 8
     - Johnny
     - [poonam](name)
-    - my name is [arman](name)[arman](name)
-    - I am 9
     - Arshaan
     - James
     - James Bond
-    - [Maya](name)[Maya](name)
+
 - intent: answer_question
   examples: |
     - [A](mcq_answer)

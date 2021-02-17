@@ -3,6 +3,9 @@ stories:
 - story: General - First Time Meeting - Happy Path
   steps:
   - intent: greet
+  - action: action_check_user_status
+  - slot_was_set:
+    - is_new_user: true
   - action: utter_greet_first_time
   - action: utter_greet_first_time_followup
   - action: first_form
@@ -11,6 +14,61 @@ stories:
   - action: utter_first_time_confirm
   - intent: affirm
   - action: utter_lesson_options
+
+- story: General - First Time Meeting - Unhappy Path
+  steps:
+  - active_loop: first_form
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: deny
+  - action: action_failed_first_time_form
+  - action: first_form
+  - active_loop: first_form
+  - active_loop: null
+  - action: utter_first_time_confirm
+
+- story: General - Greet Existing User
+  steps:
+  - intent: greet
+  - action: action_check_user_status
+  - slot_was_set:
+    - is_new_user: false
+  - action: utter_greet_existing
+  - action: utter_lesson_options # Write custom action
+  
+- story: General - Exit at End of Lesson - Happy Path
+  steps:
+  - action: utter_start_next
+  - or:
+    - intent: deny
+    - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: utter_end_chat_session
+
+- story: General - False Exit at End of Lesson
+  steps:
+  - action: utter_start_next
+  - or:
+    - intent: deny
+    - intent: stop
+  - action: utter_confirm
+  - intent: deny
+
+
+- story: Exit mid lesson
+  steps:
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: utter_end_chat_session
+
+- story: False exit mid lesson
+  steps:
+  - intent: stop
+  - action: utter_confirm
+  - intent: deny
+
 
 - story: Fraction - Halves
   steps:
@@ -90,42 +148,10 @@ stories:
   - action: utter_fractions_wholes_conclusion_3
   - action: utter_fractions_demo_conclusion
 
-- story: Exit at End of Lesson
-  steps:
-  - action: utter_start_next
-  - or:
-    - intent: deny
-    - intent: stop
-  - action: utter_confirm
-  - intent: affirm
-  - action: utter_end_chat_session
-- story: False exit at End of Lesson
-  steps:
-  - action: utter_start_next
-  - or:
-    - intent: deny
-    - intent: stop
-  - action: utter_confirm
-  - intent: deny
-  - action: action_back
-- story: Exit mid lesson
-  steps:
-  - intent: stop
-  - action: utter_confirm
-  - intent: affirm
-  - action: utter_end_chat_session
-- story: False exit mid lesson
-  steps:
-  - intent: stop
-  - action: utter_confirm
-  - intent: deny
-  - action: action_back
+
 
 - story: Exit from First Form
   steps:
-  - intent: greet
-  - action: utter_greet_first_time
-  - action: utter_greet_first_time_followup
   - action: first_form
   - active_loop: first_form
   - slot_was_set:

@@ -16,7 +16,7 @@ def question_db():
     "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
     "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
     "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"],  ],
     "fractions_parts_nrq_1": ["nrq_numeral", [2]],
     "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater"]],
     "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
@@ -28,45 +28,32 @@ def question_db():
     "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
     }
     return questions_dict
-#Custom action - runs at the start of every chat
+
+
+
 class ActionSessionStart(Action):
     def name(self) -> Text:
         return "action_session_start"
 
-    # @staticmethod
-    # def fetch_slots(tracker: Tracker) -> List[EventType]:
-    #     """Collect slots that contain the user's name and phone number."""
-
-    #     slots = []
-    #     for key in ("name", "phone_number"):
-    #         value = tracker.get_slot(key)
-    #         if value is not None:
-    #             slots.append(SlotSet(key=key, value=value))
-    #     return slots
-
     async def run(
       self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
-        # the session should begin with a `session_started` event
-        events = [SessionStarted()]
-
-        # any slots that should be carried over should come after the
-        # `session_started` event
-        # events.extend(self.fetch_slots(tracker))
-
-        # an `action_listen` should be added at the end as a user message follows
-        events.append(ActionExecuted("action_listen"))
-
-        return events
+        metadata = tracker.get_slot("session_started_metadata")
+        # Do something with the metadata
+        print(metadata)
+        # the session should begin with a `session_started` event and an `action_listen`
+        # as a user message follows
+        return [SessionStarted(), ActionExecuted("action_listen")]
 
 def extractFraction(tracker):
     # Error handle exceptions 
-    print(tracker)
+    print("Extract fractions ran")
     fraction = None
     try:
         fraction = tracker.latest_message.get('entities')[0].get('text').lower()
     except:
         print("AN ERROR in EXTRACT FRACTION OCCURED")
+        fraction = None 
     finally:
         return fraction
 
@@ -87,9 +74,11 @@ def matchOption(user_input, slot_name, cutoff=60):
             return None 
 
 def checkQuestion(user_input, question, tracker=None):
-    """ Takes in the expected user input, queries DB, 
+    """ 
+    Takes in the expected user input, queries DB, 
     and validates the user input against the question type
-    Returns -> 'CORRECT', 'INCORRECT' and None """
+    Returns -> 'CORRECT', 'INCORRECT' and None 
+    """
 
     questions_dict = question_db()
     q_list = questions_dict[question]
@@ -149,6 +138,7 @@ def respondQuestion(answer, question, slot_value, dispatcher, domain):
         slot_dict_input = slot_value
     if not answer:
         print(f"Failed to extract slot for {question} - Extracted: {slot_value}")
+        dispatcher.utter_message("I couldn't understand your input!")
         slot_dict_input = None
     
     # Automatically search for explanation
@@ -168,6 +158,7 @@ def extractFirstElementfromSlot(slot_value):
     return None
 
 def extractName(slot_value, tracker):
+
     """ Take in the slot value extracted using slot mapping 'from_text' 
     extracts name, and if cannot find returns None"""
     name_entity = next(tracker.get_latest_entity_values("name"), None)
@@ -180,6 +171,7 @@ def extractName(slot_value, tracker):
     if len(resp_words) == 1:
         return resp_words[0].capitalize()
     return None
+
 class ActionPause(Action):
 
     def name(self) -> Text:
@@ -190,6 +182,22 @@ class ActionPause(Action):
     ) -> List[Dict[Text, Any]]:
         time.sleep(7) # Add a 7 second delay 
         return [ ]
+class ActionCheckUserStatus(Action):
+
+    def name(self) -> Text:
+        return "action_check_user_status"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        
+        # TODO: Query Internal Postgres DB for past interaction
+        print("action_CHECK ran")
+        if tracker.get_slot("userName"):
+            print(f" Older user of with name {tracker.get_slot('userName')}")
+            return [SlotSet("is_new_user", False)]
+        else:
+            return [SlotSet("is_new_user", True)]
 
 class ActionFailedFirstTimeForm(Action):
 
@@ -199,7 +207,7 @@ class ActionFailedFirstTimeForm(Action):
     async def run(
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Sorry lets try this again!")
+        dispatcher.utter_message("Sorry I didn't get your information right. Lets try this again!")
         return [SlotSet(key = "userName", value = None), SlotSet(key = "age", value = None) ]
 
 class ValidateFirstForm(FormValidationAction):
