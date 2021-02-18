@@ -18,7 +18,7 @@ def question_db():
     "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
     "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"],  ],
     "fractions_parts_nrq_1": ["nrq_numeral", [2]],
-    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater"]],
+    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater", "big", "bigger"]],
     "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
     "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
     "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
@@ -28,8 +28,6 @@ def question_db():
     "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
     }
     return questions_dict
-
-
 
 class ActionSessionStart(Action):
     def name(self) -> Text:

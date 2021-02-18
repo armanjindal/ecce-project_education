@@ -18,14 +18,14 @@ pipeline:
     max_ngram: 4
   - name: DIETClassifier
     epochs: 100
-    model_confidence: cosine
-    constrain_similarities: True  # - name: EntitySynonymMapper
-    loss_type: cross_entropy
+    # model_confidence: cosine
+    # constrain_similarities: Uncomment for Rasa 2.3.0
+    # loss_type: cross_entropy
   - name: ResponseSelector
     epochs: 100
-    model_confidence: cosine
-    constrain_similarities: True  # - name: EntitySynonymMapper
-    loss_type: cross_entropy
+    # model_confidence: cosine
+    # constrain_similarities: True  Uncooment for Rasa 2.3.0
+    # loss_type: cross_entropy
   - name: FallbackClassifier
     threshold: 0.3
   - name: "DucklingEntityExtractor"
