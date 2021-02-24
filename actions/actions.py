@@ -1,5 +1,6 @@
 import string
 import time
+import random
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
@@ -10,6 +11,7 @@ from rasa_sdk.types import DomainDict
 #import helpers
 from fuzzywuzzy import process
 # TODO: Figure out why I cannot import local .py files
+
 def question_db():
     # TODO: Turn this into a external database. Turn dict into DB query
     questions_dict = {
@@ -28,20 +30,6 @@ def question_db():
     "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
     }
     return questions_dict
-
-class ActionSessionStart(Action):
-    def name(self) -> Text:
-        return "action_session_start"
-
-    async def run(
-      self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-        metadata = tracker.get_slot("session_started_metadata")
-        # Do something with the metadata
-        print(metadata)
-        # the session should begin with a `session_started` event and an `action_listen`
-        # as a user message follows
-        return [SessionStarted(), ActionExecuted("action_listen")]
 
 def extractFraction(tracker):
     # Error handle exceptions 
@@ -170,16 +158,31 @@ def extractName(slot_value, tracker):
         return resp_words[0].capitalize()
     return None
 
-class ActionPause(Action):
-
+class ActionSessionStart(Action):
     def name(self) -> Text:
-        return "action_pause"
+        return "action_session_start"
 
     async def run(
-        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+      self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
-        time.sleep(7) # Add a 7 second delay 
-        return [ ]
+        metadata = tracker.get_slot("session_started_metadata")
+        # Do something with the metadata
+        print(metadata)
+        # the session should begin with a `session_started` event and an `action_listen`
+        # as a user message follows
+        return [SessionStarted(), ActionExecuted("action_listen")]
+
+# class ActionPause(Action):
+
+#     def name(self) -> Text:
+#         return "action_pause"
+
+#     async def run(
+#         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+#     ) -> List[Dict[Text, Any]]:
+#         time.sleep(7) # Add a 7 second delay 
+#         return [ ]
+
 class ActionCheckUserStatus(Action):
 
     def name(self) -> Text:
@@ -190,12 +193,29 @@ class ActionCheckUserStatus(Action):
     ) -> List[Dict[Text, Any]]:
         
         # TODO: Query Internal Postgres DB for past interaction
-        print("action_CHECK ran")
         if tracker.get_slot("userName"):
-            print(f" Older user of with name {tracker.get_slot('userName')}")
             return [SlotSet("is_new_user", False)]
         else:
             return [SlotSet("is_new_user", True)]
+
+class ActionGoodbye(Action):
+    def name(self) -> Text:
+        return "action_goodbye"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:  
+        
+        if tracker.get_slot("userName"):
+            dispatcher.utter_message(template = "utter_goodbye")
+        else:
+            dispatcher.utter_message(text= "Bye!")
+        persistent_slots = ["userName", "age", "is_new_user"]
+        slots = []
+        for key in tracker.slots.keys():
+            if key not in persistent_slots:
+                slots.append(SlotSet(key=key, value=None))
+        return [slots, ActionExecuted("action_listen")] 
 
 class ActionFailedFirstTimeForm(Action):
 
@@ -242,6 +262,21 @@ class ValidateFirstForm(FormValidationAction):
 class ValidateFractionHalvesStoryForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_fractions_halves_story_form"
+    
+    async def required_slots(
+        self,
+        slots_mapped_in_domain: List[Text],
+        dispatcher: "CollectingDispatcher",
+        tracker: "Tracker",
+        domain: "DomainDict",
+    ) -> Optional[List[Text]]:
+        additional_slots = ["fractions_halves_mcq_1"]
+        if tracker.slots.get("outdoor_seating") is True:
+            # If the user wants to sit outside, ask
+            # if they want to sit in the shade or in the sun.
+            additional_slots.append("shade_or_sun")
+
+        return additional_slots + slots_mapped_in_domain
     
     # TODO: Change once you understand how to deal with a non extracted entity
     def validate_friend_1(

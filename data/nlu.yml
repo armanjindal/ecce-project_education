@@ -117,6 +117,9 @@ nlu:
     - halves
     - half
     - Halves
+    - lets do halves instead
+    - halves instead
+    
 - intent: lesson_fractions_wholes
   examples: |
     - wholes options

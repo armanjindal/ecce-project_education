@@ -44,7 +44,7 @@ stories:
     - intent: stop
   - action: utter_confirm
   - intent: affirm
-  - action: utter_end_chat_session
+  - action: action_goodbye
 
 - story: General - False Exit at End of Lesson
   steps:
@@ -61,7 +61,7 @@ stories:
   - intent: stop
   - action: utter_confirm
   - intent: affirm
-  - action: utter_end_chat_session
+  - action: action_goodbye
 
 - story: False exit mid lesson
   steps:
@@ -80,7 +80,6 @@ stories:
   - active_loop: null
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
-  - action: action_pause
   - action: utter_start_next
 
 - story: Fraction - Wholes
@@ -101,25 +100,21 @@ stories:
   steps:
   - action: utter_fractions_halves_conclusion
   - action: utter_fractions_halves_conclusion_animation
-  - action: action_pause
   - action: utter_start_next
   - intent: affirm
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
-  - action: action_pause
   - action: utter_fractions_parts_conclusion
-  - action: action_pause
   - action: utter_start_next
   - intent: affirm
+
 - story: Fractions - Parts -> Wholes
   steps:
   - action: fractions_parts_story_form
   - active_loop: fractions_parts_story_form
   - active_loop: null
-  - action: action_pause
   - action: utter_fractions_parts_conclusion
-  - action: action_pause
   - action: utter_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
@@ -135,7 +130,6 @@ stories:
 - story: Fractions - Parts -> Wholes
   steps:
   - action: utter_fractions_parts_conclusion
-  - action: action_pause
   - action: utter_start_next
   - intent: affirm
   - action: utter_fractions_wholes_introduction
@@ -163,7 +157,7 @@ stories:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: utter_goodbye
+  - action: action_goodbye
 
 - story: Exit from Halves form
   steps:
@@ -185,9 +179,7 @@ stories:
   - intent: stop
   - action: utter_confirm
   - intent: affirm
-  - action: utter_end_chat_session
-  - intent: goodbye
-  - action: utter_goodbye
+  - action: action_goodbye
 
 - story: Exit from Wholes Form
   steps:
@@ -198,6 +190,4 @@ stories:
   - intent: stop
   - action: utter_confirm
   - intent: affirm
-  - action: utter_end_chat_session
-  - intent: goodbye
-  - action: utter_goodbye
+  - action: action_goodbye

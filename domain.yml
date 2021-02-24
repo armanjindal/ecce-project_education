@@ -107,8 +107,8 @@ responses:
   - text: Hey there {userName}
   - text: Hey hey {userName}!
   utter_goodbye:
-  - text: Bye! 👋🏾
-  - text: Bye bye. Chat with you soon :)
+  - text: Bye! {userName} 👋🏾
+  - text: Bye bye {userName}. Chat with you soon :)
   utter_wrong_format:
   - text: There is something wrong about the value. {err}
   utter_ask_rephrase:
@@ -320,6 +320,7 @@ forms:
   fractions_parts_story_form:
     object_2:
     - type: from_text
+      not_intent: ["stop"]
     fractions_parts_nrq_1:
     - type: from_entity
       entity: number
@@ -356,7 +357,7 @@ actions:
 - validate_first_form
 - action_failed_first_time_form
 - action_check_user_status
-- action_pause
+- action_goodbye
 - utter_faq
 - utter_chitchat
 # Fractions Actions
