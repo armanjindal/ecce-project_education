@@ -1,4 +1,5 @@
 version: '2.0'
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
@@ -41,46 +42,46 @@ slots:
     type: text
     influence_conversation: false
 # Fraction Slots 
-  fractions_halves_frq_1:
+  3_fractions_halves_frq_1:
     type: text
     influence_conversation: false
-  fractions_halves_mcq_1:
+  2_fractions_halves_mcq_1:
     type: text
     influence_conversation: false
-  fractions_parts_mcq_1:
+  3_fractions_parts_mcq_1:
     type: text
     influence_conversation: false
-  fractions_parts_mcq_2:
+  4_fractions_parts_mcq_2:
     type: text
     influence_conversation: false
-  fractions_parts_mcq_3:
+  5_fractions_parts_mcq_3:
     type: text
     influence_conversation: false
-  fractions_parts_mcq_4:
+  6_fractions_parts_mcq_4:
     type: text
     influence_conversation: false
-  fractions_parts_nrq_1:
+  2_fractions_parts_nrq_1:
     type: text
     influence_conversation: false
-  fractions_wholes_frq_1:
+  3_fractions_wholes_frq_1:
     type: text
     influence_conversation: false
-  fractions_wholes_nrq_1:
+  1_fractions_wholes_nrq_1:
     type: text
     influence_conversation: false
-  fractions_wholes_nrq_2:
+  2_fractions_wholes_nrq_2:
     type: text
     influence_conversation: false
-  fractions_wholes_nrq_3:
+  4_fractions_wholes_nrq_3:
     type: text
     influence_conversation: false
-  fractions_wholes_nrq_4:
+  5_fractions_wholes_nrq_4:
     type: text
     influence_conversation: false
-  fractions_wholes_nrq_5:
+  6_fractions_wholes_nrq_5:
     type: text
     influence_conversation: false
-  friend_1:
+  1_friend_1:
     type: text
     influence_conversation: false
   friend_2:
@@ -91,7 +92,7 @@ slots:
     type: text
     initial_value: Aloo Paratha
     influence_conversation: false
-  object_2:
+  1_object_2:
     type: text
   school:
     type: text
@@ -171,7 +172,7 @@ responses:
       assistant
   utter_faq/ask_creator:
   - text: I was made by a team of cool educators still in college! You can find out
-      more at eccetech.com
+      more at ecceeducation.com
   utter_faq/ask_language:
   - text: I only text in English for now but I am going to be able to speak Hindi
       and Marathi soon!
@@ -190,57 +191,57 @@ responses:
   - text: In our lesson on fractions, you can start from the beginning from HALVES or jump to our later lesson on WHOLES if fractions are not new :) So which will it be?
   utter_fractions_halves_introduction:
   - text: Yay! Fractions from the start it is. To start we are going to talk about sharing food.
-  utter_ask_friend_1:
+  utter_ask_1_friend_1:
   - text: Which of your friends do you like to eat with the most?
-  utter_ask_fractions_halves_mcq_1:
+  utter_ask_2_fractions_halves_mcq_1:
   - image: https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png
-    text: "Imagine it is lunch time at {school} and {friend_1} forgot to bring their\
+    text: "Imagine it is lunch time at {school} and {1_friend_1} forgot to bring their\
       \ tiffin. You decide to split your last {object_1} with your friend.\nWhich\
       \ way of splitting do you think is fair to the both of you?"
-  utter_ask_fractions_halves_frq_1:
+  utter_ask_3_fractions_halves_frq_1:
   - text: "*WHY* do you think this split is 'fair'?"
-  utter_fractions_halves_frq_1_explanation:
-  - text: Because when you split {object_1} like that, both you and {friend_1} get
+  utter_3_fractions_halves_frq_1_explanation:
+  - text: Because when you split {object_1} like that, both you and {1_friend_1} get
       the same, or an equal, amount. You are splitting the {object_1} into two halves!
   utter_fractions_halves_conclusion:
-  - text: In fractions we would say that you and {friend_1} each got *one half (½)*
+  - text: In fractions we would say that you and {1_friend_1} each got *one half (½)*
       of the *whole*
   utter_fractions_halves_conclusion_animation:
   - text: Check out this animation
     image: https://ecceapi.herokuapp.com/media/fractions_halves_animation.mp4
-  utter_ask_fractions_parts_story_form_object_2:
-  - text: "Right after you and {friend_1} finished your yummy (and equal!) {object_1},
+  utter_ask_fractions_parts_story_form_1_object_2:
+  - text: "Right after you and {1_friend_1} finished your yummy (and equal!) {object_1},
       {friend_2} sits at your table. {friend_2} says they will share 1 of the 4 snacks.They
       have biscuits, grapes, and chocolates. Which is your favorite?"
-  utter_ask_fractions_parts_nrq_1:
-  - text: "I love {object_2} too \U0001F60B!\n{friend_2} has 6 {object_2}. How many do you each get if you split them equally between the three of you?"
-  utter_fractions_parts_nrq_1_explanation:
+  utter_ask_2_fractions_parts_nrq_1:
+  - text: "I love {1_object_2} too \U0001F60B!\n{friend_2} has 6 {1_object_2}. How many do you each get if you split them equally between the three of you?"
+  utter_2_fractions_parts_nrq_1_explanation:
   - text: Listen to this!
-    image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
-  utter_ask_fractions_parts_mcq_1:
-  - text: Tell us in fractions, what part of the whole (6 {object_2}) did you get?
-  utter_fractions_parts_mcq_1_options:
+    image: https://ecceapi.herokuapp.com/media/audio/\fractions_parts_nrq_1_explanation.ogg
+  utter_ask_3_fractions_parts_mcq_1:
+  - text: Tell us in fractions, what part of the whole (6 {1_object_2}) did you get?
+  utter_3_fractions_parts_mcq_1_options:
   - text: Lets try again. This time I'll give you options - 1/6 , 2/3 , 1/3, 1
-  utter_fractions_parts_mcq_1_explanation:
+  utter_3_fractions_parts_mcq_1_explanation:
   - text: Listen to this!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_1_explanation.mp3
-  utter_ask_fractions_parts_mcq_2:
-  - text: '{friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
+  utter_ask_4_fractions_parts_mcq_2:
+  - text: '{1_friend_1} gives you their share. Now you have 2 out of the 3 equal parts.
       In fractions we would say you have ⅔ (two-thirds) of the whole. Do you get more
       or less than {friend_2}?'
-  utter_fractions_parts_mcq_2_explanation:
+  utter_4_fractions_parts_mcq_2_explanation:
   - text: This animation might help!
     image: https://ecceapi.herokuapp.com/media/fractions_parts_mcq_2_explanation.mp4
-  utter_ask_fractions_parts_mcq_3:
+  utter_ask_5_fractions_parts_mcq_3:
   - text: After showing off your fraction skills to {friend_2}, they are upset you
-      get more than they do :( Now, {friend_2} wants to RE SPLIT the {object_2} EQUALLY
+      get more than they do :( Now, {friend_2} wants to RE SPLIT the {1_object_2} EQUALLY
       (into halves). Do you get more or less than before?
-  utter_fractions_parts_mcq_3_explanation:
+  utter_5_fractions_parts_mcq_3_explanation:
   - text: You are splitting the food into two equal parts instead of three! Because
       there are fewer people to share with, now each person gets more.
-  utter_ask_fractions_parts_mcq_4:
-  - text: So is ½ of the 6 {object_2} more or less than ⅓ of the 6 {object_2}?
-  utter_fractions_parts_mcq_4_explanation:
+  utter_ask_6_fractions_parts_mcq_4:
+  - text: So is ½ of the 6 {1_object_2} more or less than ⅓ of the 6 {1_object_2}?
+  utter_6_fractions_parts_mcq_4_explanation:
   - text: Check this out 
     image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_4_explanation.mp3
   utter_fractions_parts_conclusion:
@@ -251,36 +252,36 @@ responses:
   utter_fractions_wholes_introduction_hint:
   - text: Whenever we are dealing with fractions it’s always a good idea to figure
       out what the *whole* is and what the *part* is.
-  utter_ask_fractions_wholes_nrq_1:
+  utter_ask_1_fractions_wholes_nrq_1:
   - text: The farmer is splitting the 12 mangoes, which is the whole, into 3 boxes,
       so into 3 equal parts. How many mangoes are in each box?
-  utter_fractions_wholes_nrq_1_explanation:
+  utter_1_fractions_wholes_nrq_1_explanation:
   - text: 12 split equally into 3 parts is 4. You can check that this is right by
       adding together all 3 equal parts - 4 mangoes + 4 mangoes + 4 mangoes is 12
       mangoes!
-  utter_ask_fractions_wholes_nrq_2:
+  utter_ask_2_fractions_wholes_nrq_2:
   - text: In fractions, how much of the *whole* is in each box?
-  utter_fractions_wholes_nrq_2_explanation:
+  utter_2_fractions_wholes_nrq_2_explanation:
   - text: Each box is 1 part out of 3 boxes.  or ⅓ of the whole.
-  utter_ask_fractions_wholes_frq_1:
+  utter_ask_3_fractions_wholes_frq_1:
   - text: Now that you are splitting a box of 4 mangoes, what would you consider as
       the whole?
-  utter_fractions_wholes_frq_1_explanation:
+  utter_3_fractions_wholes_frq_1_explanation:
   - text: Hear why!
     image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
-  utter_ask_fractions_wholes_nrq_3:
+  utter_ask_4_fractions_wholes_nrq_3:
   - text: After splitting the mangoes evenly among your family of 4, how many mangoes
       does each person get?
-  utter_fractions_wholes_nrq_3_explanation:
+  utter_4_fractions_wholes_nrq_3_explanation:
   - text: 1 mango each since 4 mangoes split among 4 people (equally) is 1!
-  utter_ask_fractions_wholes_nrq_4:
+  utter_ask_5_fractions_wholes_nrq_4:
   - text: In fractions what share did each member of your family get?
-  utter_fractions_wholes_nrq_4_explanation:
+  utter_5_fractions_wholes_nrq_4_explanation:
   - text: Each got 1 out of 4 parts, and so the fraction is ¼
-  utter_ask_fractions_wholes_nrq_5:
+  utter_ask_6_fractions_wholes_nrq_5:
   - text: Now that you’ve got one mango all to yourself, you want to cut your mango
       into 6 equal pieces. What fraction of the whole mango is each piece?
-  utter_fractions_wholes_nrq_5_explanation:
+  utter_6_fractions_wholes_nrq_5_explanation:
   - text: You are cutting the mango into 6 equal parts so the fraction is 1/6
   utter_fractions_wholes_conclusion:
   - text: Did you realise that the whole changed depending on what you're splitting?!
@@ -297,8 +298,6 @@ responses:
   utter_fractions_demo_conclusion:
   - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code. 
 
-
-
 forms:
   first_form:
     userName:
@@ -309,48 +308,61 @@ forms:
       entity: number
 # Fractions Forms
   fractions_halves_story_form:
-    friend_1:
+    1_friend_1:
     - type: from_text
-    fractions_halves_mcq_1:
+      not_intent: ["stop"]
+    2_fractions_halves_mcq_1:
     - type: from_entity
       entity: mcq_answer
       intent: answer_question
-    fractions_halves_frq_1:
-    - type: from_text
-  fractions_parts_story_form:
-    object_2:
+      not_intent: ["stop"]
+    3_fractions_halves_frq_1:
     - type: from_text
       not_intent: ["stop"]
-    fractions_parts_nrq_1:
+  fractions_parts_story_form:
+    1_object_2:
+    - type: from_text
+      not_intent: ["stop"]
+    2_fractions_parts_nrq_1:
     - type: from_entity
       entity: number
-    fractions_parts_mcq_1:
+      not_intent: ["stop"]
+    3_fractions_parts_mcq_1:
     - type: from_entity
       entity: number
-    fractions_parts_mcq_2:
+    4_fractions_parts_mcq_2:
     - type: from_text
-    fractions_parts_mcq_3:
+      not_intent: ["stop"]
+    5_fractions_parts_mcq_3:
     - type: from_text
-    fractions_parts_mcq_4:
+    not_intent: ["stop"]
+    6_fractions_parts_mcq_4:
     - type: from_text
+      not_intent: ["stop"]
   fractions_wholes_story_form:
-    fractions_wholes_nrq_1:
+    1_fractions_wholes_nrq_1:
     - type: from_entity
       entity: number
-    fractions_wholes_nrq_2:
+      not_intent: ["stop"]
+    2_fractions_wholes_nrq_2:
     - type: from_entity
       entity: number
-    fractions_wholes_frq_1:
+      not_intent: ["stop"]
+    3_fractions_wholes_frq_1:
     - type: from_text
-    fractions_wholes_nrq_3:
+      not_intent: ["stop"]
+    4_fractions_wholes_nrq_3:
     - type: from_entity
       entity: number
-    fractions_wholes_nrq_4:
+      not_intent: ["stop"]
+    5_fractions_wholes_nrq_4:
     - type: from_entity
       entity: number
-    fractions_wholes_nrq_5:
+      not_intent: ["stop"]
+    6_fractions_wholes_nrq_5:
     - type: from_entity
       entity: number
+      not_intent: ["stop"]
 
 actions:
 - action_session_start
@@ -360,7 +372,6 @@ actions:
 - action_goodbye
 - utter_faq
 - utter_chitchat
-# Fractions Actions
 - validate_fractions_halves_story_form
 - validate_fractions_parts_story_form
 - validate_fractions_wholes_story_form

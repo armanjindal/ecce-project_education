@@ -4,7 +4,7 @@ import random
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
@@ -13,21 +13,21 @@ from fuzzywuzzy import process
 # TODO: Figure out why I cannot import local .py files
 
 def question_db():
-    # TODO: Turn this into a external database. Turn dict into DB query
+    # TODO: Turn this into a external database. Turn this function into DB query
     questions_dict = {
-    "fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
-    "fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
-    "fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"],  ],
-    "fractions_parts_nrq_1": ["nrq_numeral", [2]],
-    "fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater", "big", "bigger"]],
-    "fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
-    "fractions_wholes_nrq_1": ["nrq_numeral", [4]],
-    "fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
-    "fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
-    "fractions_wholes_nrq_3": ["nrq_numeral", [1]],
-    "fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
-    "fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
+    "2_fractions_halves_mcq_1": ["mcq_match", ['a','b','c','d'], 'b'],
+    "3_fractions_halves_frq_1": ["frq_keyword_match", ["equal", "halves", "half", "same", "identical"], None],
+    "3_fractions_parts_mcq_1" : ["nrq_fractions", ["1/3", "2/6"]],
+    "4_fractions_parts_mcq_2": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "2_fractions_parts_nrq_1": ["nrq_numeral", [2]],
+    "5_fractions_parts_mcq_3": ["frq_keyword_match", ["less", "fewer"], ["more", "greater", "big", "bigger"]],
+    "6_fractions_parts_mcq_4": ["frq_keyword_match", ["more", "greater"], ["less", "fewer"]],
+    "1_fractions_wholes_nrq_1": ["nrq_numeral", [4]],
+    "2_fractions_wholes_nrq_2": ["nrq_fractions", ["1/3", "2/6"]],
+    "3_fractions_wholes_frq_1": ["frq_keyword_match", ["box", "4"], None],
+    "4_fractions_wholes_nrq_3": ["nrq_numeral", [1]],
+    "5_fractions_wholes_nrq_4": ["nrq_fractions", ["1/4"]],
+    "6_fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
     }
     return questions_dict
 
@@ -47,7 +47,7 @@ def matchOption(user_input, slot_name, cutoff=60):
     # TODO: Turn this into an external database
     resp = user_input.lower()
     options_dict = {
-    "object_2": ["option_match", ["badams", "biscuits", "grapes", "chocolates"]]
+    "1_object_2": ["option_match", ["badams", "biscuits", "grapes", "chocolates"]]
     }
     option_matching_method = options_dict[slot_name][0]
     # Fuzzy match strings and returns closest match result to list of options
@@ -205,17 +205,18 @@ class ActionGoodbye(Action):
     async def run(
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:  
-        
         if tracker.get_slot("userName"):
             dispatcher.utter_message(template = "utter_goodbye")
         else:
             dispatcher.utter_message(text= "Bye!")
+        
         persistent_slots = ["userName", "age", "is_new_user"]
-        slots = []
-        for key in tracker.slots.keys():
-            if key not in persistent_slots:
-                slots.append(SlotSet(key=key, value=None))
-        return [slots, ActionExecuted("action_listen")] 
+        events = [AllSlotsReset()]
+        for key in persistent_slots:
+            events.append(SlotSet(key=key, value=tracker.get_slot(key)))
+        events.append(FollowupAction("action_listen")) 
+        print(events)
+        return events
 
 class ActionFailedFirstTimeForm(Action):
 
@@ -263,23 +264,25 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_fractions_halves_story_form"
     
-    async def required_slots(
-        self,
-        slots_mapped_in_domain: List[Text],
-        dispatcher: "CollectingDispatcher",
-        tracker: "Tracker",
-        domain: "DomainDict",
-    ) -> Optional[List[Text]]:
-        additional_slots = ["fractions_halves_mcq_1"]
-        if tracker.slots.get("outdoor_seating") is True:
-            # If the user wants to sit outside, ask
-            # if they want to sit in the shade or in the sun.
-            additional_slots.append("shade_or_sun")
+    # async def required_slots(
+    #     self,
+    #     slots_mapped_in_domain: List[Text],
+    #     dispatcher: "CollectingDispatcher",
+    #     tracker: "Tracker",
+    #     domain: "DomainDict",
+    # ) -> Optional[List[Text]]:
+    #     additional_slots = ["3_fractions_halves_frq_1"]
+        
+    #     if tracker.slots.get("2_fractions_mcq_1") == "B":
+    #         # If the user wants to sit outside, ask
+    #         # if they want to sit in the shade or in the sun.
+    #         additional_slots.append("3_fractions_halves_frq_1")
+    #     else:
 
-        return additional_slots + slots_mapped_in_domain
+    #     return additional_slots + slots_mapped_in_domain
     
     # TODO: Change once you understand how to deal with a non extracted entity
-    def validate_friend_1(
+    def validate_1_friend_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -289,31 +292,31 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
         defualt_name = "Puja"
         name = extractName(slot_value, tracker)
         if name:
-            return {"friend_1":name}
+            return {"1_friend_1":name}
         else:
             dispatcher.utter_message(f"I can't find the name! Lets call your friend {defualt_name} for now!")
-            return {"friend_1": defualt_name}
+            return {"1_friend_1": defualt_name}
 
-    def validate_fractions_halves_mcq_1(
+    def validate_2_fractions_halves_mcq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name = "fractions_halves_mcq_1"
+        question_name = "2_fractions_halves_mcq_1"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
 
-    def validate_fractions_halves_frq_1(
+    def validate_3_fractions_halves_frq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name = "fractions_halves_frq_1"
+        question_name = "3_fractions_halves_frq_1"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
@@ -322,77 +325,77 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_fractions_parts_story_form"
 
-    def validate_object_2(
+    def validate_1_object_2(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        match = matchOption(slot_value, "object_2")
+        match = matchOption(slot_value, "1_object_2")
         if match:
-            return{"object_2": match}
+            return{"1_object_2": match}
         else:
             dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option, choose again!!")
-            return{"object_2": None}
+            return{"1_object_2": None}
 
-    def validate_fractions_parts_nrq_1(
+    def validate_2_fractions_parts_nrq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_parts_nrq_1"
+        question_name = "2_fractions_parts_nrq_1"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
     
-    def validate_fractions_parts_mcq_1(
+    def validate_3_fractions_parts_mcq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name = "fractions_parts_mcq_1"
+        question_name = "3_fractions_parts_mcq_1"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
 
 
-    def validate_fractions_parts_mcq_2(
+    def validate_4_fractions_parts_mcq_2(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name =  "fractions_parts_mcq_2"
+        question_name =  "4_fractions_parts_mcq_2"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name:slot_dict_input}
 
-    def validate_fractions_parts_mcq_3(
+    def validate_5_fractions_parts_mcq_3(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name =  "fractions_parts_mcq_3"
+        question_name =  "5_fractions_parts_mcq_3"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name:slot_dict_input}
     
-    def validate_fractions_parts_mcq_4(
+    def validate_6_fractions_parts_mcq_4(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
-        question_name =  "fractions_parts_mcq_4"
+        question_name =  "6_fractions_parts_mcq_4"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name:slot_dict_input}
@@ -401,79 +404,74 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_fractions_wholes_story_form"
     
-    def validate_fractions_wholes_nrq_1(
+    def validate_1_fractions_wholes_nrq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_nrq_1"
+        question_name = "1_fractions_wholes_nrq_1"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
     
-    def validate_fractions_wholes_nrq_2(
+    def validate_2_fractions_wholes_nrq_2(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_nrq_2"
+        question_name = "2_fractions_wholes_nrq_2"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        print(answer)    
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
     
-    def validate_fractions_wholes_frq_1(
+    def validate_3_fractions_wholes_frq_1(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_frq_1"
+        question_name = "3_fractions_wholes_frq_1"
         answer = checkQuestion(slot_value, question_name)
-        print(answer)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}    
     
-    def validate_fractions_wholes_nrq_3(
+    def validate_4_fractions_wholes_nrq_3(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_nrq_3"
-        answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        print(answer)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
-        return {question_name: slot_dict_input}
-    
-    def validate_fractions_wholes_nrq_4(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_nrq_4"
+        question_name = "4_fractions_wholes_nrq_3"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}
     
-    def validate_fractions_wholes_nrq_5(
+    def validate_5_fractions_wholes_nrq_4(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
-        question_name = "fractions_wholes_nrq_5"
+        question_name = "5_fractions_wholes_nrq_4"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        print(answer)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
-        print(slot_dict_input)
+        return {question_name: slot_dict_input}
+    
+    def validate_6_fractions_wholes_nrq_5(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:        
+        question_name = "6_fractions_wholes_nrq_5"
+        answer = checkQuestion(slot_value, question_name, tracker=tracker)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
         return {question_name: slot_dict_input}

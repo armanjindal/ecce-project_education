@@ -29,7 +29,6 @@ jobs:
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
   
-    # RE ADD when using a Kubernetes deployment with Helm. Currently using a Docker compose
     # - name: GCP Auth
     #   env:
     #     GCLOUD_SERVICE_ACCOUNT_KEYFILE: ${{ secrets.GCLOUD_AUTH }}
@@ -37,13 +36,11 @@ jobs:
     #     echo "${GCLOUD_SERVICE_ACCOUNT_KEYFILE}" > gcloud_sa_key.json
     #     gcloud auth activate-service-account --key-file=gcloud_sa_key.json
     #     gcloud container clusters get-credentials rasa-x-cluster --zone us-central1-c --project rasa-287805
-    # - name: Helm Upgrade and Deploy
-    #   run: |
-    #     # Install helm v3
-    #     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-    #     helm repo add rasa-x https://armanjindal.github.io/rasa-x-helm/ --namespace "test-1"
-    #     helm get values rasa-x-1604487544 -o yaml > values-generated.yaml --namespace "test-1"        
-    #     helm upgrade rasa-x-1604487544 rasa-x/rasa-x -n "test-1" -f values-generated.yaml \
-    #     --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
-    #     --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} --namespace test-1 
+    - name: Upgrade Rasa X deployment on GCLOUD VM
+      run: |
+        # More information: https://rasa.com/docs/rasa-x/installation-and-setup/install/helm-chart/
 
+        # Upgrade the helm release using output parameters from the `action_server` step
+        helm upgrade --install --reuse-values \
+          --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
+          --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x

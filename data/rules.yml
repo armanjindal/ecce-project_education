@@ -19,7 +19,7 @@ rules:
 - rule: Manners - Goodbye 
   steps:
   - intent: goodbye
-  - action: action_goodbye
+  - action: utter_goodbye
 
 - rule: respond to FAQs
   steps:
@@ -42,5 +42,5 @@ rules:
   steps:
   - intent: hint
   - action: utter_fractions_wholes_introduction_hint
-  wait_for_user_input: false
+  - active_loop: fractions_wholes_story_form
 

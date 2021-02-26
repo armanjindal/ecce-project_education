@@ -46,6 +46,7 @@ stories:
   - intent: affirm
   - action: action_goodbye
 
+
 - story: General - False Exit at End of Lesson
   steps:
   - action: utter_start_next
@@ -56,18 +57,13 @@ stories:
   - intent: deny
 
 
-- story: Exit mid lesson
-  steps:
-  - intent: stop
-  - action: utter_confirm
-  - intent: affirm
-  - action: action_goodbye
 
 - story: False exit mid lesson
   steps:
   - intent: stop
   - action: utter_confirm
   - intent: deny
+# Re-engage loop 
 
 
 - story: Fraction - Halves
@@ -159,35 +155,40 @@ stories:
     - requested_slot: null
   - action: action_goodbye
 
-- story: Exit from Halves form
+- story: Exit from Halves Form
   steps:
-  - action: utter_lesson_options
-  - intent: lesson_fractions_halves
-  - action: utter_fractions_halves_introduction
-  - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
-  - slot_was_set:
-    - requested_slot: friend_1
-  - slot_was_set:
-    - friend_1: Sudhir
-  - slot_was_set:
-    - requested_slot: fractions_halves_mcq_1
-  - slot_was_set:
-    - fractions_halves_mcq_1: B
-  - slot_was_set:
-    - requested_slot: fractions_halves_frq_1
   - intent: stop
   - action: utter_confirm
   - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_goodbye
+
+- story: Exit from Parts Form
+  steps:
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - intent: stop
+  - action: utter_confirm
+  - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
   - action: action_goodbye
 
 - story: Exit from Wholes Form
   steps:
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
-  - slot_was_set:
-    - requested_slot: fractions_wholes_nrq_1
   - intent: stop
   - action: utter_confirm
   - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
   - action: action_goodbye
