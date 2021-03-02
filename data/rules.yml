@@ -19,7 +19,7 @@ rules:
 - rule: Manners - Goodbye 
   steps:
   - intent: goodbye
-  - action: utter_goodbye
+  - action: action_goodbye
 
 - rule: respond to FAQs
   steps:

@@ -137,6 +137,7 @@ stories:
   - action: utter_fractions_wholes_conclusion_2
   - action: utter_fractions_wholes_conclusion_3
   - action: utter_fractions_demo_conclusion
+  - action: action_goodbye
 
 
 

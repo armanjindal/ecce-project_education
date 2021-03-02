@@ -1,0 +1,158 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+- answer_question
+- greet
+- nlu_fallback
+- affirm
+- faq
+- chitchat
+- lesson_fractions_halves
+- lesson_fractions_wholes
+- inform
+- goodbye
+- deny
+- thankyou
+- stop
+- hint
+- restart
+
+entities:
+- language
+- mcq_answer
+- name
+- number
+- PERSON
+
+slots:
+  is_new_user:
+    type: bool
+    influence_conversation: true
+  age:
+    type: text
+    influence_conversation: false
+  userName:
+    type: text
+    influence_conversation: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+  school:
+    type: text
+    initial_value: school
+    influence_conversation: false
+
+responses:
+  utter_greet:
+  - text: Hello!
+  - text: Hey {userName}
+  utter_greet_existing:
+  - text: Hello, again!
+  - text: Hey there {userName}
+  - text: Hey hey {userName}!
+  utter_goodbye:
+  - text: Bye! {userName} 👋🏾
+  - text: Bye bye {userName}. Chat with you soon :)
+  utter_wrong_format:
+  - text: There is something wrong about the value. {err}
+  utter_ask_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+  utter_encouragment:
+  - text: That's awesome
+  - text: Yes! Lets do it
+  - text: You are doing amazing
+  utter_correct:
+  - text: That was right!
+  - text: Right on {userName} :)
+  - text: Yes that's so right!
+  - text: Nice one
+  utter_incorrect:
+  - text: Not quite right {userName} 🧐
+  - text: Almost there but not yet 🧐
+  - text: So close! I am sure you will get it next time 🧐
+  - text: Nope. Nice try though! 🧐
+  utter_you_are_welcome:
+  - text: You are welcome {userName}!
+  - text: The pleasure is all mine!
+  - text: You are very welcome!! :)
+  utter_greet_first_time:
+  - text: Hello! 👋🏾 My name is Ecce. I am your new digital, personal tutor 🙋🏽‍♀️ Lets
+      get chatting!
+  utter_greet_first_time_followup:
+  - text: I do not think we have met before. Before we start, lets get to know each
+      other a little bit.
+  utter_ask_first_form_userName:
+  - text: What is your name?
+  utter_ask_first_form_age:
+  - text: How old are you?
+  utter_first_time_confirm:
+  - text: "Is this information correct?\nName: {userName}\nAge: {age}"
+  utter_start_next:
+  - text: Would you like to go to the next lesson?
+  - text: You are doing great. Want to start the next lesson?
+  - text: Should we keep going?
+  utter_confirm:
+  - text: Are you sure you want to stop? 🥺
+  - text: Do you want to take a break?
+  - text: So are you done for now?
+  utter_check_in:
+  - text: Does that make sense?
+  - text: Do you understand?
+  - text: Is that clear?
+  - text: Got it?
+  utter_end_chat_session:
+  - text: You've done an awesome job! Lets chat again soon.
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+  utter_faq:
+  - text: "Thanks for asking a question! I can't seem to answer it right now, but I'll get back to you" 
+  # Response selectors
+  utter_faq/ask_name:
+  - text: My name is Ecce :)
+  - text: You can call me Ecce!
+  utter_faq/bot_challenge:
+  - text: I am a bot, but I prefer to think of myself as a conversational teaching
+      assistant
+  utter_faq/ask_creator:
+  - text: I was made by a team of cool educators still in college! You can find out
+      more at eccetech.com
+  utter_faq/ask_language:
+  - text: I only text in English for now but I am going to be able to speak Hindi
+      and Marathi soon!
+  utter_chitchat:
+  - text: "Chat time!"
+  utter_chitchat/exclaim_positive:
+  - text: I know right!
+  - text: This is so cool!
+  utter_chitchat/exclaim_negative:
+  - text: You've got it. You are doing so well!
+  - text: I know it isn't easy, but you can do it :)
+  utter_chitchat/exclaim_difficult:
+  - text: You are doing such a good job. I believe in you! You can always ask questions or for hints!
+  utter_lesson_options:
+  - text: In our lesson on fractions, you can start from the beginning from HALVES or jump to our later lesson on WHOLES if fractions are not new :) So which will it be?
+  utter_fractions_demo_conclusion:
+  - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code. 
+
+
+
+forms:
+  first_form:
+    userName:
+    - type: from_text
+      not_intent: stop
+    age:
+    - type: from_entity
+      entity: number
+
+actions:
+- action_session_start
+- validate_first_form
+- action_failed_first_time_form
+- action_check_user_status
+- action_goodbye
+- utter_faq
+- utter_chitchat

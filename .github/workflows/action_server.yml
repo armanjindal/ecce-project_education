@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Action Server Image and Deploy
     steps:
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -29,13 +30,14 @@ jobs:
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
   
-    # - name: GCP Auth
-    #   env:
-    #     GCLOUD_SERVICE_ACCOUNT_KEYFILE: ${{ secrets.GCLOUD_AUTH }}
-    #   run: |
-    #     echo "${GCLOUD_SERVICE_ACCOUNT_KEYFILE}" > gcloud_sa_key.json
-    #     gcloud auth activate-service-account --key-file=gcloud_sa_key.json
-    #     gcloud container clusters get-credentials rasa-x-cluster --zone us-central1-c --project rasa-287805
+    - name: Connect to gcloud action server
+      uses: actions-hub/gcloud@master
+      env:
+        PROJECT_ID: test
+        APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      with:
+        args: gcloud compute ssh --zone "europe-west2-c" "rasa-x-server" --project "ecce-300006"
+  
     - name: Upgrade Rasa X deployment on GCLOUD VM
       run: |
         # More information: https://rasa.com/docs/rasa-x/installation-and-setup/install/helm-chart/

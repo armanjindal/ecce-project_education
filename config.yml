@@ -18,13 +18,11 @@ pipeline:
     max_ngram: 4
   - name: DIETClassifier
     epochs: 100
-    model_confidence: cosine
-    constrain_similarities: True
+    # model_confidence: linear_norm
     loss_type: cross_entropy
   - name: ResponseSelector
     epochs: 100
-    model_confidence: cosine
-    constrain_similarities: True
+    # model_confidence: linear_norm
     loss_type: cross_entropy
   - name: FallbackClassifier
     threshold: 0.3

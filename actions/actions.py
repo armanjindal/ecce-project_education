@@ -36,12 +36,14 @@ def extractFraction(tracker):
     print("Extract fractions ran")
     fraction = None
     try:
-        fraction = tracker.latest_message.get('entities')[0].get('text').lower()
+        for entity_dict in tracker.latest_message.get('entities'):
+            if entity_dict.get('entity') == 'number':
+                fractions = entity_dict.get('text')
+                return fraction
+        return None
     except:
         print("AN ERROR in EXTRACT FRACTION OCCURED")
-        fraction = None 
-    finally:
-        return fraction
+        return None
 
 def matchOption(user_input, slot_name, cutoff=60):
     # TODO: Turn this into an external database
@@ -167,7 +169,6 @@ class ActionSessionStart(Action):
     ) -> List[Dict[Text, Any]]:
         metadata = tracker.get_slot("session_started_metadata")
         # Do something with the metadata
-        print(metadata)
         # the session should begin with a `session_started` event and an `action_listen`
         # as a user message follows
         return [SessionStarted(), ActionExecuted("action_listen")]
@@ -215,7 +216,6 @@ class ActionGoodbye(Action):
         for key in persistent_slots:
             events.append(SlotSet(key=key, value=tracker.get_slot(key)))
         events.append(FollowupAction("action_listen")) 
-        print(events)
         return events
 
 class ActionFailedFirstTimeForm(Action):
@@ -271,12 +271,12 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     #     tracker: "Tracker",
     #     domain: "DomainDict",
     # ) -> Optional[List[Text]]:
-    #     additional_slots = ["3_fractions_halves_frq_1"]
+    #     additional_slots = ["3_3_fractions_halves_frq_1"]
         
     #     if tracker.slots.get("2_fractions_mcq_1") == "B":
     #         # If the user wants to sit outside, ask
     #         # if they want to sit in the shade or in the sun.
-    #         additional_slots.append("3_fractions_halves_frq_1")
+    #         additional_slots.append("3_3_fractions_halves_frq_1")
     #     else:
 
     #     return additional_slots + slots_mapped_in_domain
