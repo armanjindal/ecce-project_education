@@ -33,13 +33,10 @@ def question_db():
 
 def extractFraction(tracker):
     # Error handle exceptions 
-    print("Extract fractions ran")
-    fraction = None
     try:
         for entity_dict in tracker.latest_message.get('entities'):
             if entity_dict.get('entity') == 'number':
-                fractions = entity_dict.get('text')
-                return fraction
+                return entity_dict.get('text')
         return None
     except:
         print("AN ERROR in EXTRACT FRACTION OCCURED")
