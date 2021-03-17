@@ -39,7 +39,7 @@ def extractFraction(tracker):
                 return entity_dict.get('text')
         return None
     except:
-        print("AN ERROR in EXTRACT FRACTION OCCURED")
+        print("AN ERROR in EXTRACT FRACTION OCCURED!")
         return None
 
 def matchOption(user_input, slot_name, cutoff=60):
