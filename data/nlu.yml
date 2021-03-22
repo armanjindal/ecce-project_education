@@ -58,6 +58,7 @@ nlu:
     - piy
     - Y
     - Very much so
+    - yes wow cool nice
 - intent: deny
   examples: |
     - no
@@ -87,7 +88,6 @@ nlu:
     - Arshaan
     - James
     - James Bond
-
 - intent: answer_question
   examples: |
     - [A](mcq_answer)
@@ -119,7 +119,6 @@ nlu:
     - Halves
     - lets do halves instead
     - halves instead
-    
 - intent: lesson_fractions_wholes
   examples: |
     - wholes options
@@ -141,12 +140,10 @@ nlu:
     - no more
     - lets do this later
     - im done
-
 - intent: restart
   examples: |
     - restart
     - RESTART
-
 - intent: faq/ask_name
   examples: |
     - What is your name?
