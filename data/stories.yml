@@ -75,7 +75,6 @@ stories:
   - active_loop: fractions_halves_story_form
   - active_loop: null
   - action: utter_fractions_halves_conclusion
-  - action: utter_fractions_halves_conclusion_animation
   - action: utter_start_next
 
 - story: Fraction - Wholes
@@ -95,7 +94,6 @@ stories:
 - story: Fractions - Halves -> Parts
   steps:
   - action: utter_fractions_halves_conclusion
-  - action: utter_fractions_halves_conclusion_animation
   - action: utter_start_next
   - intent: affirm
   - action: fractions_parts_story_form
