@@ -4,7 +4,7 @@ import random
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset, EventType, UserUttered
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
@@ -30,6 +30,10 @@ def question_db():
     "6_fractions_wholes_nrq_5": ["nrq_fractions", ["1/6"]],
     }
     return questions_dict
+
+def slotInDomain(slot_name, domain):
+    # Returns a boolean 
+    return slot_name in domain.get('slots')
 
 def extractFraction(tracker):
     # Error handle exceptions 
@@ -58,22 +62,29 @@ def matchOption(user_input, slot_name, cutoff=60):
         else:
             return None 
 
+def hintsExceed(question, tracker):
+    hint_name = f'{question}_list'
+    print(f"Hint name = {hint_name}")
+    hint_list = tracker.get_slot(hint_name)
+    return hint_list[0] >= len(hint_list)
+
 def checkQuestion(user_input, question, tracker=None):
     """ 
     Takes in the expected user input, queries DB, 
-    and validates the user input against the question type
-    Returns -> 'CORRECT', 'INCORRECT' and None 
+    and validates the user input against the question
+    Returns:
+    'CORRECT' : matches the validator for the question type
+    'INCORRECT': classified as invalid 
+    None if invalid input
     """
 
     questions_dict = question_db()
     q_list = questions_dict[question]
     question_type = q_list[0]
-    
-    # Exit if not extracted
 
     if not user_input:
         return None
-    
+
     if question_type == "nrq_fractions":
         if user_input > 0 and user_input <= 1:
             text_fraction = extractFraction(tracker)
@@ -113,25 +124,30 @@ def checkQuestion(user_input, question, tracker=None):
         else:
             return "INCORRECT"
 
-def respondQuestion(answer, question, slot_value, dispatcher, domain):
+def respondQuestion(answer, question, slot_value, dispatcher, tracker=None, domain=None):
     slot_dict_input = None
     if answer == "CORRECT":
         dispatcher.utter_message(template="utter_correct")
         slot_dict_input = slot_value
     if answer == "INCORRECT":
-        dispatcher.utter_message(template="utter_incorrect")
-        slot_dict_input = slot_value
+        # Checks if a hint slot is there and if there is if it exceeds
+        if domain and hintsExceed(question, tracker):
+            # Standard case for exceeding hints
+            slot_dict_input = 'EXCEEDED'
+            dispatcher.utter_message(template="utter_keep_going")
+            dispatcher.utter_message(template=f'utter_{question}_solution')
+        else:
+            dispatcher.utter_message(template="utter_incorrect")
+            slot_dict_input = None
     if not answer:
         print(f"Failed to extract slot for {question} - Extracted: {slot_value}")
         dispatcher.utter_message("I couldn't understand your input!")
         slot_dict_input = None
-    
     # Automatically search for explanation
 
     if slot_dict_input:
         explanation_response = f"utter_{question}_explanation"
         dispatcher.utter_message(template=explanation_response)
-
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
@@ -156,6 +172,7 @@ def extractName(slot_value, tracker):
     if len(resp_words) == 1:
         return resp_words[0].capitalize()
     return None
+
 
 class ActionSessionStart(Action):
     def name(self) -> Text:
@@ -225,6 +242,21 @@ class ActionFailedFirstTimeForm(Action):
     ) -> List[Dict[Text, Any]]:
         dispatcher.utter_message("Sorry I didn't get your information right. Lets try this again!")
         return [SlotSet(key = "userName", value = None), SlotSet(key = "age", value = None) ]
+
+class ActionAskPartsObject2(Action):
+    def name(self) -> Text:
+        return "action_ask_fractions_parts_story_form_1_object_2"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        if tracker.get_slot('1_friend_1'):
+            dispatcher.utter_message(template="utter_fractions_parts_story_form_1_object_2")
+            return []
+        else:
+            print("IF FLASE")
+            dispatcher.utter_message(template="utter_fractions_parts_story_form_1_object_2", friend_1 = "Puja")
+            return [SlotSet("1_friend_1", "Puja")]
 
 class ValidateFirstForm(FormValidationAction):
     def name(self) -> Text:
@@ -303,8 +335,8 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name = "2_fractions_halves_mcq_1"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
-        return {question_name: slot_dict_input}
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, tracker, domain)     
+        return {question_name:slot_dict_input}
 
     def validate_3_fractions_halves_frq_1(
         self,
@@ -315,8 +347,33 @@ class ValidateFractionHalvesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name = "3_fractions_halves_frq_1"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
+
+class AskFor2FractionsHalvesMcq1(Action):
+    def name(self) -> Text:
+        return "action_ask_2_fractions_halves_mcq_1"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        slot_name = "2_fractions_halves_mcq_1"
+        hint_name = f"{slot_name}_list"
+        hint_list = tracker.get_slot(hint_name) # TODO: add a check if this slot is defined
+        print(f"HINT LIST : {hint_list}")
+        hint_number = hint_list[0]
+        if hint_number < len(hint_list): #No. attemps < No. Hints
+            if hint_number == 0:
+                # First time being asked the question
+                dispatcher.utter_message(template= f'utter_question_{slot_name}')
+            else: 
+                # TODO: Add a check to see if the slot was a valid answer 
+                dispatcher.utter_message(text = hint_list[hint_number])
+            hint_list[0] += 1 # Increment hint counter
+            return [SlotSet(hint_name, hint_list)]
+        else: 
+            print("SOMETHING HAS GONE WRONG -  No. Attemps > No. Hints")
+            return []
 
 class ValidateFractionPartsStoryForm(FormValidationAction):
     def name(self) -> Text:
@@ -345,7 +402,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "2_fractions_parts_nrq_1"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
     
     def validate_3_fractions_parts_mcq_1(
@@ -357,7 +414,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name = "3_fractions_parts_mcq_1"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
 
 
@@ -370,7 +427,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name =  "4_fractions_parts_mcq_2"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name:slot_dict_input}
 
     def validate_5_fractions_parts_mcq_3(
@@ -382,7 +439,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name =  "5_fractions_parts_mcq_3"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name:slot_dict_input}
     
     def validate_6_fractions_parts_mcq_4(
@@ -394,7 +451,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         question_name =  "6_fractions_parts_mcq_4"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name:slot_dict_input}
 
 class ValidateFractionWholesStoryForm(FormValidationAction):
@@ -410,7 +467,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "1_fractions_wholes_nrq_1"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
     
     def validate_2_fractions_wholes_nrq_2(
@@ -422,7 +479,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "2_fractions_wholes_nrq_2"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
     
     def validate_3_fractions_wholes_frq_1(
@@ -434,7 +491,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "3_fractions_wholes_frq_1"
         answer = checkQuestion(slot_value, question_name)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}    
     
     def validate_4_fractions_wholes_nrq_3(
@@ -446,7 +503,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "4_fractions_wholes_nrq_3"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
     
     def validate_5_fractions_wholes_nrq_4(
@@ -458,7 +515,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "5_fractions_wholes_nrq_4"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
     
     def validate_6_fractions_wholes_nrq_5(
@@ -470,5 +527,6 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
     ) -> Dict[Text, Any]:        
         question_name = "6_fractions_wholes_nrq_5"
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
-        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher, domain)
+        slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}
+

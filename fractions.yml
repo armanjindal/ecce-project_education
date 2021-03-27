@@ -17,6 +17,9 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
+  2_fractions_halves_mcq_1_list:
+    type: list
+    initial_value: [0, 'first hint', 'second_hint']
   3_fractions_halves_frq_1:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -97,26 +100,27 @@ responses:
   - text: Yay! Let's start with halves by talking about my favorite thing - food!
   utter_ask_1_friend_1:
   - text: Which of your friends do you like to eat with the most?
-  utter_ask_2_fractions_halves_mcq_1:
+  utter_question_2_fractions_halves_mcq_1:
   - image: https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png
     text: |-
       Imagine it is lunch time at {school} and {1_friend_1} want to have some of your last {object_1}.
       Which way of splitting do you think is fair to the both of you? 🤨
+  utter_2_fractions_halves_mcq_1_solution:
+  - text: "The correct answer is option B!"
   utter_ask_3_fractions_halves_frq_1:
   - text: "*WHY* do you think this split is 'fair'?"
   utter_3_fractions_halves_frq_1_explanation:
   - text: By splitting the {object_1} in this way,  both you and {1_friend_1} get the same/ equal share.
   utter_fractions_halves_conclusion:
   - text: In fractions we would say that you and {1_friend_1} each got *one half (½)* of the *whole*
-  utter_ask_fractions_parts_story_form_1_object_2:
+  utter_fractions_parts_story_form_1_object_2:
   - text: 'Right after you and {1_friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table. /n {friend_2} has 3 snacks: biscuits, grapes and chocolates. Which is your favorite?'
   utter_ask_2_fractions_parts_nrq_1:
   - text: |-
       I love {1_object_2} too 😋!
       {friend_2} has 6 {1_object_2}. How many do you each get if you split them equally between the three of you?
   utter_2_fractions_parts_nrq_1_explanation:
-  - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
-    text: Listen to this!
+  - text: https://ecceapi.herokuapp.com/media/audio/fractions_parts_nrq_1_explanation.ogg
   utter_ask_3_fractions_parts_mcq_1:
   - text: If each of you got 2 {1_object_2},  what part of the whole (6 {1_object_2}) did you get?
   utter_3_fractions_parts_mcq_1_options:
@@ -179,7 +183,9 @@ responses:
   - text: Finally, when you were ready to eat one mango - you cut it into 6 slices. 1 mango was now the whole you are splitting into 6 parts!In fact, Fractions are how you divide/split *any whole*
 actions:
 - validate_fractions_halves_story_form
+- action_ask_2_fractions_halves_mcq_1
 - validate_fractions_parts_story_form
+- action_ask_fractions_parts_story_form_1_object_2
 - validate_fractions_wholes_story_form
 forms:
   fractions_halves_story_form:

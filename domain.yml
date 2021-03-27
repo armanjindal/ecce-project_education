@@ -4,9 +4,10 @@ config:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
 - answer_question:
-    use_entities: true
+    use_entities: ["mcq_answer"]
 - greet:
     use_entities: true
 - nlu_fallback:
@@ -15,14 +16,10 @@ intents:
     use_entities: true
 - faq:
     use_entities: true
-- chitchat:
-    use_entities: true
-- lesson_fractions_halves:
-    use_entities: true
-- lesson_fractions_wholes:
-    use_entities: true
+- select_lesson:
+    use_entities: ["lesson"]
 - inform:
-    use_entities: true
+    use_entities: ["name", "number"]
 - goodbye:
     use_entities: true
 - deny:
@@ -35,17 +32,19 @@ intents:
     use_entities: true
 - restart:
     use_entities: true
+
 entities:
 - language
+- lesson
 - mcq_answer
 - name
 - number
 - PERSON
+
 slots:
   is_new_user:
     type: rasa.shared.core.slots.BooleanSlot
     initial_value: null
-    auto_fill: true
     influence_conversation: true
   age:
     type: rasa.shared.core.slots.TextSlot
@@ -67,6 +66,14 @@ slots:
     initial_value: school
     auto_fill: true
     influence_conversation: false
+  lesson:
+    type: categorical
+    influence_conversation: true
+    values:
+      - halves
+      - wholes
+      - parts 
+  
 responses:
   utter_greet:
   - text: Hello!
@@ -142,20 +149,13 @@ responses:
   - text: I was made by a team of cool educators still in college! You can find out more at eccetech.com
   utter_faq/ask_language:
   - text: I only text in English for now but I am going to be able to speak Hindi and Marathi soon!
-  utter_chitchat:
-  - text: Chat time!
-  utter_chitchat/exclaim_positive:
-  - text: I know right!
-  - text: This is so cool!
-  utter_chitchat/exclaim_negative:
-  - text: You've got it. You are doing so well!
-  - text: I know it isn't easy, but you can do it :)
-  utter_chitchat/exclaim_difficult:
-  - text: You are doing such a good job. I believe in you! You can always ask questions or for hints!
   utter_lesson_options:
   - text: 'We have a lesson on fractions available for you! Which topic would you like to do: Halves, Parts, or Wholes'
   utter_fractions_demo_conclusion:
   - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code.
+  utter_keep_going:
+  - text: It is ok. I'm sure you will get it next time! Lets keep going
+
 actions:
 - action_session_start
 - validate_first_form
@@ -163,7 +163,6 @@ actions:
 - action_check_user_status
 - action_goodbye
 - utter_faq
-- utter_chitchat
 forms:
   first_form:
     age:

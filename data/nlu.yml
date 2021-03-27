@@ -20,6 +20,7 @@ nlu:
     - helloo
     - Hey
     - What’s up
+
 - intent: thankyou
   examples: |
     - thanks!
@@ -27,6 +28,7 @@ nlu:
     - u are great!
     - thanks so much
     - thanks
+
 - intent: goodbye
   examples: |
     - good bye
@@ -40,7 +42,8 @@ nlu:
     - see you around
     - bye bye
     - see you later
-    - Goodbye bitch
+    - Goodbye 
+
 - intent: affirm
   examples: |
     - yes
@@ -55,20 +58,19 @@ nlu:
     - defintley
     - fine by me
     - Yes
-    - piy
-    - Y
     - Very much so
     - yes wow cool nice
+  
 - intent: deny
   examples: |
     - no
-    - n
     - never
-    - I don't think so
     - don't like that
     - no way
     - not really
     - nope
+    - nah 
+  
 - intent: inform
   examples: |
     - My name is [Arman](name)
@@ -88,6 +90,7 @@ nlu:
     - Arshaan
     - James
     - James Bond
+  
 - intent: answer_question
   examples: |
     - [A](mcq_answer)
@@ -109,30 +112,31 @@ nlu:
     - 21
     - equal
     - [c](mcq_answer)
-- intent: lesson_fractions_halves
+
+- intent: select_lesson
   examples: |
-    - halves options
-    - the one with the halves
-    - i want to do the halves
-    - halves
-    - half
-    - Halves
-    - lets do halves instead
-    - halves instead
-- intent: lesson_fractions_wholes
-  examples: |
-    - wholes options
-    - the one with the wholes
-    - i want to do the whole
-    - wholes
-    - lets do the whole
-    - Whole
+    - [halves](lesson) options
+    - the one with the [halves](lesson)
+    - i want to do the [halves](lesson)
+    - [halves](lesson)
+    - lets do [wholes](lesson)
+    - the one with the [wholes](lesson)
+    - lets do the [wholes](lesson)
+    - i want to start with [parts](lesson)
+    - [parts](lesson)
+    - i prefer to start with [parts](lesson)
+    - lets start with [parts](lesson)
+
 - intent: hint
   examples: |
     - I need some help
     - i am stuck
     - please give me a hint
     - i need a hint
+    - help!
+    - this is too hard
+    - can you help me with this question
+  
 - intent: stop
   examples: |
     - I would like to stop this lesson!
@@ -140,10 +144,10 @@ nlu:
     - no more
     - lets do this later
     - im done
-- intent: restart
-  examples: |
-    - restart
-    - RESTART
+    - id like to leave
+    - i am done
+  
+
 - intent: faq/ask_name
   examples: |
     - What is your name?
@@ -151,6 +155,7 @@ nlu:
     - What do people call you?
     - Do you have a name for yourself?
     - I forgot your name
+
 - intent: faq/bot_challenge
   examples: |
     - are you a bot?
@@ -166,35 +171,13 @@ nlu:
     - what programming language was used to make you
 - intent: faq/ask_language
   examples: |
-    - What languages do you speak
+    - What languages do you speak?
     - Do you understand hindi?
     - can you speak [hindi](language)
     - do you speak [marathi](language)
-- intent: chitchat/exclaim_positive
+
+# Development intent
+- intent: restart
   examples: |
-    - Thats so awesome
-    - Whooooaaa
-    - Nice!
-    - this is so cool
-    - amazing
-- intent: chitchat/exclaim_negative
-  examples: |
-    - This is so hard
-    - Oh no I keep getting this wrong
-    - Can't do this any more :(
-    - oooofff this sucks
-    - im bored
-    - im so tired
-- intent: chitchat/exclaim_difficult
-  examples: |
-    - This is so hard
-    - im not getting this
-    - ugh too difficult
-    - so challenging
-- intent: nlu_fallback
-  examples: |
-    - One three
-    - blach clashcj af
-- intent: chitchat
-  examples: |
-    - this is so hard
+    - restart
+    - RESTART

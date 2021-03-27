@@ -55,7 +55,7 @@ stories:
     - intent: stop
   - action: utter_confirm
   - intent: deny
-
+  - action: utter_start_next
 
 
 - story: False exit mid lesson
@@ -63,13 +63,16 @@ stories:
   - intent: stop
   - action: utter_confirm
   - intent: deny
-# Re-engage loop 
 
 
 - story: Fraction - Halves
   steps:
   - action: utter_lesson_options
-  - intent: lesson_fractions_halves
+  - intent: select_lesson
+    entities: 
+    - lesson: halves
+  - slot_was_set:
+    - lesson: halves
   - action: utter_fractions_halves_introduction
   - action: fractions_halves_story_form
   - active_loop: fractions_halves_story_form
@@ -77,10 +80,28 @@ stories:
   - action: utter_fractions_halves_conclusion
   - action: utter_start_next
 
+- story: Fraction - Parts
+  steps:
+  - action: utter_lesson_options
+  - intent: select_lesson
+    entities: 
+    - lesson: parts
+  - slot_was_set:
+    - lesson: parts
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - active_loop: null
+  - action: utter_fractions_parts_conclusion
+  - action: utter_start_next
+
 - story: Fraction - Wholes
   steps:
   - action: utter_lesson_options
-  - intent: lesson_fractions_wholes
+  - intent: select_lesson
+    entities: 
+    - lesson: wholes
+  - slot_was_set:
+    - lesson: wholes  
   - action: utter_fractions_wholes_introduction
   - action: fractions_wholes_story_form
   - active_loop: fractions_wholes_story_form
@@ -136,8 +157,6 @@ stories:
   - action: utter_fractions_wholes_conclusion_3
   - action: utter_fractions_demo_conclusion
   - action: action_goodbye
-
-
 
 - story: Exit from First Form
   steps:
