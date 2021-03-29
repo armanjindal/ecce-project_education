@@ -4,10 +4,10 @@ config:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
 - answer_question:
-    use_entities: ["mcq_answer"]
+    use_entities:
+    - mcq_answer
 - greet:
     use_entities: true
 - nlu_fallback:
@@ -17,9 +17,12 @@ intents:
 - faq:
     use_entities: true
 - select_lesson:
-    use_entities: ["lesson"]
+    use_entities:
+    - lesson
 - inform:
-    use_entities: ["name", "number"]
+    use_entities:
+    - number
+    - name
 - goodbye:
     use_entities: true
 - deny:
@@ -32,7 +35,6 @@ intents:
     use_entities: true
 - restart:
     use_entities: true
-
 entities:
 - language
 - lesson
@@ -40,11 +42,11 @@ entities:
 - name
 - number
 - PERSON
-
 slots:
   is_new_user:
     type: rasa.shared.core.slots.BooleanSlot
     initial_value: null
+    auto_fill: true
     influence_conversation: true
   age:
     type: rasa.shared.core.slots.TextSlot
@@ -67,13 +69,14 @@ slots:
     auto_fill: true
     influence_conversation: false
   lesson:
-    type: categorical
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: true
     values:
-      - halves
-      - wholes
-      - parts 
-  
+    - halves
+    - wholes
+    - parts
 responses:
   utter_greet:
   - text: Hello!
@@ -155,7 +158,6 @@ responses:
   - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code.
   utter_keep_going:
   - text: It is ok. I'm sure you will get it next time! Lets keep going
-
 actions:
 - action_session_start
 - validate_first_form

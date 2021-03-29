@@ -18,8 +18,13 @@ slots:
     auto_fill: true
     influence_conversation: false
   2_fractions_halves_mcq_1_list:
-    type: list
-    initial_value: [0, 'first hint', 'second_hint']
+    type: rasa.shared.core.slots.ListSlot
+    initial_value:
+    - 0
+    - first hint
+    - second_hint
+    auto_fill: true
+    influence_conversation: true
   3_fractions_halves_frq_1:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -106,7 +111,7 @@ responses:
       Imagine it is lunch time at {school} and {1_friend_1} want to have some of your last {object_1}.
       Which way of splitting do you think is fair to the both of you? 🤨
   utter_2_fractions_halves_mcq_1_solution:
-  - text: "The correct answer is option B!"
+  - text: The correct answer is option B!
   utter_ask_3_fractions_halves_frq_1:
   - text: "*WHY* do you think this split is 'fair'?"
   utter_3_fractions_halves_frq_1_explanation:
@@ -114,7 +119,7 @@ responses:
   utter_fractions_halves_conclusion:
   - text: In fractions we would say that you and {1_friend_1} each got *one half (½)* of the *whole*
   utter_fractions_parts_story_form_1_object_2:
-  - text: 'Right after you and {1_friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table. /n {friend_2} has 3 snacks: biscuits, grapes and chocolates. Which is your favorite?'
+  - text: 'Right after you and {1_friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table. \n  {friend_2} has 3 snacks: biscuits, grapes and chocolates. Which is your favorite?'
   utter_ask_2_fractions_parts_nrq_1:
   - text: |-
       I love {1_object_2} too 😋!
@@ -134,16 +139,16 @@ responses:
   - image: https://ecceapi.herokuapp.com/media/fractions_parts_mcq_2_explanation.mp4
     text: This animation might help!
   utter_ask_5_fractions_parts_mcq_3:
-  - text: '{friend_2} is upset that you got more than they do :( Now, he wants you to share the {1_object_2} EQUALLY between the two of you. /n If you split the object into 2 halves, do you get more or less than before?'
+  - text: '{friend_2} is upset that you got more than they do :( Now, he wants you to share the {1_object_2} EQUALLY between the two of you. \n If you split the object into 2 halves, do you get more or less than before?'
   utter_5_fractions_parts_mcq_3_explanation:
   - text: You split the food into two equal parts instead of three! Because there are fewer people to share with, each person now gets more {object_1}
   utter_ask_6_fractions_parts_mcq_4:
-  - text: Let's talk about that in fractions! /n Is ½ of the 6 {1_object_2} more or less than ⅓ of the 6 {1_object_2}?
+  - text: Let's talk about that in fractions! \n Is ½ of the 6 {1_object_2} more or less than ⅓ of the 6 {1_object_2}?
   utter_6_fractions_parts_mcq_4_explanation:
   - image: https://ecceapi.herokuapp.com/media/audio/fractions_parts_mcq_4_explanation.mp3
     text: Check this out
   utter_fractions_parts_conclusion:
-  - text: You have now explored the concept of parts! It is as easy as splitting objects amongst different friends :)/n Now we're going to put **parts** together to make a **whole**!
+  - text: You have now explored the concept of parts! It is as easy as splitting objects amongst different friends :)\n Now we're going to put **parts** together to make a **whole**!
   utter_fractions_wholes_introduction:
   - text: A farmer has a total of 12 MANGOES 🥭  which he needs to split into 3 equal parts.  You can help him with FRACTIONS!
   utter_fractions_wholes_introduction_hint:
@@ -151,13 +156,13 @@ responses:
   utter_ask_1_fractions_wholes_nrq_1:
   - text: If the farmer splits the whole of 12 mangoes into 3 equal boxes, how many mangoes are in each box?
   utter_1_fractions_wholes_nrq_1_explanation:
-  - text: 12 split equally into 3 parts is 4. You can check that this is right by adding together all 3 equal parts/n  4 + 4 + 4  = 12 mangoes!
+  - text: 12 split equally into 3 parts is 4. You can check that this is right by adding together all 3 equal parts:\n4 + 4 + 4  = 12 mangoes!
   utter_ask_2_fractions_wholes_nrq_2:
-  - text: Let's talk about this in fractions! /n How much of the *whole* is in each box?
+  - text: Let's talk about this in fractions!\nHow much of the *whole* is in each box?
   utter_2_fractions_wholes_nrq_2_explanation:
   - text: You can also look at the 3 boxes as 3 equal parts. Each box is then 1 out of 3 parts or ⅓ of the whole.
   utter_ask_3_fractions_wholes_frq_1:
-  - text: The farmer was grateful for your help and gifted you a box of 4 mangoes. /n If you had to split this box into parts, what would be the whole?
+  - text: The farmer was grateful for your help and gifted you a box of 4 mangoes. \n If you had to split this box into parts, what would be the whole?
   utter_3_fractions_wholes_frq_1_explanation:
   - image: https://ecceapi.herokuapp.com/media/audio/fractions_wholes_frq_1_explanation.ogg
     text: Hear why!
