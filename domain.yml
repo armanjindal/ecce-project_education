@@ -31,7 +31,9 @@ intents:
 - hint:
     use_entities: true
 - restart:
-    use_entities: true
+    use_entities: false
+- human_handoff:
+    use_entities: false
 
 entities:
 - language
@@ -155,13 +157,15 @@ responses:
   - text: Thats the end of the demo lesson. We want enable educators to make lessons like these with no code.
   utter_keep_going:
   - text: It is ok. I'm sure you will get it next time! Lets keep going
-
+  utter_handoff:
+  - text: "You are now speaking to my human creators, who are smarter than me (for now!)"
 actions:
 - action_session_start
 - validate_first_form
 - action_failed_first_time_form
 - action_check_user_status
 - action_goodbye
+- action_handoff
 - utter_faq
 forms:
   first_form:

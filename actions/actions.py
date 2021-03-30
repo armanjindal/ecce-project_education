@@ -4,9 +4,14 @@ import random
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset, EventType, UserUttered
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset, EventType, UserUttered, ConversationPaused
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+
+# For twilio communication 
+from twilio.twiml.messaging_response import Message, MessagingResponse
+
+
 
 #import helpers
 from fuzzywuzzy import process
@@ -197,6 +202,24 @@ class ActionSessionStart(Action):
 #     ) -> List[Dict[Text, Any]]:
 #         time.sleep(7) # Add a 7 second delay 
 #         return [ ]
+
+class ActionHandoff(Action):
+   def name(self) -> Text:
+       return "action_handoff"
+ 
+   async def run(
+       self,
+       dispatcher: CollectingDispatcher,
+       tracker: Tracker,
+       domain: Dict[Text, Any],
+   ) -> List[EventType]:
+ 
+        dispatcher.utter_message(template="utter_handoff")
+        # Hardcoding the RocketChat LiveChat Link
+        url = "https://eccechat.me/api/v1/livechat/sms-incoming/twilio"
+        response = MessagingResponse()
+        response.redirect(url)
+        return [ConversationPaused()]
 
 class ActionCheckUserStatus(Action):
 
