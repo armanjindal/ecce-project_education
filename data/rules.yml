@@ -6,6 +6,12 @@ rules:
   - intent: nlu_fallback
   - action: utter_please_rephrase
 
+# Development - Human Handoff
+- rule: trigger human handoff
+  steps:
+  - intent: human_handoff
+  - action: action_handoff
+
 - rule: End learning session
   steps:
   - intent: stop
