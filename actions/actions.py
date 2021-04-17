@@ -8,10 +8,8 @@ from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAct
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
-# For twilio communication 
-from twilio.twiml.messaging_response import Message, MessagingResponse
-
-
+import json
+import requests
 
 #import helpers
 from fuzzywuzzy import process
@@ -186,8 +184,6 @@ class ActionSessionStart(Action):
     async def run(
       self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
-        metadata = tracker.get_slot("session_started_metadata")
-        # Do something with the metadata
         # the session should begin with a `session_started` event and an `action_listen`
         # as a user message follows
         return [SessionStarted(), ActionExecuted("action_listen")]
@@ -214,12 +210,19 @@ class ActionHandoff(Action):
        domain: Dict[Text, Any],
    ) -> List[EventType]:
  
-        dispatcher.utter_message(template="utter_handoff")
-        # Hardcoding the RocketChat LiveChat Link
-        url = "https://eccechat.me/api/v1/livechat/sms-incoming/twilio"
-        response = MessagingResponse()
-        response.redirect(url)
-        return [ConversationPaused()]
+        # Hardcoding the RocketChat LiveChat Link - change for robust handling 
+        url = "https://eccechat.me/api/apps/public/646b8e7d-f1e1-419e-9478-10d0f5bc74d9/incoming"
+        api_call = {
+            "action":"handover",
+            "sessionId": tracker.sender_id,
+            "actionData": {
+            "targetDepartment": "Human-Handoff"
+            }
+        }
+        json_blob = json.dumps(api_call)
+        response = requests.post(url, data=json_blob)
+        print(f"Status: {response.status_code}, Text: {response.text}")
+        return []
 
 class ActionCheckUserStatus(Action):
 

@@ -1,3 +1,4 @@
 fuzzywuzzy
 typing_extensions
-twilio
+json
+requests

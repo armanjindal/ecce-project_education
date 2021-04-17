@@ -19,7 +19,7 @@ slots:
     influence_conversation: false
   2_fractions_halves_mcq_1_list:
     type: list
-    initial_value: [0, 'first hint', 'second_hint']
+    initial_value: [0, 'If you split the paratha in a fair way, you and your friend would get the **same** amount']
   3_fractions_halves_frq_1:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -103,7 +103,7 @@ responses:
   utter_question_2_fractions_halves_mcq_1:
   - image: https://ecceapi.herokuapp.com/media/fractions_halves_mcq_1.png
     text: |-
-      Imagine it is lunch time at {school} and {1_friend_1} want to have some of your last {object_1}.
+      Imagine it is lunch time at {school} and {1_friend_1} wants to have some of your last {object_1}.
       Which way of splitting do you think is fair to the both of you? 🤨
   utter_2_fractions_halves_mcq_1_solution:
   - text: "The correct answer is option B!"
