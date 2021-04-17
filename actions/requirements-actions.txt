@@ -1,4 +1,2 @@
 fuzzywuzzy
 typing_extensions
-json
-requests
