@@ -24,6 +24,7 @@ nlu:
     - helo
     - Hello ECCE!
     - Hey Ecce!
+
 - intent: thankyou
   examples: |
     - thanks!
@@ -32,6 +33,10 @@ nlu:
     - thanks so much
     - thanks
     - That was helpful!
+    - tank you
+    - cheers
+    - appreciate it
+
 - intent: goodbye
   examples: |
     - good bye
@@ -47,6 +52,7 @@ nlu:
     - see you later
     - Goodbye
     - Bye
+
 - intent: affirm
   examples: |
     - yes
@@ -71,6 +77,7 @@ nlu:
     - Could we start the next lesson?
     - Yes that is
     - That is correct
+
 - intent: deny
   examples: |
     - no
@@ -80,6 +87,10 @@ nlu:
     - not really
     - nope
     - nah
+    - no thanks 
+    - nah
+    - never
+
 - intent: inform
   examples: |
     - My name is [Arman](name)
@@ -94,35 +105,21 @@ nlu:
     - [sambhav](name)
     - [Mahima](name)
     - [Mehboob](name)
-    - Johnny
     - [poonam](name)
-    - Arshaan
-    - James
-    - James Bond
-    - [Arman](name)[Arman](name)
-    - [arman](name)[arman](name)
     - [akshaan](name)
     - I like to eat with [Sambhav](name)
-    - I’m 8
-    - Arshu
-    - kanishk
-    - i am 9
+    - [arun](name)
+    - [kanishk](name)
     - [Anushka](name)
     - [Arya](name)
     - Ashoka
-    - myself ashoka
+    - myself [ashoka](name)
     - [Rishika](name)
-    - my name is ashoka
-    - My name is Ashoka
     - [Aahana](name)
-    - I like eating with my friend Rishika
-    - i have 10 years
+    - I like eating with my friend [Rishika](name)
     - My name is [Anvita](name)
-    - My name is [aahana](name)
-    - My name is [Ashima](name)[Ashima](name)
-    - [Ashima](name)[Ashima](name)
-    - I’m 21
-- intent: answer_question
+
+- intent: answer_mcq # Turn this into regex rules 
   examples: |
     - [A](mcq_answer)
     - [b](mcq_answer)
@@ -130,19 +127,41 @@ nlu:
     - [d](mcq_answer)
     - [C](mcq_answer)!
     - [e](mcq_answer)
-    - Because they are equal
     - [B](mcq_answer)
+    - [C](mcq_answer)
+    - [c](mcq_answer)
+    - Is it [B](mcq_answer)?
+    - I think it’s [a](mcq_answer)
+    - [B](mcq_answer) is the fairest
+    - [D](mcq_answer)
+    - [E](mcq_answer)
+    - I think the right answer is [B](mcq_answer)
+    - I think [B](mcq_answer) is fair
+
+- intent: answer_frq_fractions_halves
+  examples: |
+    - Because they are equal
+    - equal size pieces
+    - Equal sized parts
+    - Because it’s equal
+    - I think it’s equal because
+    - because they are equal
+    - they are equal
+    - Equal
+    - Because when you split the aloo paratha that way they are both the same name size!
+    - i get less
+    - i get more
+    - more
+    - Because they are both equal
+    - I think it’s equal
+    - I think it’s fair because it’s equal
+
+- intent: answer_number
+  examples: |
     - 12 mangoes
-    - One out of three
     - 5
     - 29
-    - chcolate
-    - equal size pieces
-    - [C](mcq_answer)
-    - Equal sized parts
     - 21
-    - equal
-    - [c](mcq_answer)
     - 8
     - 2
     - 4
@@ -150,43 +169,22 @@ nlu:
     - 27
     - 22
     - 12
-    - Because it’s equal
-    - I think it’s equal because
-    - Is it [B](mcq_answer)?
-    - I think it’s A
-    - because they are equal
-    - [D](mcq_answer)
-    - [E](mcq_answer)
     - 25
-    - I think the right answer is [B](mcq_answer)
-    - i get less
-    - [B](mcq_answer) is the fairest
-    - Because when you split the aloo paratha that way they are both the [same](name) size!
-    - i get more
-    - more
     - If I have split them equally it would be 2 grapes for each of us
-    - There are 4 mangoes in each box !
     - There are 4 mangoes in each box
-    - Because with that split [Mahima](name) [and](name) I get the [same](name) share.
     - The whole is the box of 4 mangoes!
     - I am 8 years old!
-    - I think it’s fair because it’s equal
     - Well we each get 2
     - I m 11 year old
     - 4 in each box
-    - I think B is fair
-    - I got half of the grapes
     - I think it would be 2 biscuits each
     - There are exactly 4 mangoes in each box
-    - I think it’s equal
     - There are 4 in each box
     - I think I get 2 biscuits
     - 1/4
     - 1/5
     - i got 1/3
     - we get 7 each
-    - they are equal
-    - Equal
     - 14
     - 23
     - 20
@@ -197,11 +195,11 @@ nlu:
     - So my answer is 1/4
     - Hmmm okay! The new whole is just a mangoe, so the fraction each person gets is 1/4
     - Hmm I think there are 1/3
-    - Because they are both equal
     - 2/4
     - 1/4 of the mangoes in each box
     - I am 8
     - There is 1/4 of the whole in each box
+
 - intent: select_lesson
   examples: |
     - [halves](lesson) options
@@ -218,6 +216,7 @@ nlu:
     - lets do [halves](lesson)
     - [wholes](lesson)
     - [Halves](lesson)
+
 - intent: hint
   examples: |
     - I need some help
@@ -229,6 +228,7 @@ nlu:
     - can you help me with this question
     - I’d like a hint!
     - I’d like a hint
+
 - intent: stop
   examples: |
     - I would like to stop this lesson!
@@ -238,6 +238,7 @@ nlu:
     - im done
     - id like to leave
     - i am done
+
 - intent: faq/ask_name
   examples: |
     - What is your name?
@@ -245,12 +246,14 @@ nlu:
     - What do people call you?
     - Do you have a name for yourself?
     - I forgot your name
+
 - intent: faq/bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
 - intent: faq/ask_creator
   examples: |
     - Who made you?
@@ -258,17 +261,20 @@ nlu:
     - are you created by my teacher?
     - how were u made?
     - what programming language was used to make you
+
 - intent: faq/ask_language
   examples: |
     - What languages do you speak?
     - Do you understand hindi?
     - can you speak [hindi](language)
     - do you speak [marathi](language)
+
 - intent: restart
   examples: |
     - restart
     - RESTART
     - Restart
+
 - intent: human_handoff
   examples: |
     - I want a human
@@ -352,6 +358,7 @@ nlu:
     - i want to talk to a real person
     - I’d like to talk to a human
     - I’d like to speak to a human
+
 - intent: express_preference
   examples: |
     - i like grapes
@@ -361,16 +368,7 @@ nlu:
     - i likje to graep
     - I prefer grapes. They are the best
     - I love biscuits!
-- intent: lesson_fractions_wholes
+
+- regex: number
   examples: |
-    - I’d like to start with wholes
-    - I’d like to do wholes
-    - the box
-    - Let’s do wholes
-    - Wholes
-- intent: lesson_fractions_halves
-  examples: |
-    - I would like to start with halves
-    - I’d like to do halves
-    - Let’s do halves
-    - Let’s do halves first
+    - ([0-9])

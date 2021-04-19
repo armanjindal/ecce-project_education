@@ -26,6 +26,7 @@ pipeline:
     loss_type: cross_entropy
   - name: FallbackClassifier
     threshold: 0.6
+    model_confidence: linear_norm
   - name: "DucklingEntityExtractor"
     url: "http://localhost:8000"
     dimensions: ["number"]

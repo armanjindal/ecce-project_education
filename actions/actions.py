@@ -130,17 +130,17 @@ def checkQuestion(user_input, question, tracker=None):
 def respondQuestion(answer, question, slot_value, dispatcher, tracker=None, domain=None):
     slot_dict_input = None
     if answer == "CORRECT":
-        dispatcher.utter_message(template="utter_correct")
+        dispatcher.utter_message(response="utter_correct")
         slot_dict_input = slot_value
     if answer == "INCORRECT":
         # Checks if a hint slot is there and if there is if it exceeds
         if domain and hintsExceed(question, tracker):
             # Standard case for exceeding hints
             slot_dict_input = 'EXCEEDED'
-            dispatcher.utter_message(template="utter_keep_going")
-            dispatcher.utter_message(template=f'utter_{question}_solution')
+            dispatcher.utter_message(response ="utter_keep_going")
+            dispatcher.utter_message(response =f'utter_{question}_solution')
         else:
-            dispatcher.utter_message(template="utter_incorrect")
+            dispatcher.utter_message(response ="utter_incorrect")
             slot_dict_input = None
     if not answer:
         print(f"Failed to extract slot for {question} - Extracted: {slot_value}")
@@ -150,7 +150,7 @@ def respondQuestion(answer, question, slot_value, dispatcher, tracker=None, doma
 
     if slot_dict_input:
         explanation_response = f"utter_{question}_explanation"
-        dispatcher.utter_message(template=explanation_response)
+        dispatcher.utter_message(response = explanation_response)
     return slot_dict_input
 
 def extractFirstElementfromSlot(slot_value):
@@ -209,7 +209,7 @@ class ActionHandoff(Action):
        tracker: Tracker,
        domain: Dict[Text, Any],
    ) -> List[EventType]:
- 
+        print(f"INPUT CHANNEL: {tracker.get_latest_input_channel()}")
         # Hardcoding the RocketChat LiveChat Link - change for robust handling 
         url = "https://eccechat.me/api/apps/public/646b8e7d-f1e1-419e-9478-10d0f5bc74d9/incoming"
         api_call = {
@@ -247,7 +247,7 @@ class ActionGoodbye(Action):
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:  
         if tracker.get_slot("userName"):
-            dispatcher.utter_message(template = "utter_goodbye")
+            dispatcher.utter_message(response = "utter_goodbye")
         else:
             dispatcher.utter_message(text= "Bye!")
         
@@ -277,11 +277,11 @@ class ActionAskPartsObject2(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
         if tracker.get_slot('1_friend_1'):
-            dispatcher.utter_message(template="utter_fractions_parts_story_form_1_object_2")
+            dispatcher.utter_message(response="utter_fractions_parts_story_form_1_object_2")
             return []
         else:
             print("IF FLASE")
-            dispatcher.utter_message(template="utter_fractions_parts_story_form_1_object_2", friend_1 = "Puja")
+            dispatcher.utter_message(response="utter_fractions_parts_story_form_1_object_2", friend_1 = "Puja")
             return [SlotSet("1_friend_1", "Puja")]
 
 class ValidateFirstForm(FormValidationAction):
@@ -391,7 +391,7 @@ class AskFor2FractionsHalvesMcq1(Action):
         if hint_number < len(hint_list): #No. attemps < No. Hints
             if hint_number == 0:
                 # First time being asked the question
-                dispatcher.utter_message(template= f'utter_question_{slot_name}')
+                dispatcher.utter_message(response= f'utter_question_{slot_name}')
             else: 
                 # TODO: Add a check to see if the slot was a valid answer 
                 dispatcher.utter_message(text = hint_list[hint_number])
@@ -416,7 +416,7 @@ class ValidateFractionPartsStoryForm(FormValidationAction):
         if match:
             return{"1_object_2": match}
         else:
-            dispatcher.utter_message(template= "utter_wrong_format", err= "That is not an option, choose again!!")
+            dispatcher.utter_message(response= "utter_wrong_format", err= "That is not an option, choose again!!")
             return{"1_object_2": None}
 
     def validate_2_fractions_parts_nrq_1(
