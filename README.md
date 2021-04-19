@@ -12,7 +12,6 @@ This project is not yet set up for open-source contributions. But if you are int
 The Team:
 - Arman Jindal - arman.jindal@columbia.edu 
 - Mahima Gupta - mahima_gupta@brown.edu
-- Dhruv Bhatia - dhruv_bhatia@brown.edu 
 
 
 [Demo](https://www.ecceeducation.org/)
