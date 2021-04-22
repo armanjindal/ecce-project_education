@@ -4,10 +4,10 @@ config:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
 - answer_number:
-    use_entities: ["number"]
+    use_entities:
+    - number
 - greet:
     use_entities: true
 - nlu_fallback:
@@ -17,26 +17,30 @@ intents:
 - faq:
     use_entities: true
 - select_lesson:
-    use_entities: ["lesson"]
+    use_entities:
+    - lesson
 - inform:
-    use_entities: ["name"]
+    use_entities:
+    - name
 - goodbye:
-    use_entities: false
+    use_entities: []
 - deny:
-    use_entities: false
+    use_entities: []
 - thankyou:
-    use_entities: false
+    use_entities: []
 - stop:
-    use_entities: false
+    use_entities: []
 - hint:
-    use_entities: false
+    use_entities: []
 - restart:
-    use_entities: false
+    use_entities: []
 - human_handoff:
-    use_entities: false
+    use_entities: []
 - answer_mcq:
-    use_entities: ["mcq_answer"]
-
+    use_entities:
+    - mcq_answer
+- express_preference:
+    use_entities: true
 entities:
 - language
 - lesson
@@ -44,11 +48,11 @@ entities:
 - name
 - number
 - PERSON
-
 slots:
   is_new_user:
     type: rasa.shared.core.slots.BooleanSlot
     initial_value: null
+    auto_fill: true
     influence_conversation: true
   userName:
     type: rasa.shared.core.slots.TextSlot
@@ -66,13 +70,14 @@ slots:
     auto_fill: true
     influence_conversation: false
   lesson:
-    type: categorical
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: true
     values:
-      - halves
-      - wholes
-      - parts 
-  
+    - halves
+    - wholes
+    - parts
 responses:
   utter_greet:
   - text: Hello!
@@ -150,8 +155,7 @@ responses:
   utter_keep_going:
   - text: It is ok. I'm sure you will get it next time! Lets keep going
   utter_handoff:
-  - text: "You are now speaking to my human creators, who are smarter than me (for now!)"
-
+  - text: You are now speaking to my human creators, who are smarter than me (for now!)
 actions:
 - action_session_start
 - action_default_fallback
@@ -164,6 +168,8 @@ actions:
 forms:
   first_form:
     userName:
-    - not_intent: [stop, goodbye]
+    - not_intent:
+      - stop
+      - goodbye
       type: from_text
 e2e_actions: []

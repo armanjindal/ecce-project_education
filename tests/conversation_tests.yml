@@ -1,0 +1,187 @@
+version: "2.0"
+stories:
+- story: Story from Conversation ID 87bf6cf30e41447db7598700342a27d4
+  steps:
+  - intent: greet
+  - action: action_check_user_status
+  - slot_was_set:
+    - is_new_user: true
+  - action: utter_greet_first_time
+  - action: utter_greet_first_time_followup
+  - action: first_form
+  - active_loop: first_form
+  - slot_was_set:
+    - requested_slot: userName
+  - intent: inform
+  - action: first_form
+  - slot_was_set:
+    - userName: Samara
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_first_time_confirm
+  - intent: affirm
+  - action: utter_lesson_options
+  - intent: select_lesson
+  - slot_was_set:
+    - lesson: halves
+  - action: utter_fractions_halves_introduction
+  - action: fractions_halves_story_form
+  - active_loop: fractions_halves_story_form
+  - slot_was_set:
+    - requested_slot: 1_friend_1
+  - intent: inform
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - 1_friend_1: Mahima
+  - slot_was_set:
+    - requested_slot: 2_fractions_halves_mcq_1
+  - slot_was_set:
+    - 2_fractions_halves_mcq_1_list:
+      - 1
+      - Here is a hint! In which option do you both get the same amount?
+  - intent: answer_mcq
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - 2_fractions_halves_mcq_1: null
+  - slot_was_set:
+    - requested_slot: 2_fractions_halves_mcq_1
+  - slot_was_set:
+    - 2_fractions_halves_mcq_1_list:
+      - 2
+      - Here is a hint! In which option do you both get the same amount?
+  - intent: answer_mcq
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - 2_fractions_halves_mcq_1: B
+  - slot_was_set:
+    - requested_slot: 3_fractions_halves_frq_1
+  - intent: answer_frq_fractions_halves
+  - action: fractions_halves_story_form
+  - slot_was_set:
+    - 3_fractions_halves_frq_1: Because they are equal or the same size pieces
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_halves_conclusion
+  - action: utter_start_next
+  - intent: affirm
+  - action: fractions_parts_story_form
+  - active_loop: fractions_parts_story_form
+  - slot_was_set:
+    - requested_slot: 1_object_2
+  - intent: express_preference
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 1_object_2: chocolates
+  - slot_was_set:
+    - requested_slot: 2_fractions_parts_nrq_1
+  - intent: answer_number
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 2_fractions_parts_nrq_1: 2
+  - slot_was_set:
+    - requested_slot: 3_fractions_parts_mcq_1
+  - intent: answer_number
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 3_fractions_parts_mcq_1: 0.3333333333333333
+  - slot_was_set:
+    - requested_slot: 4_fractions_parts_mcq_2
+  - intent: answer_frq_fractions_halves
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 4_fractions_parts_mcq_2: i get more than rajat
+  - slot_was_set:
+    - requested_slot: 5_fractions_parts_mcq_3
+  - intent: answer_frq_fractions_halves
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 5_fractions_parts_mcq_3: hmmm i think i get less
+  - slot_was_set:
+    - requested_slot: 6_fractions_parts_mcq_4
+  - intent: answer_frq_fractions_halves
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 6_fractions_parts_mcq_4: null
+  - slot_was_set:
+    - requested_slot: 6_fractions_parts_mcq_4
+  - intent: answer_frq_fractions_halves
+  - action: fractions_parts_story_form
+  - slot_was_set:
+    - 6_fractions_parts_mcq_4: it is more
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_parts_conclusion
+  - action: utter_start_next
+  - intent: affirm
+  - action: utter_fractions_wholes_introduction
+  - action: fractions_wholes_story_form
+  - active_loop: fractions_wholes_story_form
+  - slot_was_set:
+    - requested_slot: 1_fractions_wholes_nrq_1
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 1_fractions_wholes_nrq_1: 4
+  - slot_was_set:
+    - requested_slot: 2_fractions_wholes_nrq_2
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 2_fractions_wholes_nrq_2: 0.3333333333333333
+  - slot_was_set:
+    - requested_slot: 3_fractions_wholes_frq_1
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 3_fractions_wholes_frq_1: the box
+  - slot_was_set:
+    - requested_slot: 4_fractions_wholes_nrq_3
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 4_fractions_wholes_nrq_3: 1
+  - slot_was_set:
+    - requested_slot: 5_fractions_wholes_nrq_4
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 5_fractions_wholes_nrq_4: null
+  - slot_was_set:
+    - requested_slot: 5_fractions_wholes_nrq_4
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 5_fractions_wholes_nrq_4: null
+  - slot_was_set:
+    - requested_slot: 5_fractions_wholes_nrq_4
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 5_fractions_wholes_nrq_4: 0.25
+  - slot_was_set:
+    - requested_slot: 6_fractions_wholes_nrq_5
+  - intent: answer_number
+  - action: fractions_wholes_story_form
+  - slot_was_set:
+    - 6_fractions_wholes_nrq_5: 0.16666666666666666
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_fractions_wholes_conclusion
+  - action: utter_fractions_wholes_conclusion_1
+  - action: utter_fractions_wholes_conclusion_2
+  - action: utter_fractions_wholes_conclusion_3
+  - action: utter_fractions_demo_conclusion
+  - intent: nlu_fallback
+  - action: action_default_fallback
+  - intent: goodbye
+  - action: action_goodbye
+  - slot_was_set:
+    - userName: Samara
+  - slot_was_set:
+    - age: null
+  - slot_was_set:
+    - is_new_user: true
