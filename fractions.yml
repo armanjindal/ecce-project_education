@@ -6,8 +6,7 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - answer_frq_fractions_halves:
-    use_entities: false
-
+    use_entities: true
 entities: []
 slots:
   1_friend_1:
@@ -21,8 +20,12 @@ slots:
     auto_fill: true
     influence_conversation: false
   2_fractions_halves_mcq_1_list:
-    type: list
-    initial_value: [0, 'Here is a hint! In which option do you both get the same amount?']
+    type: rasa.shared.core.slots.ListSlot
+    initial_value:
+    - 0
+    - Here is a hint! In which option do you both get the same amount?
+    auto_fill: true
+    influence_conversation: true
   3_fractions_halves_frq_1:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -109,13 +112,13 @@ responses:
       Imagine it is lunch time at {school} and {1_friend_1} wants to have some of your last {object_1}.
       Which way of splitting do you think is fair to the both of you? 🧐
   utter_2_fractions_halves_mcq_1_solution:
-  - text: "The correct answer is option B!"
+  - text: The correct answer is option B!
   utter_ask_3_fractions_halves_frq_1:
   - text: "*WHY* do you think this split is 'fair'?"
   utter_3_fractions_halves_frq_1_explanation:
   - text: By splitting the {object_1} in this way,  both you and {1_friend_1} get the same/ equal share.
   utter_fractions_halves_conclusion:
-  - text: In fractions we would say that you and {1_friend_1} each got *one half (½)* of the *whole*. 
+  - text: In fractions we would say that you and {1_friend_1} each got *one half (½)* of the *whole*.  In the next lessons we explore the different *parts* that make up *wholes*
   utter_fractions_parts_story_form_1_object_2:
   - text: 'Right after you and {1_friend_1} finished your yummy (and equal!) {object_1}, {friend_2} sits at your table.
   {friend_2} has 3 snacks: biscuits, grapes and chocolates. Which is your favorite?'
