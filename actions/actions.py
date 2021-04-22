@@ -4,7 +4,7 @@ import random
 from typing import Text, List, Any, Dict, Optional
 
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset, EventType, UserUttered, ConversationPaused
+from rasa_sdk.events import SlotSet, SessionStarted, ActionExecuted, FollowupAction, AllSlotsReset, EventType, UserUttered, ConversationPaused, UserUtteranceReverted
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 
@@ -176,7 +176,60 @@ def extractName(slot_value, tracker):
         return resp_words[0].capitalize()
     return None
 
+def rocketChatHandoffAPIcall(tracker):
+    # Hardcoding the RocketChat LiveChat Link - change for robust handling 
+    url = "https://eccechat.me/api/apps/public/646b8e7d-f1e1-419e-9478-10d0f5bc74d9/incoming"
+    api_call = {
+        "action":"handover",
+        "sessionId": tracker.sender_id,
+        "actionData": {
+        "targetDepartment": "Human-Handoff"
+        }
+    }
+    json_blob = json.dumps(api_call)
+    response = requests.post(url, data=json_blob)
+    return response.ok
 
+# Fallback actions 
+
+class ActionDefaultFallback(Action):
+    """Executes the fallback action and goes back to the previous state
+    of the dialogue
+    
+    Called when core very confused, OR two-stage-fallback final triggered
+    """
+
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        fallback_message = ""
+        print(tracker.get_intent_of_latest_message())
+        events = [UserUtteranceReverted()]        
+
+        # check_next_loop = False
+        # for event in reversed(tracker.events):
+        #     try:
+        #         while event.get('name') not in [ 'action_listen', None]:
+        #             last_utter_action = event.get('name')
+        #             if last_utter_action == self.name:
+
+        #             break 
+        #         else :
+        #             pass
+        #     except:
+                pass
+
+        dispatcher.utter_message(text="I'm sorry, I can't understand. Could you please rephrase?")
+
+        return events
+
+    
 class ActionSessionStart(Action):
     def name(self) -> Text:
         return "action_session_start"
@@ -199,6 +252,7 @@ class ActionSessionStart(Action):
 #         time.sleep(7) # Add a 7 second delay 
 #         return [ ]
 
+
 class ActionHandoff(Action):
    def name(self) -> Text:
        return "action_handoff"
@@ -210,18 +264,8 @@ class ActionHandoff(Action):
        domain: Dict[Text, Any],
    ) -> List[EventType]:
         print(f"INPUT CHANNEL: {tracker.get_latest_input_channel()}")
-        # Hardcoding the RocketChat LiveChat Link - change for robust handling 
-        url = "https://eccechat.me/api/apps/public/646b8e7d-f1e1-419e-9478-10d0f5bc74d9/incoming"
-        api_call = {
-            "action":"handover",
-            "sessionId": tracker.sender_id,
-            "actionData": {
-            "targetDepartment": "Human-Handoff"
-            }
-        }
-        json_blob = json.dumps(api_call)
-        response = requests.post(url, data=json_blob)
-        print(f"Status: {response.status_code}, Text: {response.text}")
+        if not rocketChatHandoffAPIcall(tracker):
+            dispatcher.utter_message(text = "Something went wrong. So it is just you an me!")
         return []
 
 class ActionCheckUserStatus(Action):
@@ -251,7 +295,7 @@ class ActionGoodbye(Action):
         else:
             dispatcher.utter_message(text= "Bye!")
         
-        persistent_slots = ["userName", "age", "is_new_user"]
+        persistent_slots = ["userName", "is_new_user"]
         events = [AllSlotsReset()]
         for key in persistent_slots:
             events.append(SlotSet(key=key, value=tracker.get_slot(key)))
@@ -299,22 +343,9 @@ class ValidateFirstForm(FormValidationAction):
         if name:
             return {"userName":name}
         else:
-            dispatcher.utter_message(text="Sorry I missed your name. Can you just type only your first name for me?")
+            dispatcher.utter_message(text="Sorry I missed that! Can you give me just your first name?")
             return {"userName": None}
     
-    def validate_age(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        if int(slot_value) > 0:
-            return {"age": slot_value}
-        else:
-            dispatcher.utter_message(template="utter_wrong_format", err="You can't be less than 0  :) !")
-            return {"age": None}
-
 class ValidateFractionHalvesStoryForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_fractions_halves_story_form"

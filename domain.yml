@@ -50,11 +50,6 @@ slots:
     type: rasa.shared.core.slots.BooleanSlot
     initial_value: null
     influence_conversation: true
-  age:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
   userName:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -118,13 +113,8 @@ responses:
   - text: I do not think we have met before. Before we start, lets get to know each other a little bit.
   utter_ask_first_form_userName:
   - text: What is your name?
-  utter_ask_first_form_age:
-  - text: How old are you?
   utter_first_time_confirm:
-  - text: |-
-      Is this information correct?
-      Name: {userName}
-      Age: {age}
+  - text: Great to meet you {userName}. Did I get your name right?
   utter_start_next:
   - text: Would you like to go to the next lesson?
   - text: You are doing great. Want to start the next lesson?
@@ -161,8 +151,10 @@ responses:
   - text: It is ok. I'm sure you will get it next time! Lets keep going
   utter_handoff:
   - text: "You are now speaking to my human creators, who are smarter than me (for now!)"
+
 actions:
 - action_session_start
+- action_default_fallback
 - validate_first_form
 - action_failed_first_time_form
 - action_check_user_status
@@ -171,10 +163,7 @@ actions:
 - utter_faq
 forms:
   first_form:
-    age:
-    - entity: number
-      type: from_entity
     userName:
-    - not_intent: stop
+    - not_intent: [stop, goodbye]
       type: from_text
 e2e_actions: []
