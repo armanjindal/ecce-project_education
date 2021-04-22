@@ -190,6 +190,21 @@ def rocketChatHandoffAPIcall(tracker):
     response = requests.post(url, data=json_blob)
     return response.ok
 
+def previousAction(tracker, action_num=1):
+    """ Returns a string of the previous action Not NONE, or action_list. 
+    Does not consider the action/event from which this function is being called.
+    Args: action_num=1 is how far back to look
+    """
+    counter = 0
+    event_list = [] 
+    for event in reversed(tracker.events):
+        if event.get('name') not in [ 'action_listen', None] and '_form' not in event.get('name'):
+            return event.get('name')
+        else :
+            pass
+    return event_list
+
+
 # Fallback actions 
 
 class ActionDefaultFallback(Action):
@@ -209,27 +224,15 @@ class ActionDefaultFallback(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         fallback_message = ""
-        print(tracker.get_intent_of_latest_message())
         events = [UserUtteranceReverted()]        
-
-        # check_next_loop = False
-        # for event in reversed(tracker.events):
-        #     try:
-        #         while event.get('name') not in [ 'action_listen', None]:
-        #             last_utter_action = event.get('name')
-        #             if last_utter_action == self.name:
-
-        #             break 
-        #         else :
-        #             pass
-        #     except:
-                pass
-
-        dispatcher.utter_message(text="I'm sorry, I can't understand. Could you please rephrase?")
-
+        print(previousAction(tracker))
+        if previousAction(tracker) == self.name():
+            events.append(FollowupAction(name="action_handoff"))
+        else:
+            dispatcher.utter_message(text="I'm sorry, I can't understand. Could you please rephrase?")
         return events
 
-    
+
 class ActionSessionStart(Action):
     def name(self) -> Text:
         return "action_session_start"
@@ -240,18 +243,6 @@ class ActionSessionStart(Action):
         # the session should begin with a `session_started` event and an `action_listen`
         # as a user message follows
         return [SessionStarted(), ActionExecuted("action_listen")]
-
-# class ActionPause(Action):
-
-#     def name(self) -> Text:
-#         return "action_pause"
-
-#     async def run(
-#         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
-#     ) -> List[Dict[Text, Any]]:
-#         time.sleep(7) # Add a 7 second delay 
-#         return [ ]
-
 
 class ActionHandoff(Action):
    def name(self) -> Text:
