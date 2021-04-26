@@ -27,7 +27,6 @@ pipeline:
   - name: FallbackClassifier
     threshold: 0.6
     ambiguity_threshold: 0
-    model_confidence: 'linear_norm'
   - name: "DucklingEntityExtractor"
     url: "http://localhost:8000"
     dimensions: ["number"]

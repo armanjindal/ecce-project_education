@@ -1,6 +1,6 @@
 version: "2.0"
 stories:
-- story: Story from Conversation ID 87bf6cf30e41447db7598700342a27d4
+- story: Happy Path - Test Story 1
   steps:
   - intent: greet
   - action: action_check_user_status

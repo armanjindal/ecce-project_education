@@ -1,0 +1,48 @@
+{
+  "mcq_answer": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 16,
+    "confused_with": {}
+  },
+  "lesson": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 14,
+    "confused_with": {}
+  },
+  "name": {
+    "precision": 0.96,
+    "recall": 1.0,
+    "f1-score": 0.9795918367346939,
+    "support": 24,
+    "confused_with": {}
+  },
+  "language": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 2,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9821428571428571,
+    "recall": 0.9821428571428571,
+    "f1-score": 0.9821428571428571,
+    "support": 56
+  },
+  "macro avg": {
+    "precision": 0.99,
+    "recall": 0.875,
+    "f1-score": 0.9115646258503401,
+    "support": 56
+  },
+  "weighted avg": {
+    "precision": 0.9828571428571429,
+    "recall": 0.9821428571428571,
+    "f1-score": 0.9793488824101069,
+    "support": 56
+  }
+}

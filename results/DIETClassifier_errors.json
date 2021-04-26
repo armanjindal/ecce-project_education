@@ -1,0 +1,28 @@
+[
+  {
+    "text": "Ashoka",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.6044279336929321,
+        "value": "Ashoka",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "can you speak hindi",
+    "entities": [
+      {
+        "start": 14,
+        "end": 19,
+        "value": "hindi",
+        "entity": "language"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

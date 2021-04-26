@@ -30,19 +30,22 @@ jobs:
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
   
-    # - name: Connect to gcloud action server
-    #   uses: actions-hub/gcloud@master
-    #   env:
-    #     PROJECT_ID: test
-    #     APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-    #   with:
-    #     args: gcloud compute ssh --zone "europe-west2-c" "rasa-x-server" --project "ecce-300006"
-  
+    - name: Authenticate with gcloud
+      env:
+        PROJECT_ID: test
+        GCLOUD_CREDS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        GCLOUD_ACCOUNT: ${{ secrets.GOOGLE_ACCOUNT }}
+      run: |
+        gcloud auth activate-service-account ${GCLOUD_ACCOUNT} --key-file=${GCLOUD_CREDS}
+        gcloud compute ssh --zone "europe-west2-c" "rasa-x-server" --project "ecce-300006"
+        helm upgrade --install --reuse-values \
+          --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
+          --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
+
+
     # - name: Upgrade Rasa X deployment on GCLOUD VM
     #   run: |
     #     # More information: https://rasa.com/docs/rasa-x/installation-and-setup/install/helm-chart/
 
     #     # Upgrade the helm release using output parameters from the `action_server` step
-    #     helm upgrade --install --reuse-values \
-    #       --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
-    #       --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
+

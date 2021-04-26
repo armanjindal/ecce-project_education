@@ -1,0 +1,943 @@
+[
+  {
+    "text": "moin",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 4,
+        "value": "moin",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "have a nice day",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 12,
+        "end": 15,
+        "value": "day",
+        "extractor": "RegexEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "mahima",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "mahima",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9990060925483704,
+        "value": "mahima",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I like to eat with Mahima",
+    "entities": [
+      {
+        "start": 19,
+        "end": 25,
+        "value": "Mahima",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 19,
+        "end": 25,
+        "confidence_entity": 0.9990593791007996,
+        "value": "Mahima",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sambhav",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "sambhav",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.9990702271461487,
+        "value": "sambhav",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Mahima",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "Mahima",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9990649819374084,
+        "value": "Mahima",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "akshaan",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "akshaan",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.9989327788352966,
+        "value": "akshaan",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I like to eat with Sambhav",
+    "entities": [
+      {
+        "start": 19,
+        "end": 26,
+        "value": "Sambhav",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 19,
+        "end": 26,
+        "confidence_entity": 0.9990691542625427,
+        "value": "Sambhav",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Arya",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "Arya",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.9980401396751404,
+        "value": "Arya",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "myself ashoka",
+    "entities": [
+      {
+        "start": 7,
+        "end": 13,
+        "value": "ashoka",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 7,
+        "end": 13,
+        "confidence_entity": 0.7382470369338989,
+        "value": "ashoka",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Rishika",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "value": "Rishika",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 7,
+        "confidence_entity": 0.9989755153656006,
+        "value": "Rishika",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Aahana",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "Aahana",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9990249872207642,
+        "value": "Aahana",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I like eating with my friend Rishika",
+    "entities": [
+      {
+        "start": 29,
+        "end": 36,
+        "value": "Rishika",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 29,
+        "end": 36,
+        "confidence_entity": 0.9990665316581726,
+        "value": "Rishika",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "My name is Anvita",
+    "entities": [
+      {
+        "start": 11,
+        "end": 17,
+        "value": "Anvita",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 11,
+        "end": 17,
+        "confidence_entity": 0.9989659786224365,
+        "value": "Anvita",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "A",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "A",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9984496831893921,
+        "value": "A",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "b",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "b",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9990284442901611,
+        "value": "b",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "c...",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "c",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.998961329460144,
+        "value": "c",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "d",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "d",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9974859952926636,
+        "value": "d",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "C!",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "C",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9992741942405701,
+        "value": "C",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "e",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "e",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9989686012268066,
+        "value": "e",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "B",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "B",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9991053938865662,
+        "value": "B",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "C",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "C",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9992741942405701,
+        "value": "C",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "c",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "c",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.998961329460144,
+        "value": "c",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Is it B?",
+    "entities": [
+      {
+        "start": 6,
+        "end": 7,
+        "value": "B",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 6,
+        "end": 7,
+        "confidence_entity": 0.9991668462753296,
+        "value": "B",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I think it\u2019s a",
+    "entities": [
+      {
+        "start": 13,
+        "end": 14,
+        "value": "a",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 13,
+        "end": 14,
+        "confidence_entity": 0.9026193022727966,
+        "value": "a",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "B is the fairest",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "B",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9983794689178467,
+        "value": "B",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "D",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "D",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9992207288742065,
+        "value": "D",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "E",
+    "entities": [
+      {
+        "start": 0,
+        "end": 1,
+        "value": "E",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 0,
+        "end": 1,
+        "confidence_entity": 0.9993820190429688,
+        "value": "E",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I think the right answer is B",
+    "entities": [
+      {
+        "start": 28,
+        "end": 29,
+        "value": "B",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 28,
+        "end": 29,
+        "confidence_entity": 0.9987616539001465,
+        "value": "B",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I think B is fair",
+    "entities": [
+      {
+        "start": 8,
+        "end": 9,
+        "value": "B",
+        "entity": "mcq_answer"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "mcq_answer",
+        "start": 8,
+        "end": 9,
+        "confidence_entity": 0.9975966811180115,
+        "value": "B",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "halves options",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9983372688293457,
+        "value": "halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "the one with the halves",
+    "entities": [
+      {
+        "start": 17,
+        "end": 23,
+        "value": "halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 17,
+        "end": 23,
+        "confidence_entity": 0.9991004467010498,
+        "value": "halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i want to do the halves",
+    "entities": [
+      {
+        "start": 17,
+        "end": 23,
+        "value": "halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 17,
+        "end": 23,
+        "confidence_entity": 0.9990542531013489,
+        "value": "halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "halves",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9986175298690796,
+        "value": "halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "lets do wholes",
+    "entities": [
+      {
+        "start": 8,
+        "end": 14,
+        "value": "wholes",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 8,
+        "end": 14,
+        "confidence_entity": 0.9985246062278748,
+        "value": "wholes",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "the one with the wholes",
+    "entities": [
+      {
+        "start": 17,
+        "end": 23,
+        "value": "wholes",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 17,
+        "end": 23,
+        "confidence_entity": 0.9985693693161011,
+        "value": "wholes",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "lets do the wholes",
+    "entities": [
+      {
+        "start": 12,
+        "end": 18,
+        "value": "wholes",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 12,
+        "end": 18,
+        "confidence_entity": 0.9985585808753967,
+        "value": "wholes",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i want to start with parts",
+    "entities": [
+      {
+        "start": 21,
+        "end": 26,
+        "value": "parts",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 21,
+        "end": 26,
+        "confidence_entity": 0.9014632105827332,
+        "value": "parts",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "parts",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "parts",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.973334789276123,
+        "value": "parts",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i prefer to start with parts",
+    "entities": [
+      {
+        "start": 23,
+        "end": 28,
+        "value": "parts",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 23,
+        "end": 28,
+        "confidence_entity": 0.9251025319099426,
+        "value": "parts",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "lets start with parts",
+    "entities": [
+      {
+        "start": 16,
+        "end": 21,
+        "value": "parts",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 16,
+        "end": 21,
+        "confidence_entity": 0.8618178963661194,
+        "value": "parts",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "lets do halves",
+    "entities": [
+      {
+        "start": 8,
+        "end": 14,
+        "value": "halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 8,
+        "end": 14,
+        "confidence_entity": 0.9991236329078674,
+        "value": "halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "wholes",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "wholes",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9980438947677612,
+        "value": "wholes",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Halves",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "Halves",
+        "entity": "lesson"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "lesson",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.998530387878418,
+        "value": "Halves",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "can you speak hindi",
+    "entities": [
+      {
+        "start": 14,
+        "end": 19,
+        "value": "hindi",
+        "entity": "language"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "do you speak marathi",
+    "entities": [
+      {
+        "start": 13,
+        "end": 20,
+        "value": "marathi",
+        "entity": "language"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "language",
+        "start": 13,
+        "end": 20,
+        "confidence_entity": 0.9921610951423645,
+        "value": "marathi",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

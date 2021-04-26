@@ -204,7 +204,6 @@ def previousAction(tracker, action_num=1):
             pass
     return event_list
 
-
 # Fallback actions 
 
 class ActionDefaultFallback(Action):
@@ -231,7 +230,6 @@ class ActionDefaultFallback(Action):
         else:
             dispatcher.utter_message(text="I'm sorry, I can't understand. Could you please rephrase?")
         return events
-
 
 class ActionSessionStart(Action):
     def name(self) -> Text:
@@ -512,7 +510,8 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
-    ) -> Dict[Text, Any]:        
+    ) -> Dict[Text, Any]:
+         
         question_name = "1_fractions_wholes_nrq_1"
         answer = checkQuestion(slot_value, question_name)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
