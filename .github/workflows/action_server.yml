@@ -29,15 +29,10 @@ jobs:
         # github.sha - The commit SHA that triggered the workflow run
         docker_image_tag: ${{ github.sha }}
         requirements_file: 'actions/requirements-actions.txt'
-  
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        service_account_key: ${{ secrets.GCE_SA_KEY }}
-        export_default_credentials: true
         
-    - name: Build
+    - name: Connect to Gcloud
       run: |-
+        gcloud auth activate-service-account ${{ secrets.GCE_SA_EMAIL }} --key-file= ${{secrets.GCE_SA_KEY}}
         gcloud info
         gcloud compute ssh --zone ${{ secrets.GCE_ZONE }} ${{ secrets.GCE_INSTANCE }} --project ${{ secrets.GCE_PROJECT_ID }}
         cd ecce-remote_deployment
