@@ -31,15 +31,17 @@ jobs:
         requirements_file: 'actions/requirements-actions.txt'
   
     - uses: google-github-actions/setup-gcloud@master
-      with:
+      env:
         version: '290.0.1'
         service_account_key: ${{ secrets.GCE_SA_KEY }}
         project_id: ${{ secrets.GCE_PROJECT_ID }}
         zone: ${{ secrets.GCE_ZONE }}
         compute_instance: ${{ secrets.GCE_INSTANCE }}
-      run: |
-        gcloud compute ssh --zone ${ zone } ${ compute_instance } --project ${ project_id }
-        gcloud info
+      with:
+        args: gcloud compute ssh --zone ${ zone } ${ compute_instance } --project ${ project_id }
+        
+    - name: Build
+      run: |-
         cd ecce-remote_deployment
         helm upgrade --install --reuse-values \
           --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
