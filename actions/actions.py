@@ -525,6 +525,7 @@ class ValidateFractionWholesStoryForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:        
         question_name = "2_fractions_wholes_nrq_2"
+        
         answer = checkQuestion(slot_value, question_name, tracker=tracker)
         slot_dict_input = respondQuestion(answer, question_name, slot_value, dispatcher)
         return {question_name: slot_dict_input}

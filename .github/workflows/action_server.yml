@@ -37,17 +37,17 @@ jobs:
         export_default_credentials: true
 
     - name: Use gcloud CLI
-      run: gcloud info
-
+      run: |
+        gcloud info
+        gcloud compute ssh --zone ${{ secrets.GCE_ZONE }} ${{ secrets.GCE_INSTANCE }} --project ${{ secrets.GCE_PROJECT_ID }}
+        cd ecce-remote_deployment
+        helm upgrade --install --reuse-values \
+          --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
+          --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
+      
     # - name: Connect to Gcloud
     #   run: |-
-    #     gcloud auth activate-service-account ${{ secrets.GCE_SA_EMAIL }} --key-file= ${{secrets.GCE_SA_KEY}}
-    #     gcloud info
-    #     gcloud compute ssh --zone ${{ secrets.GCE_ZONE }} ${{ secrets.GCE_INSTANCE }} --project ${{ secrets.GCE_PROJECT_ID }}
-    #     cd ecce-remote_deployment
-    #     helm upgrade --install --reuse-values \
-    #       --set app.name=${{ steps.action_server.outputs.docker_image_name }} \
-    #       --set app.tag=${{ steps.action_server.outputs.docker_image_tag }} rasa rasa-x/rasa-x
+
 
 
     # - name: Upgrade Rasa X deployment on GCLOUD VM
